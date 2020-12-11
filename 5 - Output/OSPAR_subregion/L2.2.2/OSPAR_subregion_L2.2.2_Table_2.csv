@@ -1,0 +1,17 @@
+"MSFD habitat code","Extent of habitat (in 1000 km^2)","Number of grid cells","Landings 10^3 tonnes","Value 10^6 euro","Swept area in 1000 km^2","Proportion of grid cells fished (I-2)","Proportion of area fished (I-3)","Fishing intensity (I-1)","Average impact (I-6)","Proportion of habitat fished with 90% of effort (I-4)"
+"Offshore circalittoral coarse sediment",27.7,1390,37.06,97.07,147.24,0.99,0.79,5.33,0.23,0.49
+"Circalittoral coarse sediment",10.61,532,9.62,24.95,29.83,0.93,0.51,2.82,0.13,0.28
+"Circalittoral sand",4.3,218,3.89,11.06,15.51,0.96,0.76,3.58,0.16,0.45
+"Unknown",2.4,121,0.49,1,0.62,0.53,0.14,0.26,0.02,0.14
+"Offshore circalittoral sand",2.32,117,4.82,13.74,15.26,1,0.97,6.58,0.34,0.68
+"Offshore circalittoral mixed sediment",1.82,92,1.18,2.78,5.93,1,0.79,3.25,0.17,0.57
+"Infralittoral coarse sediment",1.5,74,4.11,6.17,2.3,0.91,0.51,1.53,0.11,0.36
+"Infralittoral sand",1.12,56,1.14,2.9,2.79,0.91,0.66,2.49,0.13,0.48
+"Circalittoral rock and biogenic reef",1.05,53,0.35,0.58,0.5,0.85,0.28,0.48,0.04,0.36
+"Circalittoral mud",0.61,31,0.44,1.33,2,1,0.63,3.22,0.13,0.35
+"Circalittoral mixed sediment",0.53,27,0.05,0.14,0.19,0.85,0.29,0.36,0.03,0.41
+"Infralittoral rock and biogenic reef",0.4,20,0.13,0.24,0.04,0.6,0.09,0.09,0.01,NA
+"Offshore circalittoral rock and biogenic reef",0.3,15,0.14,0.46,0.25,1,0.36,0.84,0.06,NA
+"Infralittoral mud",0.26,13,0.51,1.28,1.08,0.92,0.8,4.11,0.2,NA
+"Offshore circalittoral mud",0.22,11,0.3,0.95,1.54,1,1,7.01,0.24,NA
+"Infralittoral mixed sediment",0.04,2,0,0,0,0,0,0,0,NA
