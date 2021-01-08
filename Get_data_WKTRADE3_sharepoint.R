@@ -13,7 +13,6 @@
 #################################################################################
 
 # set path to folders and specify username 
-  
   pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3" # path to github folder
   pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"  # path to new folder where you like to store the fisheries data
   dir.create(pathdir_nogit)   # create a folder 
@@ -26,11 +25,11 @@
 # download data from sharepoint 
   options(icesSharePoint.username = ices_username)# set ices username
   options(icesSharePoint.site = "/ExpertGroups/WKTRADE3")  # set the site 
-  spdir() # put password
+  spdir() # put password and check folder structure
   
-  fnames <- spfiles("2021 Meeting Docs/06. Data/Technical workshop files/Fisheries and benthic state", full = TRUE)
+  fnames <- spfiles("April Technical WK Meeting docs/06. Data/Fisheries and benthic state", full = TRUE)
   for (fname in fnames) {
-    spgetfile(fname, destdir = fisheries_path)
+    spgetfile(fname, destdir = pathdir_nogit)
   }
 
 # delete username storage 
