@@ -4,5 +4,7 @@
 "3. Proportion of area fished",0.616918924526238
 "4. Aggregation of fishing pressure",0.412107780240289
 "5. Persistently unfished areas",0.0932870640382596
-"6. Average impact",0.113082282438417
-"7. Proportion of area with impact < 0.2",0.820045491659862
+"6a. Average PD impact",0.113082282438417
+"6b. Average L1 impact",0.657316361642551
+"7a. Proportion of area with PD impact < 0.2",0.820045491659862
+"7b. Proportion of area with L1 impact < 0.2",0.213752478712236

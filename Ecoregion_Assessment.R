@@ -30,6 +30,8 @@ rm(list = ls())
    Assunit <- Assunit_index[p]     
 
 ### load processed file, with longevity and state/impact 
+  load(paste(pathdir_nogit,paste(EcoReg,"state_IL.RData",sep="_"),sep="/")) 
+  State_reg_IL <- State_reg # rename the state from the inverse longevity
   load(paste(pathdir_nogit,paste(EcoReg,"state.RData",sep="_"),sep="/")) 
   load(paste(pathdir_nogit,paste(EcoReg,"Fisheries.RData",sep="_"),sep="/")) 
   load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier.RData",sep="_"),sep="/")) 

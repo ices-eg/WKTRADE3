@@ -32,10 +32,6 @@
   figA1 <- Region@data
   nam <- c(SSAR_year,weight_year,value_year)
   figA1 <- cbind(figA1, Fisheries[match(figA1$csquares,Fisheries$csquares), c(nam)])
-  
-  nam <- c(state_year)
-  figA1 <- cbind(figA1, State_reg[match(figA1$csquares,State_reg$Fisheries.csquares), c(nam)])
-
   save(figA1, file="FigureA1.RData")
 
 #####
@@ -69,23 +65,32 @@
 # indicator 5 persistently unfished areas
   ind5 <- length(which(TA1dat$avgsar == 0))/nrow(TA1dat)
   
-# indicator 6 average impact
+# indicator 6 average impact - PD model
   nam <- c(state_year)
-  TA1dat <- cbind(TA1dat, State_reg[match(TA1dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-  TA1dat[,c(nam)][is.na(TA1dat[,c(nam)])] <- 1
-  TA1dat$avgstate <- rowMeans(TA1dat[,state_year]) 
-  ind6 <- 1- mean(TA1dat[,"avgstate"])
+  TA1dat_PD <- cbind(TA1dat, State_reg[match(TA1dat$csquares,State_reg$Fisheries.csquares), c(nam)])
+  TA1dat_PD[,c(nam)][is.na(TA1dat_PD[,c(nam)])] <- 1
+  TA1dat_PD$avgstate <- rowMeans(TA1dat_PD[,state_year]) 
+  ind6_PD <- 1- mean(TA1dat_PD[,"avgstate"])
 
-# indicator 7 proportion of area with impact < 0.2 
-  ind7 <- length(which(TA1dat[,"avgstate"] >= 0.8))/nrow(TA1dat)
+# indicator 7 proportion of area with impact < 0.2 - PD model
+  ind7_PD <- length(which(TA1dat_PD[,"avgstate"] >= 0.8))/nrow(TA1dat_PD)
 
-  A1table <- c(ind1,ind2,ind3,ind4,ind5,ind6,ind7)
+# indicator 6 average impact - IL model
+  nam <- c(state_year)
+  TA1dat_IL <- cbind(TA1dat, State_reg_IL[match(TA1dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+  TA1dat_IL[,c(nam)][is.na(TA1dat_IL[,c(nam)])] <- 1
+  TA1dat_IL$avgstate <- rowMeans(TA1dat_IL[,state_year]) 
+  ind6_IL <- 1- mean(TA1dat_IL[,"avgstate"])
+  
+  # indicator 7 proportion of area with impact < 0.2 - IL model
+  ind7_IL <- length(which(TA1dat_IL[,"avgstate"] >= 0.8))/nrow(TA1dat_IL)
+  
+  A1table <- c(ind1,ind2,ind3,ind4,ind5,ind6_PD,ind6_IL,ind7_PD,ind7_IL)
   save(A1table, file="TableA1.RData")
 
 #####
 # Table A.2
 ################
-
   TA2dat <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
   
   TA2dat$grid <- 1
@@ -101,17 +106,12 @@
   TA2dat$avgweight <- rowMeans(TA2dat[,weight_year],na.rm=T)
   TA2dat$avgvalue <- rowMeans(TA2dat[,value_year],na.rm=T) 
 
-  nam <- c(state_year)
-  TA2dat <- cbind(TA2dat, State_reg[match(TA2dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-  TA2dat[,c(nam)][is.na(TA2dat[,c(nam)])] <- 1
-  TA2dat$avgstate <- rowMeans(TA2dat[,state_year]) 
-
   TA2dat$sweptarea <- TA2dat[,"avgsar"]*TA2dat$area_sqkm
   TA2dat$propgridfished <- ifelse(TA2dat[,"avgsar"] > 0,1,0)
   TA2dat$propswept <- TA2dat$sweptarea
   TA2dat$propswept <- ifelse(TA2dat$sweptarea > TA2dat$area_sqkm,TA2dat$area_sqkm,TA2dat$sweptarea)
   
-  nam <- c("area_sqkm","grid","sweptarea", "avgweight", "avgvalue","propgridfished","propswept")
+  nam <- c("area_sqkm","grid", "avgweight", "avgvalue","avgsar","sweptarea","propgridfished","propswept")
   indexcol <- which(names(TA2dat) %in% nam)
   A2table = aggregate( TA2dat[, indexcol], by= list(TA2dat$MSFD), FUN=function(x){sum(x)})
   names(A2table)[1] = 'MSFD'
@@ -120,21 +120,13 @@
   A2table <- A2table[order(A2table$area_sqkm,decreasing = T),]
   A2table$MSFD <- as.character(A2table$MSFD)
   
+  A2table$avgsar <- A2table$avgsar/A2table$grid
   A2table$area_sqkm <- A2table$area_sqkm/1000 
   A2table$sweptarea <- A2table$sweptarea/1000
   A2table$avgweight <- A2table$avgweight/1000000
   A2table$avgvalue <- A2table$avgvalue/1000000
   A2table$propgridfished <- A2table$propgridfished / A2table$grid
   A2table$propswept <- (A2table$propswept/1000) / A2table$area_sqkm
-  
-  nam <- c("avgsar", "avgstate")
-  indexcol <- which(names(TA2dat) %in% nam)
-  A2tableb = aggregate( TA2dat[, indexcol], by= list(TA2dat$MSFD), FUN=function(x){mean(x)})
-  names(A2tableb)[1] = 'MSFD'
-  
-  A2tableb <- as.data.frame(A2tableb)
-  A2tableb$impact <- 1-A2tableb[,"avgstate"]
-  A2table <- cbind(A2table,A2tableb[match(A2table$MSFD,A2tableb$MSFD),c("avgsar","impact")])
   
   A2table$eff_fish <- NA
   llenght <- max(which(A2table$grid>20))
@@ -257,86 +249,12 @@
   save(A4dat, file="FigureA4.RData")
 
 #####
-# Figure A.6
-################
-  A6dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
-  stateNames <- paste("state",Period,sep="_")
-  A6dat <- cbind(A6dat, State_reg[match(A6dat$csquares,State_reg$Fisheries.csquares), c(stateNames)])
-  A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
-  
-# left panel
-  indexcol <- which(names(A6dat) %in% stateNames)
-  All = apply( A6dat[, indexcol], 2, FUN=function(x){mean(x)})
-
-# and calculate for most common habitat types
-  nam <- c("MSFD",stateNames)
-  indexcol <- which(names(A6dat) %in% nam)
-  AvgMSFD<- A6dat %>% 
-    select(all_of(indexcol)) %>%
-    filter(MSFD %in% c(mostcommonMSFD))
-  indexcol <- which(names(AvgMSFD) %in% stateNames)
-  AvgMSFD2 = aggregate( AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
-  names(AvgMSFD2)= 'MSFD'
-  AvgMSFD2<-as.data.frame(AvgMSFD2)
-
-  A6left <-cbind(All,t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
-  colnames(A6left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
-
-# right panel
-  A6right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
-
-  mostcommonMSFD <- sort(mostcommonMSFD)
-  rown<-c()
-  for (i in 1:length(Period)){
-    nyear <-  paste("state",Period[i],sep="_")
-    
-    A6right[i,1] <- length(which(A6dat[,nyear]>0.8))/length(A6dat[,nyear])
-    A6right[i,2] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]])
-    A6right[i,3] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]])
-    A6right[i,4] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]])
-    A6right[i,5] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]])
-    rown<-c(rown,paste("State>0.8",Period[i],sep="_"))
-  }
-  A6right<-cbind(A6right,Period)
-  colnames(A6right) <-colnames(A6left)
-  rownames(A6right) <-rown
-  
-  A6fig <- list(A6left,A6right)
-  save(A6fig, file="FigureA6.RData")
-
-######
-# Figure A.8 and A.9
-################
-  A8dat <- Region@data
-
-  gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
-  
-  nam <- paste("state",rep(gears[1],length(Period)),Period,sep="_")
-  A8dat <- cbind(A8dat, State_reg[match(A8dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-  A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
-  Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
-  colnames(Avgear)[1] <- 'MSFD'
-  AvMSFD_metier <- as.data.frame(Avgear)
-    
-    for (p in 2:length(gears)){
-      nam <- paste("state",rep(gears[p],length(Period)),Period,sep="_")
-      A8dat <- cbind(A8dat, State_reg[match(A8dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-      A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
-      Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
-      colnames(Avgear)[1] <- 'MSFD'
-      AvMSFD_metier <- cbind(AvMSFD_metier, Avgear[match(AvMSFD_metier$MSFD,Avgear$MSFD), c(2:(length(Period)+1))])
-    }
-
-  A8_A9fig <- subset(AvMSFD_metier, AvMSFD_metier$MSFD %in%  c(mostcommonMSFD))
-  save(A8_A9fig, file="FigureA8_A9.RData")
-
-#####
 # Table A.3
 ################
   datT3 <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
   gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
   
-  A3table <- as.data.frame(matrix(data=NA, ncol=length(gears), nrow = 7))
+  A3table <- as.data.frame(matrix(data=NA, ncol=length(gears), nrow = 5))
   
   for (pp in 1:length(gears)){
     datgear <- datT3
@@ -349,15 +267,6 @@
     datgear$sweptarea <- datgear[,"avgsar"]*datgear$area_sqkm
     A3table[1,pp] <- sum(datgear$sweptarea,na.rm=T)/1000
     
-    # indicator 1 intensity
-    # A3table[2,pp] <- sum(datgear$sweptarea,na.rm=T)/sum(datgear$area_sqkm[datgear$avgsar >0])
-    
-    # indicator 4 aggregation of fishing pressure
-    #datgear <- datgear[order(datgear[,"avgsar"],decreasing = T),]
-    #datgear$cumSSAR <- cumsum(datgear[,"avgsar"])
-    #datgear$cumSSAR <- datgear$cumSSAR / sum(datgear[,"avgsar"])
-    #A3table[3,pp] <- min(which(datgear$cumSSAR > .9))/nrow(datgear)
-
     nam <- paste(rep(paste(gears[pp],"total_weight",sep="_"),length(AssPeriod)),AssPeriod,sep="_")
     datgear <- cbind(datgear, FisheriesMet[match(datgear$csquares,FisheriesMet$csquares), c(nam)])
     datgear[,c(nam)][is.na(datgear[,c(nam)])] <- 0
@@ -370,25 +279,229 @@
     datgear$avgvalue <- rowMeans(datgear[,nam])
     A3table[3,pp] <- sum(datgear$avgvalue)/1000000
     
-    nam <- paste(rep(paste("state",gears[pp],sep="_"),length(AssPeriod)),AssPeriod,sep="_")
-    datgear <- cbind(datgear, State_reg[match(datgear$csquares,State_reg$Fisheries.csquares), c(nam)])
-    datgear[,c(nam)][is.na(datgear[,c(nam)])] <- 0
-    datgear$avgimpact <- 1- rowMeans(datgear[,nam])
-    datgear <- subset(datgear,datgear$avgsar >0)
-    A3table[4,pp] <- (sum(datgear$avgweight)/1000000) / sum(datgear$avgimpact)
-    A3table[5,pp] <- (sum(datgear$avgvalue)/1000000) / sum(datgear$avgimpact)
-    A3table[6,pp] <- (sum(datgear$avgweight)/1000000) / (sum(datgear$sweptarea,na.rm=T)/1000)
-    A3table[7,pp] <- (sum(datgear$avgvalue)/1000000) / (sum(datgear$sweptarea,na.rm=T)/1000)
+    A3table[4,pp] <- (sum(datgear$avgweight)/1000000) / (sum(datgear$sweptarea,na.rm=T)/1000)
+    A3table[5,pp] <- (sum(datgear$avgvalue)/1000000) / (sum(datgear$sweptarea,na.rm=T)/1000)
   }
   
   colnames(A3table) <- gears
-  rownames(A3table) <- c("Area fished (1000 km2)","Landings (1000 tonnes)","Value (10^6 euro)",
-                        "Landings (1000 tonnes)/impact ratio","Value (10^6 euro)/impact ratio",
-                        "Landings (1000 tonnes)/Area fished (1000 km2) ratio","Value (10^6 euro)/Area fished (1000 km2) ratio")
+  rownames(A3table) <- c("Area swept (1000 km2)","Landings (1000 tonnes)","Value (10^6 euro)",
+                         "Landings (1000 tonnes)/Area swept (1000 km2)","Value (10^6 euro)/Area swept (1000 km2)")
   
   save(A3table, file="TableA3.RData")
+ 
+####
+# estimate impact for the regions with longevity data
+################
   
+  if (Assregion == "Baltic Sea" | Assregion == "Greater North Sea"){
+  
+  #####
+  # Figure A.5
+  ################
+    figA5 <- Region@data
+    nam <- c(state_year)
+    figA5 <- cbind(figA5, State_reg_IL[match(figA5$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+    indexcol <- which(names(figA5) %in% state_year)
+    colnames(figA5)[indexcol] <-  paste("state_IL",AssPeriod,sep="_")
+    
+    figA5 <- cbind(figA5, State_reg[match(figA5$csquares,State_reg$Fisheries.csquares), c(nam)])
+    save(figA5, file="FigureA5.RData")
+    
+  #####
+  # Figure A.6
+  ################
+    # estimate impact based on inverse longevity
+    A6dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+    stateNames <- paste("state",Period,sep="_")
+    A6dat <- cbind(A6dat, State_reg_IL[match(A6dat$csquares,State_reg_IL$Fisheries.csquares), c(stateNames)])
+    A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
+    
+  # left panel
+    indexcol <- which(names(A6dat) %in% stateNames)
+    All = apply( A6dat[, indexcol], 2, FUN=function(x){mean(x)})
+  
+  # and calculate for most common habitat types
+    nam <- c("MSFD",stateNames)
+    indexcol <- which(names(A6dat) %in% nam)
+    AvgMSFD<- A6dat %>% 
+      select(all_of(indexcol)) %>%
+      filter(MSFD %in% c(mostcommonMSFD))
+    indexcol <- which(names(AvgMSFD) %in% stateNames)
+    AvgMSFD2 = aggregate( AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
+    names(AvgMSFD2)= 'MSFD'
+    AvgMSFD2<-as.data.frame(AvgMSFD2)
+  
+    A6left <-cbind(All,t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
+    colnames(A6left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
+  
+  # right panel
+    A6right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+  
+    mostcommonMSFD <- sort(mostcommonMSFD)
+    rown<-c()
+    for (i in 1:length(Period)){
+      nyear <-  paste("state",Period[i],sep="_")
+      
+      A6right[i,1] <- length(which(A6dat[,nyear]>0.8))/length(A6dat[,nyear])
+      A6right[i,2] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]])
+      A6right[i,3] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]])
+      A6right[i,4] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]])
+      A6right[i,5] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]])
+      rown<-c(rown,paste("State>0.8",Period[i],sep="_"))
+    }
+    A6right<-cbind(A6right,Period)
+    colnames(A6right) <-colnames(A6left)
+    rownames(A6right) <-rown
+    
+    A6left_IL <- A6left
+    A6right_IL <- A6right
+    
+    A6dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+    stateNames <- paste("state",Period,sep="_")
+    A6dat <- cbind(A6dat, State_reg[match(A6dat$csquares,State_reg$Fisheries.csquares), c(stateNames)])
+    A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
+    
+    # left panel
+    indexcol <- which(names(A6dat) %in% stateNames)
+    All = apply( A6dat[, indexcol], 2, FUN=function(x){mean(x)})
+    
+    # and calculate for most common habitat types
+    nam <- c("MSFD",stateNames)
+    indexcol <- which(names(A6dat) %in% nam)
+    AvgMSFD<- A6dat %>% 
+      select(all_of(indexcol)) %>%
+      filter(MSFD %in% c(mostcommonMSFD))
+    indexcol <- which(names(AvgMSFD) %in% stateNames)
+    AvgMSFD2 = aggregate( AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
+    names(AvgMSFD2)= 'MSFD'
+    AvgMSFD2<-as.data.frame(AvgMSFD2)
+    
+    A6left <-cbind(All,t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
+    colnames(A6left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
+    
+    # right panel
+    A6right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+    
+    mostcommonMSFD <- sort(mostcommonMSFD)
+    rown<-c()
+    for (i in 1:length(Period)){
+      nyear <-  paste("state",Period[i],sep="_")
+      
+      A6right[i,1] <- length(which(A6dat[,nyear]>0.8))/length(A6dat[,nyear])
+      A6right[i,2] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]])
+      A6right[i,3] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]])
+      A6right[i,4] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]])
+      A6right[i,5] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]])
+      rown<-c(rown,paste("State>0.8",Period[i],sep="_"))
+    }
+    A6right<-cbind(A6right,Period)
+    colnames(A6right) <-colnames(A6left)
+    rownames(A6right) <-rown
+    
+    A6fig <- list(A6left,A6right,A6left_IL,A6right_IL)
+    save(A6fig, file="FigureA6.RData")
+  
+  ######
+  # Figure A.8 and A.9
+  ################
+    A8dat <- Region@data
+  
+    gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
+    
+    nam <- paste("state",rep(gears[1],length(Period)),Period,sep="_")
+    A8dat <- cbind(A8dat, State_reg[match(A8dat$csquares,State_reg$Fisheries.csquares), c(nam)])
+    A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
+    Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
+    colnames(Avgear)[1] <- 'MSFD'
+    AvMSFD_metier <- as.data.frame(Avgear)
+      
+      for (p in 2:length(gears)){
+        nam <- paste("state",rep(gears[p],length(Period)),Period,sep="_")
+        A8dat <- cbind(A8dat, State_reg[match(A8dat$csquares,State_reg$Fisheries.csquares), c(nam)])
+        A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
+        Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
+        colnames(Avgear)[1] <- 'MSFD'
+        AvMSFD_metier <- cbind(AvMSFD_metier, Avgear[match(AvMSFD_metier$MSFD,Avgear$MSFD), c(2:(length(Period)+1))])
+      }
+  
+    A8_A9fig <- subset(AvMSFD_metier, AvMSFD_metier$MSFD %in%  c(mostcommonMSFD))
+    save(A8_A9fig, file="FigureA8_A9.RData")
+  
+  # redo analysis for inverse longevity impact
+    A8dat <- Region@data
+    
+    gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
+    
+    nam <- paste("state",rep(gears[1],length(Period)),Period,sep="_")
+    A8dat <- cbind(A8dat, State_reg_IL[match(A8dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+    A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
+    Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
+    colnames(Avgear)[1] <- 'MSFD'
+    AvMSFD_metier <- as.data.frame(Avgear)
+    
+    for (p in 2:length(gears)){
+      nam <- paste("state",rep(gears[p],length(Period)),Period,sep="_")
+      A8dat <- cbind(A8dat, State_reg_IL[match(A8dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+      A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
+      Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
+      colnames(Avgear)[1] <- 'MSFD'
+      AvMSFD_metier <- cbind(AvMSFD_metier, Avgear[match(AvMSFD_metier$MSFD,Avgear$MSFD), c(2:(length(Period)+1))])
+    }
+    
+    A8_A9fig <- subset(AvMSFD_metier, AvMSFD_metier$MSFD %in%  c(mostcommonMSFD))
+    save(A8_A9fig, file="FigureA8_A9_IL.RData")
+    
+  #####
+  # Table A.4
+  ################
+    datT4 <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
+    gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
+    
+    A4table <- as.data.frame(matrix(data=NA, ncol=length(gears), nrow = 4))
+    
+    for (pp in 1:length(gears)){
+      datgear <- datT4
+      
+      nam <- paste(rep(paste(gears[pp],"surface_sar",sep="_"),length(AssPeriod)),AssPeriod,sep="_")
+      datgear <- cbind(datgear, FisheriesMet[match(datgear$csquares,FisheriesMet$csquares), c(nam)])
+      datgear[,c(nam)][is.na(datgear[,c(nam)])] <- 0
+      datgear$avgsar <- rowMeans(datgear[,nam])
+      
+      nam <- paste(rep(paste(gears[pp],"total_weight",sep="_"),length(AssPeriod)),AssPeriod,sep="_")
+      datgear <- cbind(datgear, FisheriesMet[match(datgear$csquares,FisheriesMet$csquares), c(nam)])
+      datgear[,c(nam)][is.na(datgear[,c(nam)])] <- 0
+      datgear$avgweight <- rowMeans(datgear[,nam])
+      
+      nam <- paste(rep(paste(gears[pp],"total_value",sep="_"),length(AssPeriod)),AssPeriod,sep="_")
+      datgear <- cbind(datgear, FisheriesMet[match(datgear$csquares,FisheriesMet$csquares), c(nam)])
+      datgear[,c(nam)][is.na(datgear[,c(nam)])] <- 0
+      datgear$avgvalue <- rowMeans(datgear[,nam])
+      
+      nam <- paste(rep(paste("state",gears[pp],sep="_"),length(AssPeriod)),AssPeriod,sep="_")
+      datgear_PD <- cbind(datgear, State_reg[match(datgear$csquares,State_reg$Fisheries.csquares), c(nam)])
+      datgear_PD[,c(nam)][is.na(datgear_PD[,c(nam)])] <- 0
+      datgear_PD$avgimpact <- 1- rowMeans(datgear_PD[,nam])
+      datgear_PD <- subset(datgear_PD,datgear_PD$avgsar >0)
+      A4table[1,pp] <- (sum(datgear_PD$avgweight)/1000000) / sum(datgear_PD$avgimpact)
+      A4table[2,pp] <- (sum(datgear_PD$avgvalue)/1000000) / sum(datgear_PD$avgimpact)
+      
+      datgear_IL <- cbind(datgear, State_reg_IL[match(datgear$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+      datgear_IL[,c(nam)][is.na(datgear_IL[,c(nam)])] <- 0
+      datgear_IL$avgimpact <- 1- rowMeans(datgear_IL[,nam])
+      datgear_IL <- subset(datgear_IL,datgear_IL$avgsar >0)
+      A4table[3,pp] <- (sum(datgear_IL$avgweight)/1000000) / sum(datgear_IL$avgimpact)
+      A4table[4,pp] <- (sum(datgear_IL$avgvalue)/1000000) / sum(datgear_IL$avgimpact)
+    }
+    
+    colnames(A4table) <- gears
+    rownames(A4table) <- c("Landings (1000 tonnes)/PD impact","Value (10^6 euro)/PD impact",
+                           "Landings (1000 tonnes)/L1 impact","Value (10^6 euro)/L1 impact")
+    
+    save(A4table, file="TableA4.RData")
+  
+  }
 
-rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','Period','AssPeriod',"EcoReg",
-                            'Fisheries','FisheriesMet','Region','State_reg',"EcoReg_index","Assunit","Assregion"))])
+rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index',
+                            'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet',
+                            'Region','State_reg','State_reg_IL',"EcoReg_index","Assunit","Assregion"))])
 
