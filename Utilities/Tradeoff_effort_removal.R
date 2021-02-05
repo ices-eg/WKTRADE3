@@ -90,6 +90,8 @@
   colnames(RE1_dat) <- c("impact","value","UnF_cells","weight","impact_IL") 
   colnames(RE4_dat) <- c("impact","value","UnF_cells","weight","impact_IL") 
   
+  setwd(paste(pathdir,"5 - Output",Assunit,Assregion,sep="/"))
+  pdf(paste(Assunit,Assregion,"MO_effort_red.pdf",sep="_"),width=7,height=5.5) 
   par(mfrow=c(2,3))
   par(oma = c(4, 4, 0, 0)) # make room (i.e. the 4's) for the overall x and y axis titles
   par(mar = c(2, 2, 1, 1)) # make the plots be closer together
@@ -103,8 +105,8 @@
   text(RE4_dat$impact,RE4_dat$value-3, labels=nam_points,cex=0.9, font=2,col="red")
   points(mean(Trade_RE1$avgimpact),100,pch= 16,col="blue",cex=1.3)
   
-  legend(0.005, 10, legend=c("low to high effort", "high to low effort"),
-         col=c("black", "red"), ,bty = "n",lwd=2,y.intersp=0.4)
+  legend(0.02, 13, legend=c("low to high effort", "high to low effort"),
+         col=c("black", "red"), ,bty = "n",lwd=2,y.intersp=0.8)
   
   plot(RE1_dat$impact_IL,RE1_dat$value, xlab="Average L1 impact", ylab="",type="o",
        xlim=c(0,0.7),ylim=c(0,100),pch=16,las=1, xaxt="n",yaxt="n")
@@ -141,8 +143,14 @@
   text(RE4_dat$UnF_cells,RE4_dat$weight-3, labels=nam_points,cex=0.9, font=2,col="red")
   points(RE1_dat$UnF_cells[1],RE1_dat$weight[1],pch= 16,col="blue",cex=1.3)  
 
-  mtext('average PD impact',at=.17,side=1,outer=T,cex=1, line=0.2)
-  mtext('average L1 impact',at=.50,side=1,outer=T,cex=1, line=0.2)
-  mtext('% unfished c-squares',at=.82,side=1,outer=T,cex=1, line=0.2) 
-  mtext('Value (%) relative to ref.',at=.75,side=2,outer=T,cex=1, line=0.2) 
-  mtext('Weight (%) relative to ref.',at=.25,side=2,outer=T,cex=1, line=0.2)    
+  mtext('average PD impact',at=.17,side=1,outer=T,cex=0.8, line=0.2)
+  mtext('average L1 impact',at=.50,side=1,outer=T,cex=0.8, line=0.2)
+  mtext('% unfished c-squares',at=.84,side=1,outer=T,cex=0.8, line=0.2) 
+  mtext('Value (%) relative to ref.',at=.75,side=2,outer=T,cex=0.8, line=0.2) 
+  mtext('Weight (%) relative to ref.',at=.25,side=2,outer=T,cex=0.8, line=0.2)    
+  
+  dev.off()
+  
+  rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','Period','AssPeriod',"EcoReg",
+                              'Fisheries','FisheriesMet','Region','State_reg','State_reg_IL',"EcoReg_index","Assunit","Assregion"))])
+  

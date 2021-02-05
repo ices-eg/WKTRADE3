@@ -6,7 +6,7 @@
 
 # load the Fisheries for the region
   load(paste(pathdir_nogit,paste(EcoReg,"fisheries.RData",sep="_"),sep="/")) 
-  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier.RData",sep="_"),sep="/")) 
+  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"),sep="/")) 
 
 # calculate state and impact for all metiers and per metier group as defined in document
   setwd(paste(pathdir,"Utilities",sep="/"))
@@ -19,7 +19,7 @@
 # estimate impact indicator 2
 # load the Fisheries for the region
   load(paste(pathdir_nogit,paste(EcoReg,"fisheries.RData",sep="_"),sep="/")) 
-  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier.RData",sep="_"),sep="/")) 
+  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"),sep="/")) 
   
 # calculate state and impact for all metiers and per metier grouping inverse lifespan
   setwd(paste(pathdir,"Utilities",sep="/"))

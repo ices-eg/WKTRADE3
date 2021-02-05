@@ -34,7 +34,7 @@ rm(list = ls())
   State_reg_IL <- State_reg # rename the state from the inverse longevity
   load(paste(pathdir_nogit,paste(EcoReg,"state.RData",sep="_"),sep="/")) 
   load(paste(pathdir_nogit,paste(EcoReg,"Fisheries.RData",sep="_"),sep="/")) 
-  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier.RData",sep="_"),sep="/")) 
+  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"),sep="/")) 
   
   setwd(paste(pathdir,"1 - Input env",sep="/"))
   load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
@@ -51,8 +51,24 @@ rm(list = ls())
   source("map_plot.R")
   source("Output_assessment.R")
   
-### run script for trade-off analysis
+### run script for trade-off analysis - reductions in effort
+  setwd(paste(pathdir,"Utilities",sep="/"))
+  source("Tradeoff_effort_removal.R") 
   
+### run script for reductions and prohibitions by gear type
+  setwd(paste(pathdir,"Utilities",sep="/"))
+  # source("Tradeoff_gear_prohibitions.R") # takes 20 minutes
+  source("Tradeoff_gear_prohibitions_results.R") 
+  
+### run script for trade-off analysis - freeze footprint
+  setwd(paste(pathdir,"Utilities",sep="/"))
+  source("Tradeoff_freeze_footprint.R")  
+  
+### run habitat management
+  setwd(paste(pathdir,"Utilities",sep="/"))
+ source("Tradeoff_habitat_management.R")
+ source("Tradeoff_habitat_management_table.R")
+ 
  } 
   
   
