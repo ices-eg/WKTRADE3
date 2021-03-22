@@ -6,9 +6,9 @@
 
   # set directory for output
   setwd(paste(pathdir,"5 - Output",sep="/"))  
-  dir.create(paste(Assunit))
+  dir.create(paste(Assunit), showWarnings = FALSE)
   setwd(paste(pathdir,"5 - Output",Assunit,sep="/"))  
-  dir.create(paste(Assregion))
+  dir.create(paste(Assregion), showWarnings = FALSE)
   setwd(paste(pathdir,"5 - Output",Assunit,Assregion,sep="/"))
 
 ##### Figure A.1
@@ -17,7 +17,7 @@
   sar    <- (map_plot(figA1,"surface_sar",AssPeriod,purples,Assregion))
   if (p %in% regions_with_impact){
       longevi <- (map_plot(figA1,"medlong",AssPeriod,sealand,Assregion))
-  } else { longevi <- ggplot() + geom_blank()+ theme_void()}
+  } else { longevi <- ggplot() + theme_void() + geom_text(aes(0,0,label='Not available')) +  xlab(NULL)}
   value  <- (map_plot(figA1,"total_value",AssPeriod,yellowred,Assregion))
   weight  <- (map_plot(figA1,"total_weight",AssPeriod,yellowred,Assregion))
 
@@ -39,7 +39,7 @@
   #left panel
   ma <- round(max(A3fig[[1]][,1:5]))
   left<-as.data.frame(A3fig[[1]])
-  plot(left[,1]~left$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,ma),
+  plot(left[,1]~left$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,ma+0.5),
        ylab="Trawling intensity (y-1)",xlab="Year")
   lines(left[,2]~left$Year, col="red", type="o", lty=2)
   lines(left[,3]~left$Year, col="blue", type="o", lty=3)
@@ -111,12 +111,12 @@
   load(paste(pathdir_prodFT,"FigureA6.RData",sep="/"))
   
   png(paste(Assregion,"figureA6.png",sep="_"),width=7,height=7, units = "in", res = 300) 
-  par(mfrow=c(2,2))
+  par(mfrow=c(2,2),mar=c(4,5,2,2)+0.1)
   
   #left panel
   left<-as.data.frame(A6fig[[1]])
   plot((1-left[,1])~left$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Impact (PD method)",xlab="Year")
+       ylab="Average impact (PD method)",xlab="Year")
   lines((1-left[,2])~left$Year, col="red", type="o", lty=2)
   lines((1-left[,3])~left$Year, col="blue", type="o", lty=3)
   lines((1-left[,4])~left$Year, col="orange", type="o", lty=4)
@@ -129,7 +129,7 @@
   # right panel
   right<-as.data.frame(A6fig[[2]])
   plot(right[,1]~right$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Proportion habitat with PD impact < 0.2",xlab="Year")
+       ylab="Fraction of grid cells \n PD impact < 0.2",xlab="Year")
   lines(right[,2]~right$Year, col="red", type="o", lty=2)
   lines(right[,3]~right$Year, col="blue", type="o", lty=3)
   lines(right[,4]~right$Year, col="orange", type="o", lty=4)
@@ -139,7 +139,7 @@
   #left panel
   left<-as.data.frame(A6fig[[3]])
   plot((1-left[,1])~left$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Impact (L1 method)",xlab="Year")
+       ylab="Average impact (L1 method)",xlab="Year")
   lines((1-left[,2])~left$Year, col="red", type="o", lty=2)
   lines((1-left[,3])~left$Year, col="blue", type="o", lty=3)
   lines((1-left[,4])~left$Year, col="orange", type="o", lty=4)
@@ -149,7 +149,7 @@
   # right panel
   right<-as.data.frame(A6fig[[4]])
   plot(right[,1]~right$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Proportion habitat with L1 impact < 0.2",xlab="Year")
+       ylab="Fraction of grid cells \n with L1 impact < 0.2",xlab="Year")
   lines(right[,2]~right$Year, col="red", type="o", lty=2)
   lines(right[,3]~right$Year, col="blue", type="o", lty=3)
   lines(right[,4]~right$Year, col="orange", type="o", lty=4)
@@ -202,22 +202,20 @@
   Avgear <- t(Avgear)
   
   png(paste(Assregion,"figureA8.png",sep="_"),width=12,height=9, units = "in", res = 300) 
-  par(mfrow=c(2,1))
+  par(mfrow=c(2,1),mar=c(4,5,2,2)+0.1)
   
-  barplot(Avgear_PD,beside=T,yaxt="n",xaxt="n",ylab="Impact (PD method)",ylim=c(0,max(Avgear_PD)+0.05),xlab="Metier")
-  legend(30,0.16, as.character(A8_A9fig$MSFD),
+  barplot(Avgear_PD,beside=T,yaxt="n",xaxt="n",ylab="Impact (PD method)",ylim=c(0,0.5),xlab="Metier")
+  legend(30,0.45, as.character(A8_A9fig$MSFD),
          fill = gray.colors(4),bty = "n")
   axis(1,c(seq(3, 48, length = 10)),gears) 
-  
-  axis(2,c(0,round(max(Avgear_PD)/2,digits = 2),round(max(Avgear_PD),digits = 2)),las=1)
+  axis(2,c(0,0.25,0.5),las=1)
   box()
 
-  barplot(Avgear,beside=T,yaxt="n",xaxt="n",ylab="Impact (L1 method)",ylim=c(0,max(Avgear)+0.05),xlab="Metier")
+  barplot(Avgear,beside=T,yaxt="n",xaxt="n",ylab="Impact (L1 method)",ylim=c(0,1),xlab="Metier")
   #legend(30,0.16, as.character(A8_A9fig$MSFD),
   #       fill = gray.colors(4),bty = "n")
   axis(1,c(seq(3, 48, length = 10)),gears) 
-  
-  axis(2,c(0,round(max(Avgear)/2,digits = 2),round(max(Avgear),digits = 2)),las=1)
+  axis(2,c(0,0.5,1),las=1)
   box()
   
   dev.off()

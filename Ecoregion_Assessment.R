@@ -24,8 +24,8 @@ rm(list = ls())
 ### run all areas in a loop 
   Assregion_index <- c(Sregions, divis)  # get the reporting region
   EcoReg_index    <- c(Sregions, rep(Sregions[1],5),rep(Sregions[2],7),
-                       rep(Sregions[3],7),rep(Sregions[4],5))  # get the (sub-)region for the reporting region
-  Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",24)) # is reporting region a "(sub-)Region" or "Division"?
+                       rep(Sregions[3],7),rep(Sregions[4],6))  # get the (sub-)region for the reporting region
+  Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",25)) # is reporting region a "(sub-)Region" or "Division"?
   regions_with_impact <- c(1,2,5,6,7,8,10:16) # get all areas with longevity data
   
   for (p in 1:29){
@@ -48,14 +48,13 @@ rm(list = ls())
  #  xxx
   
 ### run script to process FBIT figures and tables
-   setwd(paste(pathdir,"Utilities",sep="/"))
-   source("Processing_assessment.R")
+   #setwd(paste(pathdir,"Utilities",sep="/"))
+   #source("Processing_assessment.R")
   
 ### run script to make FBIT output  
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("map_plot.R")
    source("Output_assessment.R")
-  
  }
  
  

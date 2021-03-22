@@ -37,17 +37,17 @@ knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 table2 <- read.csv(paste(outputs,ecoregion,"_Table_2.csv",sep=''))
 
 table2_b <- head(table2)
-kable(table2, col.names = gsub("[.]", " ", names(table2)), caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat in the Greater North Sea averaged for 2013-2018 (0-200m). I refers to the indicators in Table 1.") %>%
+kable(table2, col.names = gsub("[.]", " ", names(table2)), caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
   kable_styling(font_size=12)
 ```
 
 #### Figure 3
-```{r echo=FALSE, message=FALSE,fig.align = 'center', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat for the depth zone 0-200m in the Greater North Sea. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA3.png",sep=''))
 ```
 
 #### Figure 4
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears in the Greater North Sea based on averaged fishing data per c-square from 2013-2018.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears based on averaged fishing data per c-square from 2013-2018.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA4.png",sep=''))
 ```
 

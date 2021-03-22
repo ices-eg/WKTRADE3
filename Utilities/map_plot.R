@@ -20,7 +20,7 @@
     coordxmap <- round(seq(minlong,maxlong,length.out = 4))
     coordymap <- round(seq(minlat,maxlat,length.out = 4))
     
-    pointsize <- 20/((maxlat-minlat)^2)
+    pointsize <- max(20/((maxlat-minlat)^1.5),20/((maxlong-minlong)^1.5))
     
     #if (Assunit == "Ecoregion"){
     #  pointsize <- .15   

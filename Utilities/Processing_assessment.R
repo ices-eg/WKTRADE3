@@ -8,11 +8,11 @@
   value_year <- paste("total_value",AssPeriod,sep="_")
   
   setwd(pathdir_nogit)  
-  dir.create("Producing figures and tables")
+  dir.create("Producing figures and tables", showWarnings = FALSE)
   setwd(paste(pathdir_nogit,"Producing figures and tables",sep="/"))  
-  dir.create(paste(Assunit))
+  dir.create(paste(Assunit), showWarnings = FALSE)
   setwd(paste(pathdir_nogit,"Producing figures and tables",Assunit,sep="/"))  
-  dir.create(paste(Assregion))
+  dir.create(paste(Assregion), showWarnings = FALSE)
   setwd(paste(pathdir_nogit,"Producing figures and tables",Assunit,Assregion,sep="/"))  
   
   # select division from the region
