@@ -1,0 +1,110 @@
+---
+title: "Bay of Biscay and the Iberian Coast"
+author: "WKTRADE 3"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+  font-family: times, serif;
+  text-align: justify;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Assessment sheet for Bay of Biscay and the Iberian Coast sub-region and for seven subdivisions**
+
+#  {.tabset .tabset-fade .tabset-pills}
+
+```{r ReadData, echo=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(readtext)
+
+reg_dat <- c("Bay of Biscay and the Iberian Coast","Shallow_BoB", "Deep_BoB", "ShallowNorth_IC", "ShallowSouth_IC","Galicia_IC",  "Deep_IC")
+name_dat <- c("Bay of Biscay and the Iberian Coast","Bay of Biscay - shallow","Northern area deep","Northern Iberian Coast","Southern Iberian Coast","Gulf of Galicia","Southern area deep")
+
+reg <- 1
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 2
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 3
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 4
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 5
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 6
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 7
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
+```
+
+# {-}
+

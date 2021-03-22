@@ -15,17 +15,22 @@
   dir.create(paste(Assregion))
   setwd(paste(pathdir_nogit,"Producing figures and tables",Assunit,Assregion,sep="/"))  
   
+  # select division from the region
   if (Assregion != EcoReg){
-    if (EcoReg != "Baltic Sea"){
-   Region <-  subset(Region,Region@data$OSPARreg == Assregion)
-    } }
+   Region <-  subset(Region,Region@data$division == Assregion)
+   }
   
-  Region <- Region[!(is.na(Region$medlong)),]
+  # subset all areas with longevity (north sea has no longevity prediction for Norwegian trench)
+  if (p %in% regions_with_impact){
+    Region <- Region[!(is.na(Region$medlong)),]
+  }
+  
+  # add correct column names for map plots
   idx <- which(names(Region@data)== "long")
   colnames(Region@data)[idx]  <- "longitude"
   idx <- which(names(Region@data)== "lat")
   colnames(Region@data)[idx]  <- "latitude"
-  
+
 #####
 # Figure A.1
 ################
@@ -37,7 +42,12 @@
 #####
 # Table A.1
 ################
-  TA1dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+  TA1dat <- Region@data
+  
+  # remove areas deeper than 200 meter for overview of Greater North Sea
+  if (Assregion == "Greater North Sea"){
+    TA1dat <-  subset(TA1dat,TA1dat$Depth >= -200)
+  }
   
   nam <- c(SSAR_year)
   TA1dat <- cbind(TA1dat, Fisheries[match(TA1dat$csquares,Fisheries$csquares), c(nam)])
@@ -65,25 +75,30 @@
 # indicator 5 persistently unfished areas
   ind5 <- length(which(TA1dat$avgsar == 0))/nrow(TA1dat)
   
-# indicator 6 average impact - PD model
-  nam <- c(state_year)
-  TA1dat_PD <- cbind(TA1dat, State_reg[match(TA1dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-  TA1dat_PD[,c(nam)][is.na(TA1dat_PD[,c(nam)])] <- 1
-  TA1dat_PD$avgstate <- rowMeans(TA1dat_PD[,state_year]) 
-  ind6_PD <- 1- mean(TA1dat_PD[,"avgstate"])
-
-# indicator 7 proportion of area with impact < 0.2 - PD model
-  ind7_PD <- length(which(TA1dat_PD[,"avgstate"] >= 0.8))/nrow(TA1dat_PD)
-
-# indicator 6 average impact - IL model
-  nam <- c(state_year)
-  TA1dat_IL <- cbind(TA1dat, State_reg_IL[match(TA1dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
-  TA1dat_IL[,c(nam)][is.na(TA1dat_IL[,c(nam)])] <- 1
-  TA1dat_IL$avgstate <- rowMeans(TA1dat_IL[,state_year]) 
-  ind6_IL <- 1- mean(TA1dat_IL[,"avgstate"])
+# all areas without impact prediction
+  ind6_PD <- NA; ind6_IL<- NA; ind7_PD <-NA; ind7_IL <- NA
   
-  # indicator 7 proportion of area with impact < 0.2 - IL model
-  ind7_IL <- length(which(TA1dat_IL[,"avgstate"] >= 0.8))/nrow(TA1dat_IL)
+  if (p %in% regions_with_impact){
+  # indicator 6 average impact - PD model
+    nam <- c(state_year)
+    TA1dat_PD <- cbind(TA1dat, State_reg[match(TA1dat$csquares,State_reg$Fisheries.csquares), c(nam)])
+    TA1dat_PD[,c(nam)][is.na(TA1dat_PD[,c(nam)])] <- 1
+    TA1dat_PD$avgstate <- rowMeans(TA1dat_PD[,state_year]) 
+    ind6_PD <- 1- mean(TA1dat_PD[,"avgstate"])
+  
+  # indicator 7 proportion of area with impact < 0.2 - PD model
+    ind7_PD <- length(which(TA1dat_PD[,"avgstate"] >= 0.8))/nrow(TA1dat_PD)
+  
+  # indicator 6 average impact - IL model
+    nam <- c(state_year)
+    TA1dat_IL <- cbind(TA1dat, State_reg_IL[match(TA1dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
+    TA1dat_IL[,c(nam)][is.na(TA1dat_IL[,c(nam)])] <- 1
+    TA1dat_IL$avgstate <- rowMeans(TA1dat_IL[,state_year]) 
+    ind6_IL <- 1- mean(TA1dat_IL[,"avgstate"])
+    
+    # indicator 7 proportion of area with impact < 0.2 - IL model
+    ind7_IL <- length(which(TA1dat_IL[,"avgstate"] >= 0.8))/nrow(TA1dat_IL)
+  }
   
   A1table <- c(ind1,ind2,ind3,ind4,ind5,ind6_PD,ind6_IL,ind7_PD,ind7_IL)
   save(A1table, file="TableA1.RData")
@@ -91,7 +106,12 @@
 #####
 # Table A.2
 ################
-  TA2dat <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
+  TA2dat <-  Region@data
+  
+  # remove areas deeper than 200 meter for overview of Greater North Sea
+  if (Assregion == "Greater North Sea"){
+    TA2dat <-  subset(TA2dat,TA2dat$Depth >= -200)
+  }
   
   TA2dat$grid <- 1
   TA2dat$MSFD <- as.character(TA2dat$MSFD)
@@ -143,7 +163,13 @@
 #####
 # Figure A.3
 ################
-  A3dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+  A3dat <-  Region@data
+  
+  # remove areas deeper than 200 meter for overview of Greater North Sea
+  if (Assregion == "Greater North Sea"){
+    A3dat <-  subset(A3dat,A3dat$Depth >= -200)
+  }
+  
   SSARNames <- paste("surface_sar",Period,sep="_")
   A3dat <- cbind(A3dat, Fisheries[match(A3dat$csquares,Fisheries$csquares), c(SSARNames)])
   A3dat[,c(SSARNames)][is.na(A3dat[,c(SSARNames)])] <- 0
@@ -227,19 +253,19 @@
 #####
 # Figure A.4
 ################
-  A4dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0 )
+  A4dat <-  Region@data
+  
+  # remove areas deeper than 200 meter for overview of Greater North Sea
+  if (Assregion == "Greater North Sea"){
+    A4dat <-  subset(A4dat,A4dat$Depth >= -200)
+  }
+  
   nam <- c(SSAR_year,weight_year,value_year)
   A4dat <- cbind(A4dat, Fisheries[match(A4dat$csquares,Fisheries$csquares), c(nam)])
   A4dat[ ,c(nam)][is.na(A4dat[ ,c(nam)]) ] = 0 
   A4dat$avgsar <- rowMeans(A4dat[,SSAR_year]) 
   A4dat$avgweight <- rowMeans(A4dat[,weight_year],na.rm=T)
   A4dat$avgvalue <- rowMeans(A4dat[,value_year],na.rm=T) 
-  
-  nam <- c(state_year)
-  A4dat <- cbind(A4dat, State_reg[match(A4dat$csquares,State_reg$Fisheries.csquares), c(nam)])
-  A4dat[,c(nam)][is.na(A4dat[,c(nam)])] <- 1
-  A4dat$avgstate <- rowMeans(A4dat[,state_year]) 
-
   A4dat<-A4dat[order(-A4dat[,"avgsar"]),]
   A4dat$sweptcumu <-cumsum(A4dat[,"avgsar"])/sum(A4dat[,"avgsar"])
   A4dat$landcumu  <-cumsum(A4dat[,"avgweight"])/sum(A4dat[,"avgweight"])
@@ -251,7 +277,13 @@
 #####
 # Table A.3
 ################
-  datT3 <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
+  datT3 <-Region@data
+  
+  # remove areas deeper than 200 meter for overview of Greater North Sea
+  if (Assregion == "Greater North Sea"){
+    datT3 <-  subset(datT3,datT3$Depth >= -200)
+  }
+  
   gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
   
   A3table <- as.data.frame(matrix(data=NA, ncol=length(gears), nrow = 5))
@@ -289,11 +321,9 @@
   
   save(A3table, file="TableA3.RData")
  
-####
-# estimate impact for the regions with longevity data
-################
   
-  if (Assregion == "Baltic Sea" | Assregion == "Greater North Sea"){
+### impact estimations
+  if (p %in% regions_with_impact){
   
   #####
   # Figure A.5
@@ -311,7 +341,13 @@
   # Figure A.6
   ################
     # estimate impact based on inverse longevity
-    A6dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+    A6dat <- Region@data
+    
+    # remove areas deeper than 200 meter for overview of Greater North Sea
+    if (Assregion == "Greater North Sea"){
+      A6dat <-  subset(A6dat,A6dat$Depth >= -200)
+    }
+    
     stateNames <- paste("state",Period,sep="_")
     A6dat <- cbind(A6dat, State_reg_IL[match(A6dat$csquares,State_reg_IL$Fisheries.csquares), c(stateNames)])
     A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
@@ -356,7 +392,7 @@
     A6left_IL <- A6left
     A6right_IL <- A6right
     
-    A6dat <- subset(Region@data,Region@data$Depth >= -200 & Region@data$Depth < 0)
+    A6dat <- Region@data
     stateNames <- paste("state",Period,sep="_")
     A6dat <- cbind(A6dat, State_reg[match(A6dat$csquares,State_reg$Fisheries.csquares), c(stateNames)])
     A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
@@ -402,9 +438,14 @@
     save(A6fig, file="FigureA6.RData")
   
   ######
-  # Figure A.8 and A.9
+  # Figure A.8
   ################
     A8dat <- Region@data
+    
+    # remove areas deeper than 200 meter for overview of Greater North Sea
+    if (Assregion == "Greater North Sea"){
+      A8dat <-  subset(A8dat,A8dat$Depth >= -200)
+    }
   
     gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
     
@@ -454,7 +495,13 @@
   #####
   # Table A.4
   ################
-    datT4 <- subset(Region@data,Region@data$Depth >= -200  & Region@data$Depth < 0)
+    datT4 <- Region@data
+    
+    # remove areas deeper than 200 meter for overview of Greater North Sea
+    if (Assregion == "Greater North Sea"){
+      datT4 <-  subset(datT4,datT4$Depth >= -200)
+    }
+    
     gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
     
     A4table <- as.data.frame(matrix(data=NA, ncol=length(gears), nrow = 4))
@@ -498,10 +545,10 @@
                            "Landings (1000 tonnes)/L1 impact","Value (10^6 euro)/L1 impact")
     
     save(A4table, file="TableA4.RData")
-  
+    
   }
-
-rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index',
-                            'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet',
-                            'Region','State_reg','State_reg_IL',"EcoReg_index","Assunit","Assregion"))])
+  
+rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','EcoReg_index',
+                            'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet','p','regions_with_impact',
+                            'Region','State_reg','State_reg_IL',"Assunit","Assregion"))])
 

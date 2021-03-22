@@ -1,0 +1,120 @@
+---
+title: "Baltic Sea"
+author: "WKTRADE 3"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+  font-family: times, serif;
+  text-align: justify;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Assessment sheet for Baltic Sea region and for seven subdivisions**
+
+#  {.tabset .tabset-fade .tabset-pills}
+
+```{r ReadData, echo=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(readtext)
+
+reg_dat <- c("Baltic Sea","Aland_BS", "GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
+name_dat <- c("Baltic Sea","Aland area", "Gulf of Finland", "Gulf of Riga" ,"Arkona & Bornholm Basin","Western Baltic Sea" ,"Baltic Proper" ,"Bothnian area")
+reg <- 1
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 2
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 3
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 4
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 5
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 6
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 7
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 8
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+# {-}
+
