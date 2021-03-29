@@ -40,7 +40,7 @@
   ma <- round(max(A3fig[[1]][,1:5]))
   left<-as.data.frame(A3fig[[1]])
   plot(left[,1]~left$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,ma+0.5),
-       ylab="Trawling intensity (y-1)",xlab="Year")
+       ylab="I-1: Average trawling intensity (y-1)",xlab="Year")
   lines(left[,2]~left$Year, col="red", type="o", lty=2)
   lines(left[,3]~left$Year, col="blue", type="o", lty=3)
   lines(left[,4]~left$Year, col="orange", type="o", lty=4)
@@ -50,7 +50,7 @@
   # middle panel
   middle<-as.data.frame(A3fig[[2]])
   plot(middle[,1]~middle$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Proportion fished",xlab="Year")
+       ylab="I-3: Proportion of area fished",xlab="Year")
   lines(middle[,2]~middle$Year, col="red", type="o", lty=2)
   lines(middle[,3]~middle$Year, col="blue", type="o", lty=3)
   lines(middle[,4]~middle$Year, col="orange", type="o", lty=4)
@@ -60,7 +60,7 @@
   # right panel
   right<-as.data.frame(A3fig[[3]])
   plot(right[,1]~right$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Proportion fished with 90% effort",xlab="Year")
+       ylab="I-4: Smallest  prop. of area with 90% of effort",xlab="Year")
   lines(right[,2]~right$Year, col="red", type="o", lty=2)
   lines(right[,3]~right$Year, col="blue", type="o", lty=3)
   lines(right[,4]~right$Year, col="orange", type="o", lty=4)
@@ -129,7 +129,7 @@
   # right panel
   right<-as.data.frame(A6fig[[2]])
   plot(right[,1]~right$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Fraction of grid cells \n PD impact < 0.2",xlab="Year")
+       ylab="Prop. of area \n PD impact < 0.2",xlab="Year")
   lines(right[,2]~right$Year, col="red", type="o", lty=2)
   lines(right[,3]~right$Year, col="blue", type="o", lty=3)
   lines(right[,4]~right$Year, col="orange", type="o", lty=4)
@@ -149,7 +149,7 @@
   # right panel
   right<-as.data.frame(A6fig[[4]])
   plot(right[,1]~right$Year,type="o",col="black",lwd=2, pch=16, yaxt="n",ylim=c(0,1),
-       ylab="Fraction of grid cells \n with L1 impact < 0.2",xlab="Year")
+       ylab="Prop. of area \n with L1 impact < 0.2",xlab="Year")
   lines(right[,2]~right$Year, col="red", type="o", lty=2)
   lines(right[,3]~right$Year, col="blue", type="o", lty=3)
   lines(right[,4]~right$Year, col="orange", type="o", lty=4)
@@ -168,8 +168,8 @@
   
   A8_A9fig[,nam]
 
-  for (p in 2:length(gears)){
-    nam <- paste("state",rep(gears[p],length(AssPeriod)),AssPeriod,sep="_")
+  for (q in 2:length(gears)){
+    nam <- paste("state",rep(gears[q],length(AssPeriod)),AssPeriod,sep="_")
     Avgear <- cbind(Avgear,data.frame(rowMeans(A8_A9fig[, nam])))
   }
   colnames(Avgear) <- gears
@@ -190,8 +190,8 @@
   
   A8_A9fig[,nam]
   
-  for (p in 2:length(gears)){
-    nam <- paste("state",rep(gears[p],length(AssPeriod)),AssPeriod,sep="_")
+  for (q in 2:length(gears)){
+    nam <- paste("state",rep(gears[q],length(AssPeriod)),AssPeriod,sep="_")
     Avgear <- cbind(Avgear,data.frame(rowMeans(A8_A9fig[, nam])))
   }
   colnames(Avgear) <- gears
@@ -225,8 +225,8 @@
 ##########
 # Table A1
   load(paste(pathdir_prodFT,"TableA1.RData",sep="/"))
-  col1 <- c("Intensity (I-1)", "Proportion of cells fished (I-2)", "Proportion of area fished (I-3)", 
-            "Aggregation of fishing pressure (I-4)","Persistently unfished areas (I-5)", 
+  col1 <- c("Intensity (I-1)", "Proportion of area in fished cells (I-2)", "Proportion of area fished per year (I-3)", 
+            "Smallest  prop. of area with 90% of fishing effort (I-4)","Proportion of area in unfished cells (I-5)", 
             "Average PD impact","Average L1 impact", "Proportion of area with PD impact < 0.2", "Proportion of area with L1 impact < 0.2")
   A1table <- round(A1table, digits = 2)  
   A1table <- data.frame(Indicators = col1, values = A1table)
@@ -234,12 +234,12 @@
 
 # Table A2
   load(paste(pathdir_prodFT,"TableA2.RData",sep="/"))
-  A2table <- A2table[,c(1:3,5:7,4,8:10)]
+  A2table <- A2table[,c(1:6,9,8,7,10)]
   
   colnames(A2table) <- c("MSFD broad habitat type","Extent of habitat (1000 km2)", "Number of grid cells",
                          "Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)",
-                         "Prop. of grid cells fished (I-2)", "Prop. of area fished (I-3)",
-                          "Prop of habitat fished with 90% of effort (I-4)")
+                         "Prop. of area in fished grid cells (I-2)", "Prop. of area fished per year (I-3)",
+                          "Smallest  prop. of area with 90% of fishing effort (I-4)")
   
   A2table[,c(2:10)] <- round(A2table[,c(2:10)], digits = 2)
   
@@ -260,4 +260,5 @@
   
   rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','EcoReg_index',
                               'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet','p','regions_with_impact',
-                              'Region','State_reg','State_reg_IL',"Assunit","Assregion"))])
+                              'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq"))])
+  

@@ -1,9 +1,9 @@
 "Indicators","values"
 "Intensity (I-1)",0
-"Proportion of cells fished (I-2)",0.01
-"Proportion of area fished (I-3)",0
-"Aggregation of fishing pressure (I-4)",0.01
-"Persistently unfished areas (I-5)",0.99
+"Proportion of area in fished cells (I-2)",0.01
+"Proportion of area fished per year (I-3)",0
+"Smallest  prop. of area with 90% of fishing effort (I-4)",0.01
+"Proportion of area in unfished cells (I-5)",0.99
 "Average PD impact",0
 "Average L1 impact",0
 "Proportion of area with PD impact < 0.2",1

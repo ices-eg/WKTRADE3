@@ -58,8 +58,19 @@ coregrounds <- readtext(paste(outtext,"Core fishing grounds.txt",sep=''))
 `r coregrounds$text`
 
 #### Figure 5
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% core fishing grounds by metier during the period 2013-2018**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
+```
 
 #### Figure 6
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core? fishing ground**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
+```
+
+#### Figure 7
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. percent area fished vs. landings value (euro) by métier, coloured by year**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
+```
 
 ### Fishing by métier {.tabset } 
 ```{r echo=FALSE, message=FALSE}
@@ -80,5 +91,65 @@ kable(table3, caption="Table 3. Overview of area fished (sum of swept area), lan
 No information available
 
 ### Manangement scenarios  {.tabset }
+```{r echo=FALSE, message=FALSE}
+Management <- readtext(paste(outtext,"Management.txt",sep=''))
+```
+`r Management$text`
+
+#### MSFD habitat - 1
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_1.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_1.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+#### MSFD habitat - 2
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_2.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_2.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+#### MSFD habitat - 3
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_3.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_3.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+```
+
+#### MSFD habitat - 4
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_4.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_4.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
 
 ## {-}

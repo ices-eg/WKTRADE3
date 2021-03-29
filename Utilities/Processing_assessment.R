@@ -58,22 +58,23 @@
   TA1dat$sweptarea <- TA1dat[,"avgsar"]*TA1dat$area_sqkm
   ind1 <- sum(TA1dat$sweptarea,na.rm=T)/sum(TA1dat$area_sqkm)
 
-# indicator 2 proportion of grid cells fished (fished irrespective of swept area)
-  ind2 <- length(which(TA1dat[,"avgsar"]>0))/nrow(TA1dat)
-
-# indicator 3 proportion of area fished
+# indicator 2 proportion of area within fished grid cells (fished irrespective of swept area)
+  ind2 <-  ifelse(TA1dat[,"avgsar"] > 0,1,0)
+  ind2 <- sum(ind2 * TA1dat$area_sqkm)/sum(TA1dat$area_sqkm)
+  
+# indicator 3 proportion of area swept each year
   TA1dat$sweptarea2 <- TA1dat$sweptarea
   TA1dat$sweptarea2 <- ifelse(TA1dat$sweptarea > TA1dat$area_sqkm,TA1dat$area_sqkm,TA1dat$sweptarea)
   ind3 <- sum(TA1dat$sweptarea2,na.rm=T)/sum(TA1dat$area_sqkm)
 
 # indicator 4 aggregation of fishing pressure
-  TA1dat <- TA1dat[order(TA1dat[,"avgsar"],decreasing = T),]
-  TA1dat$cumSSAR <- cumsum(TA1dat[,"avgsar"])
-  TA1dat$cumSSAR <- TA1dat$cumSSAR / sum(TA1dat[,"avgsar"])
+  TA1dat <- TA1dat[order(TA1dat[,"sweptarea"],decreasing = T),]
+  TA1dat$cumSSAR <- cumsum(TA1dat[,"sweptarea"])
+  TA1dat$cumSSAR <- TA1dat$cumSSAR / sum(TA1dat[,"sweptarea"])
   ind4 <- min(which (TA1dat$cumSSAR > .9))/nrow(TA1dat)
   
-# indicator 5 persistently unfished areas
-  ind5 <- length(which(TA1dat$avgsar == 0))/nrow(TA1dat)
+# indicator 5 proportion of area within persistently unfished grid cells
+  ind5 <- 1-ind2
   
 # all areas without impact prediction
   ind6_PD <- NA; ind6_IL<- NA; ind7_PD <-NA; ind7_IL <- NA
@@ -84,20 +85,24 @@
     TA1dat_PD <- cbind(TA1dat, State_reg[match(TA1dat$csquares,State_reg$Fisheries.csquares), c(nam)])
     TA1dat_PD[,c(nam)][is.na(TA1dat_PD[,c(nam)])] <- 1
     TA1dat_PD$avgstate <- rowMeans(TA1dat_PD[,state_year]) 
-    ind6_PD <- 1- mean(TA1dat_PD[,"avgstate"])
+    TA1dat_PD$avgstate_weight <- TA1dat_PD$avgstate*TA1dat_PD$area_sqkm
+    ind6_PD <- 1- sum(TA1dat_PD$avgstate_weight,na.rm=T)/sum(TA1dat_PD$area_sqkm)
   
   # indicator 7 proportion of area with impact < 0.2 - PD model
-    ind7_PD <- length(which(TA1dat_PD[,"avgstate"] >= 0.8))/nrow(TA1dat_PD)
-  
+    ind7_PD <-  ifelse(TA1dat_PD[,"avgstate"] >= 0.8,1,0)
+    ind7_PD <- sum(ind7_PD * TA1dat_PD$area_sqkm)/sum(TA1dat_PD$area_sqkm)
+    
   # indicator 6 average impact - IL model
     nam <- c(state_year)
     TA1dat_IL <- cbind(TA1dat, State_reg_IL[match(TA1dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
     TA1dat_IL[,c(nam)][is.na(TA1dat_IL[,c(nam)])] <- 1
     TA1dat_IL$avgstate <- rowMeans(TA1dat_IL[,state_year]) 
-    ind6_IL <- 1- mean(TA1dat_IL[,"avgstate"])
+    TA1dat_IL$avgstate_weight <- TA1dat_IL$avgstate*TA1dat_IL$area_sqkm
+    ind6_IL <- 1- sum(TA1dat_IL$avgstate_weight,na.rm=T)/sum(TA1dat_IL$area_sqkm)
     
     # indicator 7 proportion of area with impact < 0.2 - IL model
-    ind7_IL <- length(which(TA1dat_IL[,"avgstate"] >= 0.8))/nrow(TA1dat_IL)
+    ind7_IL <-  ifelse(TA1dat_IL[,"avgstate"] >= 0.8,1,0)
+    ind7_IL <- sum(ind7_IL * TA1dat_IL$area_sqkm)/sum(TA1dat_IL$area_sqkm)
   }
   
   A1table <- c(ind1,ind2,ind3,ind4,ind5,ind6_PD,ind6_IL,ind7_PD,ind7_IL)
@@ -113,48 +118,65 @@
     TA2dat <-  subset(TA2dat,TA2dat$Depth >= -200)
   }
   
+  # ignore these steps if you only have one mid-point observation per c-square
+    colnames(TA2dat)[which(colnames(TA2dat)=="MSFD")] <- "MSFD_midpoint" 
+
+  # account for area of MSDS habitat within csquares and make sure total area is < grid cell size 
+  tnew <- aggregate(msfd_csq$area_km2, by=list(msfd_csq$csquares),FUN = sum)
+  colnames(tnew) <- c("csquares","areanew")
+  
+  msfd_csq_new <- cbind(msfd_csq, tnew[match(msfd_csq$csquares,tnew$csquares), c("areanew")])
+  colnames(msfd_csq_new)[ncol(msfd_csq_new)] <- "tot_area"
+  TA2dat <- merge(TA2dat,msfd_csq_new,by = "csquares", all.x =T)
+  TA2dat$area_km2 <- ifelse(TA2dat$tot_area < TA2dat$area_sqkm, TA2dat$area_km2,TA2dat$area_km2*(TA2dat$area_sqkm/TA2dat$tot_area))
+  
   TA2dat$grid <- 1
   TA2dat$MSFD <- as.character(TA2dat$MSFD)
   TA2dat$MSFD[TA2dat$MSFD=="Na"]= "Unknown"
-  TA2dat$MSFD[TA2dat$MSFD=="<Na>"]= "Unknown"
-  TA2dat$MSFD[is.na(TA2dat$MSFD)]= "Unknown"
+  #TA2dat$MSFD[TA2dat$MSFD=="<Na>"]= "Unknown"
+  #TA2dat$MSFD[is.na(TA2dat$MSFD)]= "Unknown"
   
   nam <- c(SSAR_year,weight_year,value_year)
   TA2dat <- cbind(TA2dat, Fisheries[match(TA2dat$csquares,Fisheries$csquares), c(nam)])
   TA2dat[,c(nam)][is.na(TA2dat[,c(nam)])] <- 0
-  TA2dat$avgsar <- rowMeans(TA2dat[,SSAR_year]) 
-  TA2dat$avgweight <- rowMeans(TA2dat[,weight_year],na.rm=T)
-  TA2dat$avgvalue <- rowMeans(TA2dat[,value_year],na.rm=T) 
+  TA2dat$avgsar <- rowMeans(TA2dat[,SSAR_year]) # get the c-sq average within c-sq per year
+  TA2dat$avgweight <- rowMeans(TA2dat[,weight_year],na.rm=T) * (TA2dat$area_km2 / TA2dat$area_sqkm) # distribute weight equally across MSFD habitats in each c-sq
+  TA2dat$avgvalue <- rowMeans(TA2dat[,value_year],na.rm=T) * (TA2dat$area_km2 / TA2dat$area_sqkm) # distribute value equally across MSFD habitats in each c-sq
 
-  TA2dat$sweptarea <- TA2dat[,"avgsar"]*TA2dat$area_sqkm
-  TA2dat$propgridfished <- ifelse(TA2dat[,"avgsar"] > 0,1,0)
-  TA2dat$propswept <- TA2dat$sweptarea
-  TA2dat$propswept <- ifelse(TA2dat$sweptarea > TA2dat$area_sqkm,TA2dat$area_sqkm,TA2dat$sweptarea)
+  TA2dat$sweptarea <- TA2dat[,"avgsar"]*TA2dat$area_km2
   
-  nam <- c("area_sqkm","grid", "avgweight", "avgvalue","avgsar","sweptarea","propgridfished","propswept")
+  # estimate proportion of area swept each year
+  TA2dat$propswept <- TA2dat$sweptarea
+  TA2dat$propswept <- ifelse(TA2dat$sweptarea > TA2dat$area_km2,TA2dat$area_km2,TA2dat$sweptarea)
+  
+  # estimate proportion of area fished (all area within c-squares with SAR > 0)
+  TA2dat$propfished <- ifelse(TA2dat[,"avgsar"] > 0,1,0)
+  TA2dat$propfished <- TA2dat$propfished * TA2dat$area_km2
+  
+  nam <- c("area_km2","grid", "avgweight", "avgvalue","sweptarea","propfished","propswept")
   indexcol <- which(names(TA2dat) %in% nam)
   A2table = aggregate( TA2dat[, indexcol], by= list(TA2dat$MSFD), FUN=function(x){sum(x)})
   names(A2table)[1] = 'MSFD'
   
   A2table <- as.data.frame(A2table)
-  A2table <- A2table[order(A2table$area_sqkm,decreasing = T),]
+  A2table <- A2table[order(A2table$area_km2,decreasing = T),]
   A2table$MSFD <- as.character(A2table$MSFD)
   
-  A2table$avgsar <- A2table$avgsar/A2table$grid
-  A2table$area_sqkm <- A2table$area_sqkm/1000 
+  A2table$avgsar <- A2table$sweptarea/A2table$area_km2
+  A2table$propfished <- A2table$propfished / A2table$area_km2
+  A2table$propswept <- A2table$propswept / A2table$area_km2
+  A2table$area_km2 <- A2table$area_km2/1000 
   A2table$sweptarea <- A2table$sweptarea/1000
   A2table$avgweight <- A2table$avgweight/1000000
   A2table$avgvalue <- A2table$avgvalue/1000000
-  A2table$propgridfished <- A2table$propgridfished / A2table$grid
-  A2table$propswept <- (A2table$propswept/1000) / A2table$area_sqkm
-  
+
   A2table$eff_fish <- NA
   llenght <- max(which(A2table$grid>20))
   for (i in 1:llenght){
     hab <- subset(TA2dat,TA2dat$MSFD == A2table[i,1])
-    hab <- hab[order(hab[,"avgsar"],decreasing = T),]
-    hab$cumSSAR <- cumsum(hab[,"avgsar"])
-    hab$cumSSAR <- hab$cumSSAR / sum(hab[,"avgsar"])
+    hab <- hab[order(hab[,"sweptarea"],decreasing = T),]
+    hab$cumSSAR <- cumsum(hab[,"sweptarea"])
+    hab$cumSSAR <- hab$cumSSAR / sum(hab[,"sweptarea"])
     A2table$eff_fish[i] <- ifelse(is.na(hab$cumSSAR[1]),NA,min(which (hab$cumSSAR > .9))/nrow(hab))
   }
   
@@ -162,7 +184,7 @@
 
 #####
 # Figure A.3
-################
+################ 
   A3dat <-  Region@data
   
   # remove areas deeper than 200 meter for overview of Greater North Sea
@@ -170,86 +192,97 @@
     A3dat <-  subset(A3dat,A3dat$Depth >= -200)
   }
   
-  SSARNames <- paste("surface_sar",Period,sep="_")
+  # get SAR for the whole period
+  SSARNames <- paste("surface_sar",Period,sep="_") 
   A3dat <- cbind(A3dat, Fisheries[match(A3dat$csquares,Fisheries$csquares), c(SSARNames)])
   A3dat[,c(SSARNames)][is.na(A3dat[,c(SSARNames)])] <- 0
-
-  # left panel
-  # calculate for all data
-  indexcol <- which(names(A3dat) %in% SSARNames)
-  All = apply(A3dat[, indexcol], 2,  FUN=function(x){mean(x)})
-
-  # and calculate for most common habitat types
-  nam <- c("MSFD",SSARNames)
-  indexcol <- which(names(A3dat) %in% nam)
-  table_MSFD <- sort(table(A3dat$MSFD),decreasing = T)
-  mostcommonMSFD <- names(table_MSFD)[1:4]
   
-  AvgMSFD<- A3dat %>% 
-    select(all_of(indexcol)) %>%
-    filter(MSFD %in% c(mostcommonMSFD))
-  
-  indexcol <- which(names(AvgMSFD) %in% SSARNames)
-  AvgMSFD2 = aggregate(AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
-  names(AvgMSFD2)[1]= 'MSFD'
-  AvgMSFD2<-as.data.frame(AvgMSFD2)
-  
-  A3left <-cbind((All),t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
-  colnames(A3left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
-
-# middle panel
+  # get data for left, middle and right panel
+  A3left <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
   A3middle <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
-  
-  rown<-c()
-  for (i in 1:length(Period)){
-    nyear <-  paste("surface_sar",Period[i],sep="_")
-    
-    A3middle[i,1] <- length(which(A3dat[,nyear]>0.1))/length(A3dat[,nyear])
-    A3middle[i,2] <- length(which(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[1]]>0.1))/length(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[1]])
-    A3middle[i,3] <- length(which(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[2]]>0.1))/length(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[2]])
-    A3middle[i,4] <- length(which(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[3]]>0.1))/length(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[3]])
-    A3middle[i,5] <- length(which(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[4]]>0.1))/length(A3dat[,nyear][A3dat$MSFD == mostcommonMSFD[4]])
-    rown<-c(rown,paste("Prop_fished",Period[i],sep="_"))
-  }
-  A3middle<-cbind(A3middle,Period)
-  colnames(A3middle) <-colnames(A3left)
-  rownames(A3middle) <-rown
-
-# right panel
   A3right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
   
-  rown<-c()
-  for (i in 1:length(Period)){
-    nyear <-  paste("surface_sar",Period[i],sep="_")
-    grd<-min(which(cumsum(sort(A3dat[,nyear],dec=T))/sum(A3dat[,nyear])>0.9))
-    A3right[i,1]<-grd/nrow(A3dat)
-    
-    hab1<-subset(A3dat,A3dat$MSFD == mostcommonMSFD[1])
-    grd<-min(which(cumsum(sort(hab1[,nyear],dec=T))/sum(hab1[,nyear])>0.9))
-    A3right[i,2]<-grd/nrow(hab1)
-    
-    hab2<-subset(A3dat,A3dat$MSFD == mostcommonMSFD[2])
-    grd<-min(which(cumsum(sort(hab2[,nyear],dec=T))/sum(hab2[,nyear])>0.9))
-    A3right[i,3]<-grd/nrow(hab2)
-    
-    hab3<-subset(A3dat,A3dat$MSFD == mostcommonMSFD[3])
-    grd<-min(which(cumsum(sort(hab3[,nyear],dec=T))/sum(hab3[,nyear])>0.9))
-    A3right[i,4]<-grd/nrow(hab3)
-    
-    hab4<-subset(A3dat,A3dat$MSFD == mostcommonMSFD[4])
-    grd<-min(which(cumsum(sort(hab4[,nyear],dec=T))/sum(hab4[,nyear])>0.9))
-    A3right[i,5]<-grd/nrow(hab4)
-    
-    rown<-c(rown,paste("Prop_90_effort",Period[i],sep="_"))
+  # calculate indicator 1 average SAR all years all data
+  indexcol <- which(names(A3dat) %in% SSARNames)
+  A3dat[,indexcol] <- A3dat[,indexcol] * A3dat$area_sqkm
+  All = apply(A3dat[, indexcol], 2,  FUN=function(x){sum(x)})
+  A3left[,1] <- All/sum(A3dat$area_sqkm) 
+  A3dat[,indexcol] <- A3dat[,indexcol] / A3dat$area_sqkm
+  
+  # calculate indicator 3 area swept per year
+  A3dat_swept <- A3dat
+  A3dat_swept[,indexcol] <- A3dat_swept[,indexcol] * A3dat_swept$area_sqkm
+  for (j in 1: length(Period)){
+    idx <- indexcol[j]
+    A3dat_swept[,idx] <- ifelse(A3dat_swept[,idx] > A3dat_swept$area_sqkm,A3dat_swept$area_sqkm,A3dat_swept[,idx])
+    A3middle[j,1]     <- sum(A3dat_swept[,idx],na.rm=T)/sum(A3dat_swept$area_sqkm)
   }
   
-  A3right<-cbind(A3right,Period)
-  colnames(A3right) <-colnames(A3left)
-  rownames(A3right) <-rown
+  # indicator 4 aggregation of fishing pressure per year
+  A3dat_swept <- A3dat
+  A3dat_swept[,indexcol] <- A3dat_swept[,indexcol] * A3dat_swept$area_sqkm
+  for (j in 1: length(Period)){
+    idx <- indexcol[j]
+    A3dat_swept <- A3dat_swept[order(A3dat_swept[,idx],decreasing = T),]
+    A3dat_swept$cumSSAR <- cumsum(A3dat_swept[,idx])
+    A3dat_swept$cumSSAR <- A3dat_swept$cumSSAR / sum(A3dat_swept[,idx])
+    A3right[j,1] <- min(which (A3dat_swept$cumSSAR > .9))/nrow(A3dat_swept)
+  }
   
+   # now estimate again for most extensive MSFD habitats
+  A3msfd <- A3dat
+  colnames(A3msfd)[which(colnames(A3msfd)=="MSFD")] <- "MSFD_midpoint" 
+  
+  # account for area of MSDS habitat within csquares and make sure total area is < grid cell size 
+  tnew <- aggregate(msfd_csq$area_km2, by=list(msfd_csq$csquares),FUN = sum)
+  colnames(tnew) <- c("csquares","areanew")
+  
+  msfd_csq_new <- cbind(msfd_csq, tnew[match(msfd_csq$csquares,tnew$csquares), c("areanew")])
+  colnames(msfd_csq_new)[ncol(msfd_csq_new)] <- "tot_area"
+  A3msfd <- merge(A3msfd,msfd_csq_new,by = "csquares", all.x =T)
+  A3msfd$MSFD <- as.character(A3msfd$MSFD)
+  A3msfd$MSFD[A3msfd$MSFD=="Na"]= "Unknown"
+  
+  mostcommonMSFD <- A2table[1:4,1]
+  
+  for (imsfd in 1:4){
+    hab <- subset(A3msfd,A3msfd$MSFD == mostcommonMSFD[imsfd])
+    
+    # calculate indicator 1 average SAR all years all data
+    indexcol <- which(names(hab) %in% SSARNames)
+    hab[,indexcol] <- hab[,indexcol] * hab$area_km2
+    All = apply(hab[, indexcol], 2,  FUN=function(x){sum(x)})
+    A3left[,(imsfd+1)] <- All/sum(hab$area_km2) 
+    hab[,indexcol] <- hab[,indexcol] / hab$area_km2
+    
+    # calculate indicator 3 area swept per year
+    hab_swept <- hab
+    hab_swept[,indexcol] <- hab_swept[,indexcol] * hab_swept$area_km2
+    for (j in 1: length(Period)){
+      idx <- indexcol[j]
+      hab_swept[,idx] <- ifelse(hab_swept[,idx] > hab_swept$area_km2,hab_swept$area_km2,hab_swept[,idx])
+      A3middle[j,(imsfd+1)]     <- sum(hab_swept[,idx],na.rm=T)/sum(hab_swept$area_km2)
+    }
+    
+    # indicator 4 aggregation of fishing pressure per year
+    hab_swept <- hab
+    hab_swept[,indexcol] <- hab_swept[,indexcol] * hab_swept$area_sqkm
+    for (j in 1: length(Period)){
+      idx <- indexcol[j]
+      hab_swept <- hab_swept[order(hab_swept[,idx],decreasing = T),]
+      hab_swept$cumSSAR <- cumsum(hab_swept[,idx])
+      hab_swept$cumSSAR <- hab_swept$cumSSAR / sum(hab_swept[,idx])
+      A3right[j,(imsfd+1)] <- min(which (hab_swept$cumSSAR > .9))/nrow(hab_swept)
+    }
+  }
+  
+  A3left <- cbind(A3left,Period)  
+  colnames(A3left) <-c("All",mostcommonMSFD,"Year")
+  A3middle <- cbind(A3middle,Period); colnames(A3middle) <- colnames(A3left)  
+  A3right <- cbind(A3right,Period); colnames(A3right) <- colnames(A3left)  
   A3fig <- list(A3left,A3middle,A3right)
   save(A3fig, file="FigureA3.RData")
-
+  
 #####
 # Figure A.4
 ################
@@ -340,101 +373,135 @@
   #####
   # Figure A.6
   ################
-    # estimate impact based on inverse longevity
-    A6dat <- Region@data
+    A6dat <-  Region@data
     
     # remove areas deeper than 200 meter for overview of Greater North Sea
     if (Assregion == "Greater North Sea"){
       A6dat <-  subset(A6dat,A6dat$Depth >= -200)
     }
     
-    stateNames <- paste("state",Period,sep="_")
+    stateNames <- paste("state",Period,sep="_") # get state for the whole period
     A6dat <- cbind(A6dat, State_reg_IL[match(A6dat$csquares,State_reg_IL$Fisheries.csquares), c(stateNames)])
     A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
     
-  # left panel
+    # get data for left, right panel
+    A6left_IL <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+    A6right_IL <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+    
+    # calculate average L1 all years all data
     indexcol <- which(names(A6dat) %in% stateNames)
-    All = apply( A6dat[, indexcol], 2, FUN=function(x){mean(x)})
-  
-  # and calculate for most common habitat types
-    nam <- c("MSFD",stateNames)
-    indexcol <- which(names(A6dat) %in% nam)
-    AvgMSFD<- A6dat %>% 
-      select(all_of(indexcol)) %>%
-      filter(MSFD %in% c(mostcommonMSFD))
-    indexcol <- which(names(AvgMSFD) %in% stateNames)
-    AvgMSFD2 = aggregate( AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
-    names(AvgMSFD2)= 'MSFD'
-    AvgMSFD2<-as.data.frame(AvgMSFD2)
-  
-    A6left <-cbind(All,t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
-    colnames(A6left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
-  
-  # right panel
-    A6right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
-  
-    mostcommonMSFD <- sort(mostcommonMSFD)
-    rown<-c()
-    for (i in 1:length(Period)){
-      nyear <-  paste("state",Period[i],sep="_")
-      
-      A6right[i,1] <- length(which(A6dat[,nyear]>0.8))/length(A6dat[,nyear])
-      A6right[i,2] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]])
-      A6right[i,3] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]])
-      A6right[i,4] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]])
-      A6right[i,5] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]])
-      rown<-c(rown,paste("State>0.8",Period[i],sep="_"))
+    A6dat[,indexcol] <- A6dat[,indexcol] * A6dat$area_sqkm
+    All = apply(A6dat[, indexcol], 2,  FUN=function(x){sum(x)})
+    A6left_IL[,1] <- All/sum(A6dat$area_sqkm) 
+    A6dat[,indexcol] <- A6dat[,indexcol] / A6dat$area_sqkm
+    
+    # calculate prop area >0.8 state
+    for (j in 1: length(Period)){
+      idx <- stateNames[j]
+      looparea <-  ifelse(A6dat[,idx] >= 0.8,1,0)
+      A6right_IL[j,1] <- sum(looparea * A6dat$area_sqkm)/sum(A6dat$area_sqkm)
     }
-    A6right<-cbind(A6right,Period)
-    colnames(A6right) <-colnames(A6left)
-    rownames(A6right) <-rown
     
-    A6left_IL <- A6left
-    A6right_IL <- A6right
+    # now estimate again for most extensive MSFD habitats
+    A6msfd <- A6dat
+    colnames(A6msfd)[which(colnames(A6msfd)=="MSFD")] <- "MSFD_midpoint" 
     
-    A6dat <- Region@data
-    stateNames <- paste("state",Period,sep="_")
+    # account for area of MSDS habitat within csquares and make sure total area is < grid cell size 
+    tnew <- aggregate(msfd_csq$area_km2, by=list(msfd_csq$csquares),FUN = sum)
+    colnames(tnew) <- c("csquares","areanew")
+    msfd_csq_new <- cbind(msfd_csq, tnew[match(msfd_csq$csquares,tnew$csquares), c("areanew")])
+    colnames(msfd_csq_new)[ncol(msfd_csq_new)] <- "tot_area"
+    A6msfd <- merge(A6msfd,msfd_csq_new,by = "csquares", all.x =T)
+    A6msfd$MSFD <- as.character(A6msfd$MSFD)
+    A6msfd$MSFD[A6msfd$MSFD=="Na"]= "Unknown"
+    
+    mostcommonMSFD <- A2table[1:4,1]
+    
+    for (imsfd in 1:4){
+      hab <- subset(A6msfd,A6msfd$MSFD == mostcommonMSFD[imsfd])
+      
+      # calculate average state
+      indexcol <- which(names(hab) %in% stateNames)
+      hab[,indexcol] <- hab[,indexcol] * hab$area_km2
+      All = apply(hab[, indexcol], 2,  FUN=function(x){sum(x)})
+      A6left_IL[,(imsfd+1)] <- All/sum(hab$area_km2) 
+      hab[,indexcol] <- hab[,indexcol] / hab$area_km2
+      
+      # calculate prop area >0.8 state
+      for (j in 1: length(Period)){
+        idx <- stateNames[j]
+        looparea <-  ifelse(hab[,idx] >= 0.8,1,0)
+        A6right_IL[j,(imsfd+1)] <- sum(looparea * hab$area_km2)/sum(hab$area_km2)
+    }}
+    
+  # do the same for PD state
+    A6dat <-  Region@data
+    
+    # remove areas deeper than 200 meter for overview of Greater North Sea
+    if (Assregion == "Greater North Sea"){
+      A6dat <-  subset(A6dat,A6dat$Depth >= -200)
+    }
+    
+    stateNames <- paste("state",Period,sep="_") # get state for the whole period
     A6dat <- cbind(A6dat, State_reg[match(A6dat$csquares,State_reg$Fisheries.csquares), c(stateNames)])
     A6dat[,c(stateNames)][is.na(A6dat[,c(stateNames)])] <- 1
     
-    # left panel
+    # get data for left, right panel
+    A6left_PD  <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+    A6right_PD <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
+    
+    # calculate average L1 all years all data
     indexcol <- which(names(A6dat) %in% stateNames)
-    All = apply( A6dat[, indexcol], 2, FUN=function(x){mean(x)})
+    A6dat[,indexcol] <- A6dat[,indexcol] * A6dat$area_sqkm
+    All = apply(A6dat[, indexcol], 2,  FUN=function(x){sum(x)})
+    A6left_PD[,1] <- All/sum(A6dat$area_sqkm) 
+    A6dat[,indexcol] <- A6dat[,indexcol] / A6dat$area_sqkm
     
-    # and calculate for most common habitat types
-    nam <- c("MSFD",stateNames)
-    indexcol <- which(names(A6dat) %in% nam)
-    AvgMSFD<- A6dat %>% 
-      select(all_of(indexcol)) %>%
-      filter(MSFD %in% c(mostcommonMSFD))
-    indexcol <- which(names(AvgMSFD) %in% stateNames)
-    AvgMSFD2 = aggregate( AvgMSFD[, indexcol], by= list(AvgMSFD$MSFD), FUN=function(x){mean(x)})
-    names(AvgMSFD2)= 'MSFD'
-    AvgMSFD2<-as.data.frame(AvgMSFD2)
-    
-    A6left <-cbind(All,t(AvgMSFD2[1:4,2:(length(Period)+1)]),Period)
-    colnames(A6left) <-c("All",as.character(AvgMSFD2[1:4,1]),"Year")
-    
-    # right panel
-    A6right <-as.data.frame(matrix(data=NA,ncol=5,nrow=length(Period)))
-    
-    mostcommonMSFD <- sort(mostcommonMSFD)
-    rown<-c()
-    for (i in 1:length(Period)){
-      nyear <-  paste("state",Period[i],sep="_")
-      
-      A6right[i,1] <- length(which(A6dat[,nyear]>0.8))/length(A6dat[,nyear])
-      A6right[i,2] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[1]])
-      A6right[i,3] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[2]])
-      A6right[i,4] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[3]])
-      A6right[i,5] <- length(which(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]]>0.8))/length(A6dat[,nyear][A6dat$MSFD == mostcommonMSFD[4]])
-      rown<-c(rown,paste("State>0.8",Period[i],sep="_"))
+    # calculate prop area >0.8 state
+    for (j in 1: length(Period)){
+      idx <- stateNames[j]
+      looparea <-  ifelse(A6dat[,idx] >= 0.8,1,0)
+      A6right_PD[j,1] <- sum(looparea * A6dat$area_sqkm)/sum(A6dat$area_sqkm)
     }
-    A6right<-cbind(A6right,Period)
-    colnames(A6right) <-colnames(A6left)
-    rownames(A6right) <-rown
     
-    A6fig <- list(A6left,A6right,A6left_IL,A6right_IL)
+    # now estimate again for most extensive MSFD habitats
+    A6msfd <- A6dat
+    colnames(A6msfd)[which(colnames(A6msfd)=="MSFD")] <- "MSFD_midpoint" 
+    
+    # account for area of MSDS habitat within csquares and make sure total area is < grid cell size 
+    tnew <- aggregate(msfd_csq$area_km2, by=list(msfd_csq$csquares),FUN = sum)
+    colnames(tnew) <- c("csquares","areanew")
+    msfd_csq_new <- cbind(msfd_csq, tnew[match(msfd_csq$csquares,tnew$csquares), c("areanew")])
+    colnames(msfd_csq_new)[ncol(msfd_csq_new)] <- "tot_area"
+    A6msfd <- merge(A6msfd,msfd_csq_new,by = "csquares", all.x =T)
+    A6msfd$MSFD <- as.character(A6msfd$MSFD)
+    A6msfd$MSFD[A6msfd$MSFD=="Na"]= "Unknown"
+    mostcommonMSFD <- A2table[1:4,1]
+    
+    for (imsfd in 1:4){
+      hab <- subset(A6msfd,A6msfd$MSFD == mostcommonMSFD[imsfd])
+      
+      # calculate average state
+      indexcol <- which(names(hab) %in% stateNames)
+      hab[,indexcol] <- hab[,indexcol] * hab$area_km2
+      All = apply(hab[, indexcol], 2,  FUN=function(x){sum(x)})
+      A6left_PD[,(imsfd+1)] <- All/sum(hab$area_km2) 
+      hab[,indexcol] <- hab[,indexcol] / hab$area_km2
+      
+      # calculate prop area >0.8 state
+      for (j in 1: length(Period)){
+        idx <- stateNames[j]
+        looparea <-  ifelse(hab[,idx] >= 0.8,1,0)
+        A6right_PD[j,(imsfd+1)] <- sum(looparea * hab$area_km2)/sum(hab$area_km2)
+    }}
+    
+    A6left_IL <- cbind(A6left_IL,Period)  
+    colnames(A6left_IL) <-c("All",mostcommonMSFD,"Year")
+    A6left_PD <- cbind(A6left_PD,Period); colnames(A6left_PD) <- colnames(A6left_IL)  
+    A6right_PD <- cbind(A6right_PD,Period); colnames(A6right_PD) <- colnames(A6left_IL)  
+    A6right_IL <- cbind(A6right_IL,Period); colnames(A6right_IL) <- colnames(A6left_IL)  
+    
+    A6fig <- list(A6left_PD,A6right_PD,A6left_IL,A6right_IL)
     save(A6fig, file="FigureA6.RData")
   
   ######
@@ -550,5 +617,5 @@
   
 rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','EcoReg_index',
                             'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet','p','regions_with_impact',
-                            'Region','State_reg','State_reg_IL',"Assunit","Assregion"))])
+                            'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq"))])
 

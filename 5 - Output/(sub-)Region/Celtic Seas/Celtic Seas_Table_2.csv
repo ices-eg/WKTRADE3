@@ -1,24 +1,24 @@
-"MSFD broad habitat type","Extent of habitat (1000 km2)","Number of grid cells","Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)","Prop. of grid cells fished (I-2)","Prop. of area fished (I-3)","Prop of habitat fished with 90% of effort (I-4)"
-"Upper bathyal sediment",156.3,9400,5442.73,85.74,226.87,1.42,0.58,0.39,0.25
-"Abyssal",138.24,7519,3.74,0.23,0.17,0,0.04,0,0.02
-"Offshore circalittoral coarse sediment",130.31,7221,372.52,120.31,232.87,1.68,0.86,0.52,0.35
-"Offshore circalittoral sand",127.62,6969,4366.38,91.54,242.64,1.88,0.93,0.73,0.53
-"Lower bathyal sediment",114.01,7085,1.23,0.14,0.2,0,0.04,0,0.02
-"Unknown",83.27,4593,1201.86,12.28,30.39,0.34,0.46,0.17,0.13
-"Offshore circalittoral mud",64.92,3490,3247.93,96.17,239.2,3.65,0.99,0.87,0.58
-"Upper bathyal sediment or Upper bathyal rock and biogenic reef",43.2,2213,3304.28,10.86,31.44,0.71,0.62,0.23,0.16
-"Lower bathyal sediment or Lower bathyal rock and biogenic reef",33.77,1717,16.56,0.16,0.07,0,0.14,0,0.07
-"Circalittoral coarse sediment",17.54,969,2.14,4.33,3.3,0.18,0.72,0.15,0.27
-"Circalittoral sand",11.06,598,3.2,1.95,3.41,0.3,0.65,0.2,0.22
-"Offshore circalittoral mixed sediment",9.26,515,7.18,6.28,10.16,1.05,0.75,0.31,0.21
-"Circalittoral rock and biogenic reef",8.88,500,1.99,1.5,1.67,0.19,0.54,0.15,0.21
-"Offshore circalittoral rock and biogenic reef",6.96,380,2.44,2.82,5.91,0.87,0.77,0.28,0.21
-"Circalittoral mud",4.93,273,7.26,1.5,3.18,0.65,0.77,0.33,0.29
-"Infralittoral rock and biogenic reef",1.74,101,0.08,0.26,0.18,0.1,0.54,0.09,0.2
-"Infralittoral sand",1.47,79,0.05,0.23,0.06,0.04,0.42,0.04,0.19
-"Circalittoral mixed sediment",1.04,57,0.12,0.31,0.32,0.32,0.72,0.24,0.3
-"Upper bathyal rock and biogenic reef",0.83,51,0.67,0.14,0.16,0.19,0.25,0.09,0.08
-"Infralittoral coarse sediment",0.75,42,0.09,0.24,0.05,0.07,0.43,0.07,0.17
-"Infralittoral mud",0.48,26,0.02,0.1,0.05,0.12,0.31,0.1,0.15
-"Lower bathyal rock and biogenic reef",0.42,26,0,0,0,0,0,0,NA
-"Infralittoral mixed sediment",0.23,13,0.01,0.01,0.02,0.1,0.46,0.08,NA
+"MSFD broad habitat type","Extent of habitat (1000 km2)","Number of grid cells","Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)","Prop. of area in fished grid cells (I-2)","Prop. of area fished per year (I-3)","Smallest  prop. of area with 90% of fishing effort (I-4)"
+"Upper bathyal sediment",156.05,10560,5424.91,85.04,225.5,1.45,0.59,0.39,0.24
+"Abyssal",138.24,8092,3.75,0.23,0.17,0,0.04,0,0.02
+"Offshore circalittoral coarse sediment",131.43,11280,411.22,121.61,235.47,1.79,0.86,0.52,0.26
+"Offshore circalittoral sand",126.98,11325,4314.01,91.23,242.03,1.91,0.93,0.73,0.39
+"Lower bathyal sediment",113.95,7970,1.35,0.22,0.3,0,0.05,0,0.03
+"Offshore circalittoral mud",64.6,5416,3292.64,95,237.11,3.67,0.99,0.87,0.42
+"Upper bathyal sediment or Upper bathyal rock and biogenic reef",43.09,2781,3290.53,10.83,31.35,0.73,0.62,0.23,0.14
+"Unknown",42.6,5876,1199.85,8.19,21.02,0.49,0.68,0.25,0.12
+"Lower bathyal sediment or Lower bathyal rock and biogenic reef",33.95,2276,17.73,0.18,0.11,0,0.14,0,0.07
+"Circalittoral coarse sediment",17.94,3306,2.4,4.36,3.6,0.2,0.72,0.15,0.17
+"Circalittoral sand",10.94,2341,2.92,1.99,3.43,0.31,0.65,0.19,0.14
+"Offshore circalittoral mixed sediment",9.4,1786,5.19,5.93,9.28,0.99,0.76,0.3,0.17
+"Circalittoral rock and biogenic reef",9.02,3407,2.1,1.35,1.85,0.2,0.57,0.15,0.15
+"Offshore circalittoral rock and biogenic reef",6.79,3200,2.08,3.33,6.3,0.93,0.79,0.3,0.14
+"Circalittoral mud",4.82,1227,5.93,1.65,3.56,0.74,0.77,0.33,0.17
+"Infralittoral rock and biogenic reef",1.67,1991,0.16,0.22,0.25,0.15,0.45,0.09,0.11
+"Infralittoral sand",1.48,845,0.05,0.16,0.06,0.04,0.37,0.03,0.09
+"Circalittoral mixed sediment",0.96,586,0.12,0.3,0.34,0.36,0.71,0.25,0.2
+"Infralittoral coarse sediment",0.88,781,0.13,0.28,0.09,0.1,0.48,0.08,0.08
+"Upper bathyal rock and biogenic reef",0.81,329,1.78,0.15,0.18,0.22,0.24,0.1,0.05
+"Lower bathyal rock and biogenic reef",0.48,179,0,0,0,0,0.01,0,0.01
+"Infralittoral mud",0.4,428,0.02,0.09,0.03,0.08,0.35,0.06,0.11
+"Infralittoral mixed sediment",0.19,235,0,0.01,0.02,0.11,0.34,0.08,0.1

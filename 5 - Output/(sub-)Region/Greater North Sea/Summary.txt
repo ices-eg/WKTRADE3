@@ -1,8 +1,0 @@
-The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the North Sea region with 91% of the grid cells (I-2), and 62% of the surface area (I-3), in the depth zone 0-200m, being fished on average per year for the period 2013-2018 (Table 1). Fishing is aggregated with 90% of the pressure occurring in 41% of grid cells (I-4). 
-The PD method shows an average decline in community biomass of 11% relative to carrying capacity across c-squares (I-6). Most c-squares, 82% (I-7), have an impact score less than 20%. 
-
-The L1 method, estimating the proportion of the community with a life span exceeding the time interval between trawling events, shows an average impact of 0.66 across c-squares (I-6). Only 21% (I-7) of the c-squares have impact scores less than 20% (I-7).
-
-Maps of spatial distribution of intensity, sensitivity and economic value and weight of fisheries landings are shown in Figure 1. 
-
-All pressure and impact estimates are for areas < 200 meter depth as there is no longevity prediction for deeper regions. 

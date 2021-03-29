@@ -32,7 +32,7 @@ reg <- 1
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\Assessment text\\",sep='')
 
 ```
 

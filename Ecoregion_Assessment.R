@@ -27,8 +27,8 @@ rm(list = ls())
                        rep(Sregions[3],7),rep(Sregions[4],6))  # get the (sub-)region for the reporting region
   Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",25)) # is reporting region a "(sub-)Region" or "Division"?
   regions_with_impact <- c(1,2,5,6,7,8,10:16) # get all areas with longevity data
-  
-  for (p in 1:29){
+
+  for (p in 11:29){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     
@@ -43,18 +43,24 @@ rm(list = ls())
    load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"),sep="/")) 
    setwd(paste(pathdir,"1 - Input env",sep="/"))
    load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
-
-### run script for spatial temporal analysis
- #  xxx
-  
+   load(paste(EcoReg,"MSFD_per_csquare.RData",sep="_")) 
+   
+### run script for spatial temporal analysis (takes a long time)
+   setwd(paste(pathdir,"Utilities",sep="/"))
+   source("Core_fishing_by_metier_analysis_results.R")
+   
 ### run script to process FBIT figures and tables
-   #setwd(paste(pathdir,"Utilities",sep="/"))
-   #source("Processing_assessment.R")
+   setwd(paste(pathdir,"Utilities",sep="/"))
+   source("Processing_assessment.R")
   
 ### run script to make FBIT output  
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("map_plot.R")
    source("Output_assessment.R")
+   
+### run habitat management
+   setwd(paste(pathdir,"Utilities",sep="/"))
+   source("Tradeoff_habitat_management_allRegions.R")
  }
  
  

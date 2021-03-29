@@ -37,7 +37,6 @@ knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 ```{r echo=FALSE, message=FALSE}
 table2 <- read.csv(paste(outputs,ecoregion,"_Table_2.csv",sep=''))
 
-table2_b <- head(table2)
 kable(table2, col.names = gsub("[.]", " ", names(table2)), caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
   kable_styling(font_size=12)
 ```
@@ -59,8 +58,19 @@ coregrounds <- readtext(paste(outtext,"Core fishing grounds.txt",sep=''))
 `r coregrounds$text`
 
 #### Figure 5
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% core fishing grounds by metier during the period 2013-2018**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
+```
 
 #### Figure 6
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core? fishing ground**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
+```
+
+#### Figure 7
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. percent area fished vs. landings value (euro) by métier, coloured by year**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
+```
 
 ### Fishing by métier {.tabset } 
 ```{r echo=FALSE, message=FALSE}
@@ -83,13 +93,13 @@ impact <- readtext(paste(outtext,"Impact.txt",sep=''))
 ```
 `r impact$text`
 
-#### Figure 7
-```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 7. Impact of mobile bottom-contacting gears averaged for the 2013-2018 six-year cycle for the PD and L1 method.**"}
+#### Figure 8
+```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 8. Impact of mobile bottom-contacting gears averaged for the 2013-2018 six-year cycle for the PD and L1 method.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA5.png",sep=''))
 ```
 
-#### Figure 8
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 8. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2018 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
+#### Figure 9
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 9. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2018 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA6.png",sep=''))
 ```
 
@@ -102,13 +112,73 @@ kable(table4, caption="Table 4. Overview of impact per metier relative to weight
 
 ```
 
-#### Figure 9
+#### Figure 10
 
-```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Figure 9. PD impact (upper panel) and L1 impact (lower panel) of selected gear groupings on the most extensive MSFD habitat types. Impact is estimated in isolation of the other gear groupings. Note the different scales on the Y-axis.**"}
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Figure 10. PD impact (upper panel) and L1 impact (lower panel) of selected gear groupings on the most extensive MSFD habitat types. Impact is estimated in isolation of the other gear groupings. Note the different scales on the Y-axis.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA8.png",sep=''))
 
 ```
 
 ### Manangement scenarios  {.tabset }
+```{r echo=FALSE, message=FALSE}
+Management <- readtext(paste(outtext,"Management.txt",sep=''))
+```
+`r Management$text`
+
+#### MSFD habitat - 1
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management with reductions in effort through spatial closures for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_1.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_1.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+#### MSFD habitat - 2
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_2.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_2.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+#### MSFD habitat - 3
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_3.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_3.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+#### MSFD habitat - 4
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Hab_4.png",sep=''))
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outputs,ecoregion,"_Hab_4.csv",sep=''))
+
+kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
 
 ## {-}

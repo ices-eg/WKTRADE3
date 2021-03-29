@@ -1,20 +1,20 @@
-"MSFD broad habitat type","Extent of habitat (1000 km2)","Number of grid cells","Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)","Prop. of grid cells fished (I-2)","Prop. of area fished (I-3)","Prop of habitat fished with 90% of effort (I-4)"
-"Circalittoral mixed sediment",5.55,360,0,0,0,0,0.01,0,0.01
-"Circalittoral mud or Circalittoral sand",4.17,272,0,0,0,0,0,0,NA
-"Circalittoral mud",3.1,201,0.01,0,0,0,0.02,0,0.01
-"Offshore circalittoral mud",3.04,196,0,0,0,0,0,0,NA
-"Circalittoral sand",1.04,68,0,0,0,0,0,0,NA
-"Offshore circalittoral mixed sediment",0.94,61,0,0,0,0,0,0,NA
-"Offshore circalittoral mud or Offshore circalittoral sand",0.88,57,0,0,0,0,0,0,NA
-"Infralittoral mixed sediment",0.8,52,0,0,0,0,0,0,NA
-"Circalittoral rock and biogenic reef",0.72,47,0,0,0,0,0,0,NA
-"Circalittoral coarse sediment",0.41,27,0,0,0,0,0,0,NA
-"Offshore circalittoral sand",0.35,23,0,0,0,0,0,0,NA
-"Infralittoral rock and biogenic reef",0.22,14,0,0,0,0,0,0,NA
-"Infralittoral mud or Infralittoral sand",0.2,13,0,0,0,0,0,0,NA
-"Offshore circalittoral coarse sediment",0.18,12,0,0,0,0,0,0,NA
-"Infralittoral sand",0.11,7,0,0,0,0,0,0,NA
-"Offshore circalittoral rock and biogenic reef",0.08,5,0,0,0,0,0,0,NA
-"Unknown",0.08,5,0,0,0,0,0,0,NA
-"Infralittoral coarse sediment",0.06,4,0,0,0,0,0,0,NA
-"Infralittoral mud",0.06,4,0,0,0,0,0,0,NA
+"MSFD broad habitat type","Extent of habitat (1000 km2)","Number of grid cells","Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)","Prop. of area in fished grid cells (I-2)","Prop. of area fished per year (I-3)","Smallest  prop. of area with 90% of fishing effort (I-4)"
+"Circalittoral mixed sediment",5.35,1006,0,0,0,0,0.01,0,0.01
+"Circalittoral mud or Circalittoral sand",4.06,748,0,0,0,0,0,0,0
+"Offshore circalittoral mud",3.06,374,0,0,0,0,0,0,NA
+"Circalittoral mud",2.96,687,0.01,0,0,0,0.02,0,0
+"Circalittoral sand",0.99,299,0,0,0,0,0,0,NA
+"Offshore circalittoral mud or Offshore circalittoral sand",0.9,184,0,0,0,0,0,0,NA
+"Offshore circalittoral mixed sediment",0.88,274,0,0,0,0,0,0,NA
+"Circalittoral rock and biogenic reef",0.81,558,0,0,0,0,0,0,0
+"Infralittoral mixed sediment",0.5,451,0,0,0,0,0,0,0
+"Circalittoral coarse sediment",0.48,284,0,0,0,0,0,0,NA
+"Offshore circalittoral sand",0.36,118,0,0,0,0,0,0,NA
+"Infralittoral rock and biogenic reef",0.22,279,0,0,0,0,0.03,0,0.01
+"Offshore circalittoral coarse sediment",0.13,71,0,0,0,0,0,0,NA
+"Infralittoral mud or Infralittoral sand",0.11,211,0,0,0,0,0,0,NA
+"Infralittoral sand",0.09,110,0,0,0,0,0,0,NA
+"Unknown",0.08,49,0,0,0,0,0,0,NA
+"Offshore circalittoral rock and biogenic reef",0.06,74,0,0,0,0,0,0,NA
+"Infralittoral coarse sediment",0.05,104,0,0,0,0,0,0,NA
+"Infralittoral mud",0.04,117,0,0,0,0,0,0,NA
