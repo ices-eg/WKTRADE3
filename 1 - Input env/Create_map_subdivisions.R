@@ -28,7 +28,7 @@ BS <- cbind(BS, as.factor(Region$division))
 colnames(BS) <- c("long","lat","colare")
 
 colnew <- c("#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a")
-colnew <- rep(colnew,3)
+colnew <- c(colnew,rev(colnew),rev(colnew))
 
 # Get the world map
 worldMap <- map_data("world")
@@ -43,7 +43,7 @@ shapeReg  <- subset(shapeEcReg, Ecoregion== "Celtic Seas" | Ecoregion== "Bay of 
                       Ecoregion== "Greater North Sea" | Ecoregion== "Baltic Sea")
 
 new <- rbind(CS,BS,NS,BoB)
-map <- ggplot() + geom_point(data=new,aes(x=long,y=lat,color=colare)) +
+map <- ggplot() + geom_point(data=new,aes(x=long,y=lat,color=colare),size=0.5) +
                   scale_colour_manual(values=colnew)
 map <- map +  geom_polygon(data = worldMap, aes(x = long, y = lat, group = group),color="dark grey",fill="light grey")
 map <- map +  geom_polygon(data = shapeReg, aes(x = long, y = lat, group = group),color="black",fill=NA)
@@ -59,4 +59,3 @@ map <- map +  theme(plot.background=element_blank(),
   scale_x_continuous(breaks=coordxmap)+
   scale_y_continuous(breaks=coordymap)+
   coord_cartesian(xlim=c(coordslim[1], coordslim[2]), ylim=c(coordslim[3],coordslim[4]))
-figmap<- figmap +   guides(colour = guide_legend(override.aes = list(size=5))) 

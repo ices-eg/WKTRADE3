@@ -16,19 +16,19 @@ rm(list = ls())
 ### create list of marine reporting areas
   Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
   NS_div <- c("Northern_NS", "Kattegat_NS", "Channel_NS", "Southern_NS" ,"NTrench_NS")
-  BS_div <- c("Aland_BS", "GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
-  CS_div <- c("deep_CS",  "channel_CS"  ,"south_CS", "North_CS" ,"shetland_CS" ,"Irishsea_CS", "Middle_CS") 
+  BS_div <- c("GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
+  CS_div <- c("deep_CS" ,"south_CS", "North_CS" ,"Irishsea_CS", "Middle_CS") 
   BoBIC_div <- c("Shallow_BoB", "ShallowNorth_IC","ShallowSouth_IC", "Galicia_IC",  "Deep_IC", "Deep_BoB")
   divis <- c(NS_div,BS_div,CS_div,BoBIC_div)
 
 ### run all areas in a loop 
   Assregion_index <- c(Sregions, divis)  # get the reporting region
-  EcoReg_index    <- c(Sregions, rep(Sregions[1],5),rep(Sregions[2],7),
-                       rep(Sregions[3],7),rep(Sregions[4],6))  # get the (sub-)region for the reporting region
-  Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",25)) # is reporting region a "(sub-)Region" or "Division"?
-  regions_with_impact <- c(1,2,5,6,7,8,10:16) # get all areas with longevity data
+  EcoReg_index    <- c(Sregions, rep(Sregions[1],5),rep(Sregions[2],6),
+                       rep(Sregions[3],5),rep(Sregions[4],6))  # get the (sub-)region for the reporting region
+  Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",22)) # is reporting region a "(sub-)Region" or "Division"?
+  regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
 
-  for (p in 11:29){
+  for (p in 23:24){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     
@@ -45,10 +45,6 @@ rm(list = ls())
    load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
    load(paste(EcoReg,"MSFD_per_csquare.RData",sep="_")) 
    
-### run script for spatial temporal analysis (takes a long time)
-   setwd(paste(pathdir,"Utilities",sep="/"))
-   source("Core_fishing_by_metier_analysis_results.R")
-   
 ### run script to process FBIT figures and tables
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("Processing_assessment.R")
@@ -57,32 +53,16 @@ rm(list = ls())
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("map_plot.R")
    source("Output_assessment.R")
-   
+
+### run script for spatial temporal analysis (takes a long time)
+   setwd(paste(pathdir,"Utilities",sep="/"))
+   source("Core_fishing_by_metier_analysis_results.R")
+      
 ### run habitat management
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("Tradeoff_habitat_management_allRegions.R")
  }
  
- 
- # run trade off analysis for the Greater North Sea
-  
-### run script for trade-off analysis - reductions in effort
-  setwd(paste(pathdir,"Utilities",sep="/"))
-  source("Tradeoff_effort_removal.R") 
-  
-### run script for reductions and prohibitions by gear type
-  setwd(paste(pathdir,"Utilities",sep="/"))
-  # source("Tradeoff_gear_prohibitions.R") # takes 20 minutes
-  source("Tradeoff_gear_prohibitions_results.R") 
-  
-### run script for trade-off analysis - freeze footprint
-  setwd(paste(pathdir,"Utilities",sep="/"))
-  source("Tradeoff_freeze_footprint.R")  
-  
-### run habitat management
-  setwd(paste(pathdir,"Utilities",sep="/"))
- source("Tradeoff_habitat_management.R")
- source("Tradeoff_habitat_management_table.R")
  
 
   

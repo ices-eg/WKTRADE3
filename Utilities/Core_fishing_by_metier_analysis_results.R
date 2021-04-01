@@ -23,6 +23,11 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   vmsValueLong <- vmsValueLong[vmsValueLong$year %in% c(2013:2018),]
   vmsValueLong$metier <- substr(vmsValueLong$column, 1, nchar(as.character(vmsValueLong$column))-17)
   vmsValueLong$wktradeMet <- vmsValueLong$metier
+  
+  # remove all metiers with few data
+  tt <- aggregate(vmsValueLong$csquares,by=list(vmsValueLong$wktradeMet),FUN=length)
+  tt <- tt[which(tt[,2]>100),1]
+  vmsValueLong <- vmsValueLong[vmsValueLong$wktradeMet %in% c(tt),]
   wktradeMet <- as.data.frame(unique(vmsValueLong$wktradeMet))
   metiers <- unique(vmsValueLong$wktradeMet)
   
@@ -151,6 +156,11 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   #Polygon with fishing grounds per year
   poly <- function(x, m){
     print(x)
+    # check if there is data
+    MBCG_FG <- 
+      VMS_MBCG_90pct %>% 
+      filter(year==x & wktradeMet==m)
+    if(nrow(MBCG_FG)>0){
     MBCG_FG <- 
       VMS_MBCG_90pct %>% 
       filter(year==x & wktradeMet==m) %>%
@@ -170,7 +180,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     
     fil <- paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_",x,"_",m,".shp",sep="")
     st_write(MBCG_FG_dis, fil, driver="ESRI Shapefile", delete_dsn = T)
-    
+    }
   }
   
   for(i in 2013:2018){

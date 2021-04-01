@@ -113,6 +113,7 @@
   indexcol <- which(names(FisheriesMet) %in% exclude)
   FisheriesMet <- FisheriesMet[,-indexcol]
   
+  FisheriesMet[,2:ncol(FisheriesMet)][FisheriesMet[,2:ncol(FisheriesMet)] == 0] <- NA
   
   setwd(pathdir_nogit)
   save(FisheriesMet,file=paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"))

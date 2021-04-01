@@ -26,8 +26,8 @@ library(kableExtra)
 library(knitr)
 library(readtext)
 
-reg_dat <- c("Baltic Sea","Aland_BS", "GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
-name_dat <- c("Baltic Sea","Aland area", "Gulf of Finland", "Gulf of Riga" ,"Arkona & Bornholm Basin","Western Baltic Sea" ,"Baltic Proper" ,"Bothnian area")
+reg_dat <- c("Baltic Sea" ,"Bothnian_BS", "GulfF_BS", "GulfR_BS" ,"Proper_BS","ArkBor_BS","Western_BS" )
+name_dat <- c("Baltic Sea","Bothnian area","Gulf of Finland", "Gulf of Riga","Baltic Proper" ,"Arkona & Bornholm Basin","Western Baltic Sea"  )
 reg <- 1
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
@@ -96,17 +96,6 @@ outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 7
-ecoregion <- reg_dat[reg]
-econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
-```
-
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
-```
-
-```{r echo=FALSE, message=FALSE}
-reg <- 8
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')

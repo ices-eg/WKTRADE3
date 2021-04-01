@@ -187,7 +187,7 @@
       label_sub <- label_all[idx]
 
       if((length(filedata$cat[is.na(filedata$cat)])>0)){
-        label_sub <- c(label_sub,"depth > 200 m")
+        label_sub <- c(label_sub,"NA")
       }
       
       colorchoice <- colorchoice[idx]
@@ -286,7 +286,7 @@
       label_sub <- label_all[idx]
       
       if((length(filedata$cat[is.na(filedata$cat)])>0)){
-        label_sub <- c(label_sub,"depth > 200 m")
+        label_sub <- c(label_sub,"NA")
       }
       
       colorchoice <- colorchoice[idx-1]
@@ -338,7 +338,7 @@
     label_sub <- label_all[idx]
     
     if((length(filedata$cat[is.na(filedata$cat)])>0)){
-      label_sub <- c(label_sub,"depth > 200 m")
+      label_sub <- c(label_sub,"NA")
     }
     
     colorchoice <- colorchoice[idx]
@@ -391,7 +391,7 @@
     label_sub <- label_all[idx]
     
     if((length(filedata$cat[is.na(filedata$cat)])>0)){
-      label_sub <- c(label_sub,"depth > 200 m")
+      label_sub <- c(label_sub,"NA")
     }
     
     colorchoice <- colorchoice[idx]

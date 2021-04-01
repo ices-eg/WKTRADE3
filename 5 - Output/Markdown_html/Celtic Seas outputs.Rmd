@@ -26,8 +26,8 @@ library(kableExtra)
 library(knitr)
 library(readtext)
 
-reg_dat <- c("Celtic Seas","North_CS" ,"shetland_CS" ,"deep_CS", "Irishsea_CS", "Middle_CS", "channel_CS" ,"south_CS")
-name_dat <- c("Celtic Seas","Northern area","Shetland area","Offshore deep","Irish Sea", "Centre area","English Channel","Southern area")
+reg_dat <- c("Celtic Seas","North_CS","deep_CS", "Irishsea_CS", "Middle_CS" ,"south_CS")
+name_dat <- c("Celtic Seas","Northern area","Offshore deep","Irish Sea", "Centre area","Southern area")
 reg <- 1
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
@@ -85,28 +85,6 @@ outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 6
-ecoregion <- reg_dat[reg]
-econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
-```
-
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
-```
-
-```{r echo=FALSE, message=FALSE}
-reg <- 7
-ecoregion <- reg_dat[reg]
-econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
-```
-
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
-```
-
-```{r echo=FALSE, message=FALSE}
-reg <- 8
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
