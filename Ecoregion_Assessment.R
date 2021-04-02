@@ -28,7 +28,7 @@ rm(list = ls())
   Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",22)) # is reporting region a "(sub-)Region" or "Division"?
   regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
 
-  for (p in 23:24){
+  for (p in 1:26){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     

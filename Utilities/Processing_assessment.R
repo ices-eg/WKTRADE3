@@ -523,8 +523,8 @@
     colnames(Avgear)[1] <- 'MSFD'
     AvMSFD_metier <- as.data.frame(Avgear)
       
-      for (p in 2:length(gears)){
-        nam <- paste("state",rep(gears[p],length(Period)),Period,sep="_")
+      for (pp in 2:length(gears)){
+        nam <- paste("state",rep(gears[pp],length(Period)),Period,sep="_")
         A8dat <- cbind(A8dat, State_reg[match(A8dat$csquares,State_reg$Fisheries.csquares), c(nam)])
         A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
         Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})
@@ -547,8 +547,8 @@
     colnames(Avgear)[1] <- 'MSFD'
     AvMSFD_metier <- as.data.frame(Avgear)
     
-    for (p in 2:length(gears)){
-      nam <- paste("state",rep(gears[p],length(Period)),Period,sep="_")
+    for (pp in 2:length(gears)){
+      nam <- paste("state",rep(gears[pp],length(Period)),Period,sep="_")
       A8dat <- cbind(A8dat, State_reg_IL[match(A8dat$csquares,State_reg_IL$Fisheries.csquares), c(nam)])
       A8dat[,c(nam)][is.na(A8dat[,c(nam)])] <- 1
       Avgear <- aggregate( A8dat[, nam], by= list(A8dat$MSFD), FUN=function(x){mean(x)})

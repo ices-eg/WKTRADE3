@@ -2,7 +2,7 @@
 "Intensity (I-1)",1.09
 "Proportion of area in fished cells (I-2)",0.78
 "Proportion of area fished per year (I-3)",0.41
-"Smallest  prop. of area with 90% of fishing effort (I-4)",0.31
+"Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)",0.31
 "Proportion of area in unfished cells (I-5)",0.22
 "Average PD impact",0.02
 "Average L1 impact",0.4

@@ -226,7 +226,7 @@
 # Table A1
   load(paste(pathdir_prodFT,"TableA1.RData",sep="/"))
   col1 <- c("Intensity (I-1)", "Proportion of area in fished cells (I-2)", "Proportion of area fished per year (I-3)", 
-            "Smallest  prop. of area with 90% of fishing effort (I-4)","Proportion of area in unfished cells (I-5)", 
+            "Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)","Proportion of area in unfished cells (I-5)", 
             "Average PD impact","Average L1 impact", "Proportion of area with PD impact < 0.2", "Proportion of area with L1 impact < 0.2")
   A1table <- round(A1table, digits = 2)  
   A1table <- data.frame(Indicators = col1, values = A1table)

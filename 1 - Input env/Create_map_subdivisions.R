@@ -36,17 +36,10 @@ coordslim <- c(-15,30,30,70)
 coordxmap <- round(seq(coordslim[1],coordslim[2],length.out = 4))
 coordymap <- round(seq(coordslim[3],coordslim[4],length.out = 4))
 
-# get shapefile ecoregion
-pathnew <- "C:/Users/pdvd/Dropbox/Werk/Benthic assessments BENTHIS and ICES/ICES data one folder"
-shapeEcReg <- readOGR(dsn = paste(pathnew,"/ICES_ecoregions",sep="/") ,layer="ICES_ecoregions_20171207_erase_ESRI")
-shapeReg  <- subset(shapeEcReg, Ecoregion== "Celtic Seas" | Ecoregion== "Bay of Biscay and the Iberian Coast" |
-                      Ecoregion== "Greater North Sea" | Ecoregion== "Baltic Sea")
-
 new <- rbind(CS,BS,NS,BoB)
 map <- ggplot() + geom_point(data=new,aes(x=long,y=lat,color=colare),size=0.5) +
                   scale_colour_manual(values=colnew)
 map <- map +  geom_polygon(data = worldMap, aes(x = long, y = lat, group = group),color="dark grey",fill="light grey")
-map <- map +  geom_polygon(data = shapeReg, aes(x = long, y = lat, group = group),color="black",fill=NA)
 map <- map +  theme(plot.background=element_blank(),
                           panel.background=element_blank(),
                           axis.text.y   = element_text(size=16),
@@ -59,3 +52,7 @@ map <- map +  theme(plot.background=element_blank(),
   scale_x_continuous(breaks=coordxmap)+
   scale_y_continuous(breaks=coordymap)+
   coord_cartesian(xlim=c(coordslim[1], coordslim[2]), ylim=c(coordslim[3],coordslim[4]))
+
+png("subdiv.png",width=12,height=9, units = "in", res = 300 ) 
+print(map)
+dev.off()

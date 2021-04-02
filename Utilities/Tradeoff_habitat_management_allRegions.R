@@ -156,7 +156,7 @@
     
     nam_points <- c("","-5","-10","","-20","","-40","","-80","-99")
     
-    plot(RE1_dat$UnF_area,RE1_dat$value, xlab="Percentage area unfished**", ylab="Expected value relative to reference (%)",
+    plot(RE1_dat$UnF_area,RE1_dat$value, xlab="Percentage area unfished", ylab="Expected value relative to reference (%)",
          type="l",xlim=c(0,100),ylim=c(0,100),pch=16,las=1,yaxt="n",xaxt="n")
     points(RE1_dat$UnF_area[c(2,3,5,7,9,10)],RE1_dat$value[c(2,3,5,7,9,10)],pch=16)
     text(RE1_dat$UnF_area[c(2,3,5,7,9,10)]-6,RE1_dat$value[c(2,3,5,7,9,10)], 
