@@ -16,7 +16,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-**Assessment sheet for Celtic Seas sub-region and for seven subdivisions**
+**Assessment sheet for Celtic Seas sub-region and for five subdivisions**
 
 #  {.tabset .tabset-fade .tabset-pills}
 

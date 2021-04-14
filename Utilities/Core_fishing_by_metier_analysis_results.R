@@ -15,8 +15,14 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     Region <- Region[!(is.na(Region$medlong)),]
   }
 
+  reguni <- ifelse(Assunit == "Division","division","Ecoregion")
+
 #Reformat data, define metiers
   vmsValue <- select(FisheriesMet,csquares, contains("_value_"))
+  vmsValue <- cbind(vmsValue, Region@data[match(vmsValue$csquares,Region@data$csquares), c(reguni)])
+  colnames(vmsValue)[ncol(vmsValue)] <- reguni
+  vmsValue <-  subset(vmsValue,vmsValue[,reguni] == Assregion)
+  vmsValue <- vmsValue[,1:(ncol(vmsValue)-1)]
   vmsValueLong <- gather(vmsValue, column, euro, 2:ncol(vmsValue), factor_key=TRUE)
   vmsValueLong <- vmsValueLong[!is.na(vmsValueLong$euro),]
   vmsValueLong$year <- sapply(strsplit(as.character(vmsValueLong$column), "_"), tail, 1)
@@ -26,7 +32,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   
   # remove all metiers with few data
   tt <- aggregate(vmsValueLong$csquares,by=list(vmsValueLong$wktradeMet),FUN=length)
-  tt <- tt[which(tt[,2]>100),1]
+  tt <- tt[which(tt[,2]>1),1]
   vmsValueLong <- vmsValueLong[vmsValueLong$wktradeMet %in% c(tt),]
   wktradeMet <- as.data.frame(unique(vmsValueLong$wktradeMet))
   metiers <- unique(vmsValueLong$wktradeMet)
@@ -194,6 +200,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   metiers1 <- metiers1 %>% group_by(wktradeMet) %>% count(wktradeMet) 
   metiers1 <- metiers1 %>%filter(n==6)
   metiers2 <- unique(metiers1$wktradeMet)
+  metiers2 <- metiers2[metiers2  %in% unique(MBCG_reference_s$wktradeMet)]
   
   setwd(pathdir_output)  
   dir.create("CSV", showWarnings = FALSE)
@@ -296,6 +303,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   }
   
   combined_overlap = combined_overlap[-1,]
+  combined_overlap$pct[combined_overlap$pct >100 ] <- NA
   
   #Plot overlap by metier
   core2 <- ggplot(data=combined_overlap, aes(year, pct)) + geom_bar(stat = "identity") +

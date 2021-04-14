@@ -28,7 +28,7 @@ rm(list = ls())
   Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",22)) # is reporting region a "(sub-)Region" or "Division"?
   regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
 
-  for (p in 1:26){
+  for (p in 21:26){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     
@@ -54,17 +54,17 @@ rm(list = ls())
    source("map_plot.R")
    source("Output_assessment.R")
 
-### run script for spatial temporal analysis (takes a long time)
-   setwd(paste(pathdir,"Utilities",sep="/"))
-   source("Core_fishing_by_metier_analysis_results.R")
+### run script for spatial temporal analysis (takes a long time), some regions give error as no data is available, run 1 by 1 :)
+   #setwd(paste(pathdir,"Utilities",sep="/"))
+   #source("Core_fishing_by_metier_analysis_results.R")
       
-### run habitat management
+### run habitat management option
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("Tradeoff_habitat_management_allRegions.R")
- }
- 
- 
-
+  }
   
+# due to data limitations/errors, different outputs are potentially wrong 
+# all (potentially) wrong numbers are changed to NA in tables with the below code
   
-  
+  setwd(paste(pathdir,"Utilities",sep="/"))
+  source("Exceptions_in_tables_data_limitations.R")

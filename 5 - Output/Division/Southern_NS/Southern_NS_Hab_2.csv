@@ -1,4 +1,4 @@
-"Effort reduction (%)","PD impact","L1 impact","Unfished area (%)","Decline in value (%)","Decline in weight (%)"
+"Effort reduction as a percentage","Average PD impact","Average L1 impact","Percentage area unfished","Percentage of total value","Percentage of total weight"
 0,0.12,0.76,1.78,100,100
 5,0.11,0.66,28.28,94.98,96.65
 10,0.1,0.57,39.57,89.86,93.27

@@ -1,11 +1,11 @@
-"Effort reduction (%)","PD impact","L1 impact","Unfished area (%)","Decline in value (%)","Decline in weight (%)"
-0,NA,NA,98.41,100,100
-5,NA,NA,98.86,51.89,97.64
-10,NA,NA,99.04,36.5,89.84
-15,NA,NA,99.17,24.5,80.76
-20,NA,NA,99.27,16.13,68.2
-30,NA,NA,99.45,4.33,44.06
-40,NA,NA,99.59,3.58,28
-60,NA,NA,99.79,2.28,20.81
-80,NA,NA,99.92,0.27,8
-99,NA,NA,100,0,0
+"Effort reduction as a percentage","Average PD impact","Average L1 impact","Percentage area unfished","Percentage of total value","Percentage of total weight"
+0,NA,NA,3.21,100,100
+5,NA,NA,23.87,97.28,86.75
+10,NA,NA,32.64,94.77,73.47
+15,NA,NA,40.83,92.02,59.56
+20,NA,NA,48.21,88.63,48.33
+30,NA,NA,60.33,81.16,29.5
+40,NA,NA,70.32,73.15,15.52
+60,NA,NA,85.15,53.27,5.27
+80,NA,NA,94.8,28.65,0.72
+99,NA,NA,99.89,0.5,0

@@ -166,8 +166,6 @@
   nam <- paste("state",rep(gears[1],length(AssPeriod)),AssPeriod,sep="_")
   Avgear <- data.frame(rowMeans(A8_A9fig[, nam]))
   
-  A8_A9fig[,nam]
-
   for (q in 2:length(gears)){
     nam <- paste("state",rep(gears[q],length(AssPeriod)),AssPeriod,sep="_")
     Avgear <- cbind(Avgear,data.frame(rowMeans(A8_A9fig[, nam])))
@@ -187,8 +185,6 @@
   
   nam <- paste("state",rep(gears[1],length(AssPeriod)),AssPeriod,sep="_")
   Avgear <- data.frame(rowMeans(A8_A9fig[, nam]))
-  
-  A8_A9fig[,nam]
   
   for (q in 2:length(gears)){
     nam <- paste("state",rep(gears[q],length(AssPeriod)),AssPeriod,sep="_")
@@ -225,11 +221,14 @@
 ##########
 # Table A1
   load(paste(pathdir_prodFT,"TableA1.RData",sep="/"))
-  col1 <- c("Intensity (I-1)", "Proportion of area in fished cells (I-2)", "Proportion of area fished per year (I-3)", 
+  col1 <- c("Average intensity (I-1)", "Proportion of area in fished cells (I-2)", "Proportion of area fished per year (I-3)", 
             "Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)","Proportion of area in unfished cells (I-5)", 
-            "Average PD impact","Average L1 impact", "Proportion of area with PD impact < 0.2", "Proportion of area with L1 impact < 0.2")
+            "Average PD impact (I-6)","Average L1 impact (I-6)", "Proportion of area with PD impact < 0.2 (I-7)", 
+            "Proportion of area with L1 impact < 0.2 (I-7)")
   A1table <- round(A1table, digits = 2)  
   A1table <- data.frame(Indicators = col1, values = A1table)
+  colnames(A1table) <- c("Indicators","0 to 200 m","200 to 800 m", "more than 800 m") 
+  #A1table[A1table=="Inf"] <- NA
   write.csv(A1table, file= paste(Assregion,"Table_1.csv",sep="_"), row.names=FALSE)
 
 # Table A2
@@ -237,7 +236,7 @@
   A2table <- A2table[,c(1:6,9,8,7,10)]
   
   colnames(A2table) <- c("MSFD broad habitat type","Extent of habitat (1000 km2)", "Number of grid cells",
-                         "Landings 1000 tonnes","Value 10^6 euro","Swept area 1000 km2","Average fishing intensity (I-1)",
+                         "Landings 1000 tonnes","Value 10^6^ euro","Swept area 1000 km2","Average fishing intensity (I-1)",
                          "Prop. of area in fished grid cells (I-2)", "Prop. of area fished per year (I-3)",
                           "Smallest  prop. of area with 90% of fishing effort (I-4)")
   
@@ -247,13 +246,19 @@
   
 # Table A3
   load(paste(pathdir_prodFT,"TableA3.RData",sep="/"))
+  A3table[A3table < 0.005 & A3table >0] <- -100
   A3table <- round(A3table, digits = 2)
+  new <- A3table %>%
+     mutate_all(as.character)
+  rownames(new) <- rownames(A3table)
+  new[new == "-100"] <- "<0.005"
+  A3table <- new
   write.csv(A3table, file= paste(Assregion,"Table_3.csv",sep="_"), row.names=T)
   
   if (p %in% regions_with_impact){
 # Table A4
   load(paste(pathdir_prodFT,"TableA4.RData",sep="/"))
-  A4table <- round(A4table, digits = 2)
+  A4table <- round(A4table, digits = 3)
   write.csv(A4table, file= paste(Assregion,"Table_4.csv",sep="_"), row.names=T)
   
   }

@@ -11,7 +11,10 @@ summary <- readtext(paste(outtext,"Summary.txt",sep=''))
 ```{r echo=FALSE, message=FALSE}
 table1 <- read.csv(paste(outputs,ecoregion,"_Table_1.csv",sep=''))
 
-kable(table1, caption="Table 1. Pressure and impact indicators for 2013-2018",format = "html", table.attr = "style='width:60%;'") %>% 
+nam <- gsub("[.]", " ", names(table1))
+nam <- gsub("[X]", " ", nam)
+
+kable(table1, col.names = nam, caption="Table 1. Pressure and impact indicators for 2013-2018",format = "html", table.attr = "style='width:80%;'", align=c('l','c','c','c')) %>% 
   kable_styling(font_size=12)
 ```
 
@@ -29,7 +32,7 @@ pressure <- readtext(paste(outtext,"Pressure.txt",sep=''))
 `r pressure$text`
 
 #### Figure 2
-```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Fishing intensity, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2013-2018 six-year cycle**"}
+```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Surface abrasion, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2013-2018 six-year cycle**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 ```
 
@@ -37,7 +40,11 @@ knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 ```{r echo=FALSE, message=FALSE}
 table2 <- read.csv(paste(outputs,ecoregion,"_Table_2.csv",sep=''))
 
-kable(table2, col.names = gsub("[.]", " ", names(table2)), caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
+nam <- c("MSFD broad habitat type","Extent of habitat (1000 km^2^)", "Number of grid cells",
+                         "Landings 1000 tonnes","Value 10^6^ euro","Swept area 1000 km^2^","Average intensity (I-1)","Prop. of area in fished grid cells (I-2)", "Prop. of area fished per year (I-3)",
+                          "Smallest  prop. of area with 90% of fishing effort (I-4)")
+
+kable(table2, col.names = nam, caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
   kable_styling(font_size=12)
 ```
 
@@ -63,12 +70,12 @@ knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
 ```
 
 #### Figure 6
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core? fishing ground**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core fishing ground**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
 ```
 
 #### Figure 7
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. percent area fished vs. landings value (euro) by métier, coloured by year**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
 ```
 
@@ -81,8 +88,9 @@ FishingMet <- readtext(paste(outtext,"Fishing by metier.txt",sep=''))
 #### Table 3
 ```{r echo=FALSE, message=FALSE}
 table3 <- read.csv(paste(outputs,ecoregion,"_Table_3.csv",sep=''))
+nam <- gsub("[X]", " ", colnames(table3))
 
-kable(table3, caption="Table 3. Overview of area fished (sum of swept area), landings and value for the different metiers. Area fished in 1000 km2, weight of landings in 1000 tonnes, value of landings in 10^6 euro.") %>%
+kable(table3, col.names = nam, caption="Table 3. Overview of area fished (sum of swept area), landings and value for the different metiers. Area fished in 1000 km^2^, weight of landings in 1000 tonnes, value of landings in 10^6^ euro.") %>%
   kable_styling(font_size=12)
 
 ```
@@ -106,8 +114,9 @@ knitr::include_graphics(paste(outputs,ecoregion,"_figureA6.png",sep=''))
 #### Table 4
 ```{r echo=FALSE, message=FALSE}
 table4 <- read.csv(paste(outputs,ecoregion,"_Table_4.csv",sep=''))
+nam <- gsub("[X]", " ", colnames(table4))
 
-kable(table4, caption="Table 4. Overview of impact per metier relative to weight and value of landings estimated for the grid cells fished (SAR >0) with these métiers only. Weight of landings in 1000 tonnes, value of landings in 106 euro.") %>%
+kable(table4, col.names = nam, caption="Table 4. Overview of impact per metier relative to weight and value of landings estimated for the grid cells fished (SAR >0) with these métiers only. Weight of landings in 1000 tonnes, value of landings in 10^6^ euro.") %>%
   kable_styling(font_size=12)
 
 ```
@@ -119,22 +128,24 @@ knitr::include_graphics(paste(outputs,ecoregion,"_figureA8.png",sep=''))
 
 ```
 
-### Manangement scenarios  {.tabset }
+### Management scenarios  {.tabset }
 ```{r echo=FALSE, message=FALSE}
 Management <- readtext(paste(outtext,"Management.txt",sep=''))
 ```
 `r Management$text`
 
 #### MSFD habitat - 1
-```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management with reductions in effort through spatial closures for the most extensive MSFD habitat type.**"}
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Multi-purpose habitat management trade-off for the most extensive MSFD habitat type.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_Hab_1.png",sep=''))
 
 ```
 
 ```{r echo=FALSE, message=FALSE}
 hab <- read.csv(paste(outputs,ecoregion,"_Hab_1.csv",sep=''))
+nam <- c("Effort reduction (%)","Average PD impact","Average L1 impact",
+                         "Area unfished (%)","Value (%)","Weight (%)")
 
-kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+kable(hab, col.names = nam, caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
   kable_styling(font_size=12)
 
 ```
@@ -147,8 +158,9 @@ knitr::include_graphics(paste(outputs,ecoregion,"_Hab_2.png",sep=''))
 
 ```{r echo=FALSE, message=FALSE}
 hab <- read.csv(paste(outputs,ecoregion,"_Hab_2.csv",sep=''))
-
-kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+nam <- c("Effort reduction (%)","Average PD impact","Average L1 impact",
+                         "Area unfished (%)","Value (%)","Weight (%)")
+kable(hab, col.names = nam, caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
   kable_styling(font_size=12)
 
 ```
@@ -161,8 +173,9 @@ knitr::include_graphics(paste(outputs,ecoregion,"_Hab_3.png",sep=''))
 
 ```{r echo=FALSE, message=FALSE}
 hab <- read.csv(paste(outputs,ecoregion,"_Hab_3.csv",sep=''))
-
-kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+nam <- c("Effort reduction (%)","Average PD impact","Average L1 impact",
+                         "Area unfished (%)","Value (%)","Weight (%)")
+kable(hab, col.names = nam, caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
   kable_styling(font_size=12)
 
 ```
@@ -175,10 +188,45 @@ knitr::include_graphics(paste(outputs,ecoregion,"_Hab_4.png",sep=''))
 
 ```{r echo=FALSE, message=FALSE}
 hab <- read.csv(paste(outputs,ecoregion,"_Hab_4.csv",sep=''))
-
-kable(hab, col.names = gsub("[.]", " ", names(hab)), caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
+nam <- c("Effort reduction (%)","Average PD impact","Average L1 impact",
+                         "Area unfished (%)","Value (%)","Weight (%)")
+kable(hab, col.names = nam, caption="Table presenting a similar overview as above, while including weight of landings",format = "html", table.attr = "style='width:60%;'", align='c') %>% 
   kable_styling(font_size=12)
 
 ```
+
+#### Overview all MSFD habitats
+
+```{r echo=FALSE, message=FALSE}
+hab <-  read.table(paste(outputs,ecoregion,"_habitat_effort.txt",sep=''),header=T,sep=",",  colClasses = 'character')
+nam <- gsub("[X]", " ", names(hab))
+nam[1:2] <-c("MSFD broad habitat type", "Extent of habitat 1000 km^2^")
+
+kable(hab, col.names = nam, caption="Fishing effort consequences, as a % relative to total swept area, of protecting a certain fraction of each broad habitat type sorted from low to high fished c-squares",format = "html", table.attr = "style='width:90%;'", align='l') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.table(paste(outputs,ecoregion,"_habitat_value.txt",sep=''),header=T,sep=",",  colClasses = 'character')
+
+nam <- gsub("[X]", " ", names(hab))
+nam[1:2] <-c("MSFD broad habitat type", "Extent of habitat 1000 km^2^")
+
+kable(hab, col.names = nam, caption="Fishing value consequences, as a % relative to total value, of protecting a certain fraction of each broad habitat type sorted from low to high fished c-squares",format = "html", table.attr = "style='width:90%;'", align='l') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.table(paste(outputs,ecoregion,"_habitat_weight.txt",sep=''),header=T,sep=",",  colClasses = 'character')
+nam <- gsub("[X]", " ", names(hab))
+nam[1:2] <-c("MSFD broad habitat type", "Extent of habitat 1000 km^2^")
+
+kable(hab, col.names = nam, caption="Fishing weight consequences, as a % relative to total weight, of protecting a certain fraction of each broad habitat type sorted from low to high fished c-squares",format = "html", table.attr = "style='width:90%;'", align='l') %>% 
+  kable_styling(font_size=12)
+
+```
+
 
 ## {-}
