@@ -1,0 +1,9 @@
+The figures and tables below show one implementation of multi-purpose habitat management through reductions in effort and spatial closures for the four most extensive MSFD habitat types. They show the changes in average impact (PD, L1), unfished area and fisheries values of landings based on a static assessment of effort removal.
+
+The analysis is based on the progressive removal of 5 to 99% of all MBCG fishing effort, starting from the c-squares with the lowest effort (corrected for the areal extent of the MSFD habitat within each c-square). Blue dots show the current situation and are used as reference. The % of unfished area in the reference is only based on grid cells that are unfished. Average PD and L1 impacts are a weighted average and consider the areal extent of each MSFD habitat type within a grid cell.
+
+Note that the fraction of grid cells above/below a certain impact threshold initially remains the same (not shown) as the removal of effort starts from the c-squares with the lowest effort that typically have low impact.
+
+The most extensive habitat by area in the Northern North Sea is offshore circalittoral sand. Because the fishing effort is aggregated in this habitat (90% of effort corresponding to ~30% of the area), the reduction of 10% of the effort corresponds to the exclusion of over ~50% of the original fished area with a limited improvement in the impact indicators (~1% in PD method, ~23% in L1 method). However such scenario still provides over ~80% of landing and values of the original amounts. 
+
+For the second most extensive habitat by area, offshore circalittoral mud, the reduction of 10% of the effort corresponds to a smaller portion of fished area lost (~40%) as the fishery was not as much aggregated, and to a larger improvement in the impact indicators (~1% PD model, ~29% L1 method) with comparable decrease in landing and value (less than 20%). 

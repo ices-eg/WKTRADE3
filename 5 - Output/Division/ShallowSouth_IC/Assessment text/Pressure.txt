@@ -1,0 +1,9 @@
+The distribution of fishing intensity in the Southern Iberian coast has a strong spatial variation (Figure 2). Areas of higher intensity occur across the shelf of the north part of Portugal while it is lower at the south part of the Portuguese Cost. 
+
+The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in  Offshore circalittoral mixed sediment (95% of grid cells fished) and  Upper bathyal sediment (93% of grid cells fished) (Table 2). Fishing intensity is highest in Circalittoral mixed sediment (average intensity = 7.07 year-1) and  Offshore circalittoral mixed sediment (average intensity = 4.23 year-1). 
+
+Total fishing intensity is largely unchanged over time (Figure 3). There is a large decreasing peak in intensity in circalittoral mixed sediment and circalittoral sand in the period 2011-2012, while the circalittoral mud and offshore circalittoral sand showed the inverse pattern, with an increase on the fishing intensity on this period. The proportion of area fished also showed temporal variations (Figure 3). This shows that the spatial distribution of the footprint down to deeper areas, showing an increase of the proportion of area fished since 2012 in offshore circalittoral sand and mud while area fished decrease in circalittoral mixed sediment and circalittoral sand.   
+
+The smallest proportion of habitat with 90% of effort varies depending on depth between 20-55%. 
+
+The intensively fished areas represent the ‘core fishing grounds’(Figure 3, right panel). These grounds contribute most of the landings (Figure 4). More than 90% of the fishing effort (swept area) and more than 90% of the landings occur in only 20% of the surface area (Figure 4).

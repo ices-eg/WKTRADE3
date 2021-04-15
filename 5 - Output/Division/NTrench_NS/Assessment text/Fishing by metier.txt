@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings and value per area fished is the beam trawl fishery for demersal fish (TBB_DMF) but note that the métier covers the smallest swept area among the active ones. The seines (SDN_DMF and SSC_DMF) have the lowest landings, but comparable ratios with the otter trawl métiers (OT_DMF and OT_CRU). 

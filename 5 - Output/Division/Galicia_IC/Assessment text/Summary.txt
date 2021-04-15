@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the  Gulf of Cadiz subdivision with 49% of the grid cells (I-2), and 16% of the surface area (I-3) being fished on average per year for the period 2013-2018 (Table 1). Fishing is very aggregated with 90% of the pressure occurring in 10% of grid cells (I-4). 
+
+The ICES methods for computing impact are not available at the moment in the region and therefore this part of the analysis has not been completed. 
+
+Maps of spatial distribution of intensity, economic value and weight of fisheries landings are shown in Figure 1, although the map of economic value seems incomplete in the region.  It is evident from the weight map that there is a mistake in the values for the region, and weights are not presented in further analyses.

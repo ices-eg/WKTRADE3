@@ -1,0 +1,5 @@
+The figures and tables below show one implementation of multi-purpose habitat management through reductions in effort and spatial closures for the four most extensive MSFD habitat types. As the impact indicators could not be calculated for the Norwegian Trench, the analysis only shows the changes in proportion of unfished area, fisheries values of landings based on a static assessment of effort removal.
+
+The analysis is based on the progressive removal of 5 to 99% of all MBCG fishing effort, starting from the c-squares with the lowest effort (corrected for the areal extent of the MSFD habitat within each c-square). Blue dots show the current situation and are used as reference. The % of unfished area in the reference is only based on grid cells that are unfished.
+
+Among the three most extensive broad-scale habitat types (without considering the data classified under an unknown habitat type), only the offshore circalittoral mud habitat (among the most intensely fished) shows a gradual increase in unfished area, while the others rapidly lose more than 50% of the original area once reducing the effort above 20%. 

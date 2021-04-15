@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the offshore deep subdivision, with 81% of the grid cells (I-2), and 43% of the surface area (I-3) being fished on average per year for the period 2013-2018 (Table 1) at depths <200, and with 73% of the grid cells (I-2), and 49% of the surface area (I-3) being fished on average per year for the period 2013-2018 at depths from 200 to 800m. Fishing is aggregated with 90% of the pressure occurring in ~33 of grid cells (I-4). The offshore deep encompasses a considerable area below 800 m which is barely fished. 
+
+No longevity layer was available for the Celtic Sea region – declines in community biomass relating to impact cannot, therefore, be calculated for either the L1 or PD method.
+
+Maps of spatial distribution of surface abrasion, economic value and weight of fisheries landings are shown in Figure 1.  It is evident from the weight map that there is a mistake in the weights for the region, and weights are not presented in further analyses.

@@ -1,0 +1,7 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially across the Southern North Sea subdivision with an average swept area ratio of 1.6 y-1.  For the period 2013-2018, 96% of the grid cells (I-2), and 71% of the surface area (I-3) were fished on average per year in the depth zone 0-200m (Table 1). Fishing in the Southern North Sea is the least aggregated among the Greater North Sea subdivisions with 90% of the pressure occurring in 55% of grid cells (I-4). Fishing is not occurring in 4% of grid cells. 
+
+The PD method shows an average decline in community biomass of 13% relative to carrying capacity across c-squares (I-6). Most c-squares, 78% (I-7), have an impact score less than 20%. The L1 method shows a larger impact on a larger portion of c-squares, with an average score of 0.77 (I-6) and only 13% (I-7) of the c-squares having a score lower than 20% (I-7).
+
+Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. Note that for the Southern North Sea, benthic species median longevity gradually increases with latitude. 
+
+All pressure and impact estimates are for areas < 200 meter depth as there is no longevity prediction for deeper regions.

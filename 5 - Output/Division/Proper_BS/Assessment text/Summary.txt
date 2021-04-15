@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears is spatially constrained in the Baltic Proper subdivision with 26% of the grid cells (I-2), and 10% of the surface area (I-3), in the depth zone 0-200m, being fished on average per year for the period 2013-2018 (Table 1). Fishing is very aggregated with 90% of the pressure occurring in 7% of grid cells (I-4). 
+
+The PD method shows an average decline in community biomass of 0% relative to carrying capacity across c-squares (I-6). All c-squares (100% (I-7)), have an impact score less than 20%. The L1 method shows an average impact of 0.09 across c-squares (I-6). The majority of c-squares, 88% (I-7), have impact scores less than 20% (I-7).
+
+Maps of spatial distribution of intensity (surface abrasion), seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. Activity is mostly concentrated in the south area of the Baltic Proper (Figure 1).

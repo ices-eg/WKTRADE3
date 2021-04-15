@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings and value per area fished is the beam trawling for molluscs (TBB_MOL). Note this is driven by a very small area. The seines (SDN_DMF and SSC_DMF) have the lowest landings and value per area fished. 

@@ -1,0 +1,11 @@
+**Data limitations in Greater North Sea sub-region** 
+
+The peak in fishing intensity in 2016 and the drop in 2017 are based on erroneous data inputs. There is some information of value of landings missing in the Northern North Sea/Norwegian Trench. Impact indicators (L1 and PD) could not be calculated for c-squares > 200m depth because of data unavailability. 
+
+Temporal patterns in fishing activity are available from 2009 for vessels over 15m and from 2012 for vessels over 12m. Temporal variation in fishing activity hence represents vessels over 15m (2009-2011) and vessels over 12m (2012-2018). The assessment maps and indicator values produced are based on an average for 2013-2018.
+
+**How are changes in the fishing footprint analyzed?**
+
+To describe the fishing footprint, we expressed fishing intensity as swept-area ratios (SAR). The swept area is calculated as hours fished x average fishing speed x gear width. The gear width is estimated based on relationships between average gear widths and average vessel length or engine power (kW), as stated in Eigaard et al. (2016) and using ICES expert input. The swept-area ratio is the sum of the swept area divided by the area of each grid cell (c-square). Therefore, the C-square SAR value indicates the theoretical number of times the entire grid cell has been swept if effort was evenly distributed within the cell. For example, a SAR of 2 means that each location within the c-square is fished 2 times over the year, a SAR of 0.5 means that each location within the c-square is fished once in two years. Due to data availability, all analyses of the fishing footprint do not account for sub-grid variation of fishing events within the c-square. 
+
+In order to better understand the relationship between catch/value of landings and the levels of physical disturbance for MSFD purposes, the analysis considers ten gear groupings (hereafter termed métiers) together with the total intensity of all gears (Table 2). 

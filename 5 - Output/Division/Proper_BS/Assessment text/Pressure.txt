@@ -1,0 +1,7 @@
+The distribution of fishing intensity in the Baltic Proper subregion is mostly concentrated in the south area  (Figure 2). 
+
+The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in circalittoral sand (49% of grid cells fished) and offshore circalittoral mud (40% of grid cells fished) (Table 2). The highest fishing intensity is found in the offshore circalittoral mud (1.02 yr-1) and the offshore circalittoral sand (1.98 yr-1) (Table 2). 
+
+Figure 3 shows the fishing intensity for the four largest MSDF broad-scale habitats. Total fishing intensity peaked in 2012, and has been very stable afterwards (Figure 3). This trend is predominantly driven by the offshore circalittoral mixed sediment and circalittoral mud or sand (Figure 3). The average trawling intensity is more variable over time than the proportion of area fished (Figure 3, compare left and middle panel). This shows that changes in intensity have not affected the spatial distribution of the footprint much.
+
+Fishing pressure is highly aggregated, both at the regional level as well as at the level of the habitat (Figure 3, right panel). The smallest proportion of habitat with 90% of effort is less than 10%. The intensively fished areas represent the ‘core fishing grounds’. These grounds contribute most of the landings and value (Figure 4). More than 80% of the fishing effort (swept area), landings and value, occur in 10% of the surface area of the Baltic Proper (Figure 4).

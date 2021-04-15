@@ -1,0 +1,9 @@
+Indicators;Description
+Intensity (I-1);Average number of times the area is swept per year by MBCG. Estimated as the sum of swept area for all MBCG (averaged for the six-year cycle), divided by the total area. 
+Proportion of grid cells fished (I-2);The number of c-squares fished at least once in the six-year cycle (irrespective of the swept area within the cell), divided by the total number of c-squares. 
+Proportion of area fished (I-3);The sum of swept area across all c-squares based on the average for the six-year cycle, where swept area in a specific grid cell cannot be greater than the area of that grid cell, divided by the summed area of all c-squares. 
+Aggregation of fishing pressure (I-4);The smallest proportion of c-squares in the area where 90% of the total swept area occurs. 
+Persistently unfished areas (I-5);The number of c-squares persistently unfished in the six-year cylce (irrespective of the swept area within the cell), divided by the total number of c-squares. 
+;
+Impact (I-6);Average fishing impact across c-squares (averaged for the six-year cycle). 
+Proportion area with impact <0.2 (I-7);The proportion of c-squares with an average impact below 0.2 (averaged for the six-year cycle)

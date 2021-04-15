@@ -1,0 +1,5 @@
+The figures and tables below show one implementation of multi-purpose habitat management through reductions in effort and spatial closures for the four most extensive MSFD habitat types. They show the unfished area of landings based on a static assessment of effort removal. No impact data is available for this subdivision at present. 
+
+The analysis is based on the progressive removal of 5 to 99% of all MBCG fishing effort, starting from the c-squares with the lowest effort (corrected for the areal extent of the MSFD habitat within each c-square). Blue dots show the current situation and are used as reference. The % of unfished area in the reference is only based on grid cells that are unfished. 
+
+For all habitats the %unfished drops much faster than the value of the fishery.

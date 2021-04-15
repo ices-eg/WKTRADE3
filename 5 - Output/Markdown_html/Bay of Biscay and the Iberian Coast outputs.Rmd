@@ -1,6 +1,6 @@
 ---
 title: "Bay of Biscay and the Iberian Coast"
-author: "WKTRADE 3"
+author: "WKTRADE 3 - April 2021"
 output: html_document
 ---
 
@@ -33,7 +33,7 @@ reg <- 1
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\Assessment text\\",sep='')
 
 ```
 
@@ -45,7 +45,7 @@ reg <- 2
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.rmd'}
@@ -56,7 +56,7 @@ reg <- 3
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact_no_value.rmd'}
@@ -67,7 +67,7 @@ reg <- 4
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact_no_value.rmd'}
@@ -78,7 +78,7 @@ reg <- 5
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact_no_value.rmd'}
@@ -89,7 +89,7 @@ reg <- 6
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact_no_value.rmd'}
@@ -100,11 +100,50 @@ reg <- 7
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
 outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Lorem ipsum\\"
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
 ```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact_no_value.rmd'}
 ```
+
+## Read me {.tabset}
+
+**Assessment sheet for Bay of Biscay and the Iberian Coast sub-region and for six subdivisions**
+
+```{r echo=FALSE, message=FALSE}
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\Bay of Biscay and the Iberian Coast\\Assessment text\\"
+Readme <- readtext(paste(outtext,"Read me1.txt",sep=''))
+```
+`r Readme$text`
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outtext,"Indicator_table.csv",sep=''),sep=";")
+nam <-  names(hab)
+
+kable(hab, col.names = nam, caption="Table 1. Pressure and impact indicators that are applied by (sub-)regional, subdivision sea, or broadscale habitat type within that sea at a 0.05° × 0.05° grid, hereafter termed c-square.",format = "html", table.attr = "style='width:90%;'", align='l') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+Readme <- readtext(paste(outtext,"Read me2.txt",sep=''))
+```
+`r Readme$text`
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outtext,"Metier_table.csv",sep=''),sep=";")
+nam <-  names(hab)
+
+kable(hab, col.names = nam, caption="Table 2 Gear groupings used in the analysis. Note that OT_CRU includes OT_MIX_CRU and OT_MIX_CRU_DMF, and, OT_MIX includes OT_MIX_DMF_BEN and OT_MIX_DMF_PEL.",format = "html", table.attr = "style='width:90%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+Readme <- readtext(paste(outtext,"Read me3.txt",sep=''))
+```
+`r Readme$text`
+
 
 # {-}
 

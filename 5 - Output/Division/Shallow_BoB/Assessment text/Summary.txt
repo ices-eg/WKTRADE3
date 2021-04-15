@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the “Bay of Biscay shallow” subdivision with 92% of the grid cells (I-2), and 80% of the surface area (I-3), in the depth zone 0-200m, being fished on average per year for the period 2013-2018 (Table 1). Fishing is relatively aggregated with 90% of the pressure occurring in 56% of grid cells (I-4). 
+
+The ICES methods for computing impact are not available at the moment in the region and therefore this part of the analysis has not been completed. 
+
+Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. It is evident from the weight map that there is a mistake in the values for the region, and weights are not presented in further analyses.

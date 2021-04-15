@@ -1,0 +1,3 @@
+Intensity, weight of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings per area fished is the otter trawling for demersal fish species (OT_DMF). The seines (SDN_DMF and SSC_DMF) and otter trawling for crustaceans (OT_CRU) have the lowest landings per area fished. This is followed by otter trawls that target demersal fish (OT_DMF). 
