@@ -29,7 +29,7 @@ rm(list = ls())
   regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
   regions_with_corefishing <- c(1:3,5:9,12:15,16:21)
   
-  for (p in 1:21){
+  for (p in 1:26){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     
@@ -51,17 +51,18 @@ rm(list = ls())
    source("Processing_assessment.R")
   
 ### run script to make FBIT output  
- #  setwd(paste(pathdir,"Utilities",sep="/"))
- #   source("map_plot.R")
- #  source("Output_assessment.R")
+   setwd(paste(pathdir,"Utilities",sep="/"))
+   source("map_plot.R")
+   source("Output_assessment.R")
 
 ### run script for spatial temporal analysis (takes a long time)
    setwd(paste(pathdir,"Utilities",sep="/"))
    if (p %in% regions_with_corefishing){
-   source("Core_fishing_by_metier_analysis_results.R")
-   }  
-   source("Core_fishing_percentiles.R")  
-   
+     source("Core_fishing_by_metier_analysis_results.R")
+     setwd(paste(pathdir,"Utilities",sep="/"))
+     source("Core_fishing_percentiles.R")  
+     }  
+
 ### run habitat management option
    setwd(paste(pathdir,"Utilities",sep="/"))
    source("Tradeoff_habitat_management_allRegions.R")
