@@ -265,5 +265,5 @@
   
   rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','EcoReg_index',
                               'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet','p','regions_with_impact',
-                              'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq"))])
+                              'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq","regions_with_corefishing"))])
   

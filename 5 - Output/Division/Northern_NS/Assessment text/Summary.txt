@@ -4,4 +4,4 @@ The PD method shows an average decline in community biomass of 7% relative to ca
 
 Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. Average value across the Northern North Sea shows a wide distribution of value but the largest proportion coming from the northern half of the subdivision. Landings show hotspots located along the Norwegian Trench and in several other spots offshore.
 
-All pressure and impact estimates are for areas < 200 metre depth as there is no longevity prediction layer for deeper regions.
+All impact estimates are for areas < 200 metre depth as there is no longevity prediction layer for deeper regions.

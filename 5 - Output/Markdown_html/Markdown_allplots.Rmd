@@ -65,18 +65,23 @@ coregrounds <- readtext(paste(outtext,"Core fishing grounds.txt",sep=''))
 `r coregrounds$text`
 
 #### Figure 5
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% core fishing grounds by metier during the period 2013-2018**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% highest value by métier, presented as a % relative to the total number of c-squares (n) that are within the 90% highest value by métier across all years. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
 ```
 
 #### Figure 6
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core fishing ground**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core fishing ground. For métiers that are included in Figure 5 and missing in Figure 6, no reference core ground could be established and/or métiers were not used in the area in some years.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
 ```
 
 #### Figure 7
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
+```
+
+#### Figure 8
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 8. The area associated with each 10-percentile interval for each métier using averages of SAR (left column) and landings value (euro, right column) for the period 2013-2018. The lightest blue c-squares represent the lowest 10% of total SAR / value of landings. The brown c-squares represent the highest 10% of total SAR / value of landings.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Core_percentiles.jpg",sep=''))
 ```
 
 ### Fishing by métier {.tabset } 
@@ -101,13 +106,13 @@ impact <- readtext(paste(outtext,"Impact.txt",sep=''))
 ```
 `r impact$text`
 
-#### Figure 8
-```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 8. Impact of mobile bottom-contacting gears averaged for the 2013-2018 six-year cycle for the PD and L1 method.**"}
+#### Figure 9
+```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 9. Impact of mobile bottom-contacting gears averaged for the 2013-2018 six-year cycle for the PD and L1 method.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA5.png",sep=''))
 ```
 
-#### Figure 9
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 9. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2018 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
+#### Figure 10
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 10. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2018 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA6.png",sep=''))
 ```
 
@@ -121,9 +126,9 @@ kable(table4, col.names = nam, caption="Table 4. Overview of impact per metier r
 
 ```
 
-#### Figure 10
+#### Figure 11
 
-```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Figure 10. PD impact (upper panel) and L1 impact (lower panel) of selected gear groupings on the most extensive MSFD habitat types. Impact is estimated in isolation of the other gear groupings. Note the different scales on the Y-axis.**"}
+```{r, out.width="80%",echo=FALSE,fig.align = 'center', message=FALSE, fig.cap="**Figure 11. PD impact (upper panel) and L1 impact (lower panel) of selected gear groupings on the most extensive MSFD habitat types. Impact is estimated in isolation of the other gear groupings. Note the different scales on the Y-axis.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA8.png",sep=''))
 
 ```

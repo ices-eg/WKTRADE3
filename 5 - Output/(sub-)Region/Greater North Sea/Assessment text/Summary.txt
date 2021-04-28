@@ -4,4 +4,4 @@ The PD method shows an average decline in community biomass of 12% relative to c
 
 Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. 
 
-All pressure and impact estimates are for areas < 200 meter depth as there is no longevity prediction for deeper regions.
+All impact estimates are for areas < 200 meter depth as there is no longevity prediction for deeper regions.

@@ -1,6 +1,6 @@
 ---
 title: "Celtic Seas"
-author: "WKTRADE 3"
+author: "ICES WKTRADE 3 - April 2021"
 output: html_document
 ---
 

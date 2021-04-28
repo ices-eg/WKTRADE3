@@ -64,18 +64,23 @@ coregrounds <- readtext(paste(outtext,"Core fishing grounds.txt",sep=''))
 `r coregrounds$text`
 
 #### Figure 5
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% core fishing grounds by metier during the period 2013-2018**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% highest value by métier, presented as a % relative to the total number of c-squares (n) that are within the 90% highest value by métier across all years. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
 ```
 
 #### Figure 6
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core fishing ground**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 6. Percentage area overlap between the 90% highest value per year and the reference core fishing ground. For métiers that are included in Figure 5 and missing in Figure 6, no reference core ground could be established and/or métiers were not used in the area in some years.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
 ```
 
 #### Figure 7
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
+```
+
+#### Figure 8
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 8. The area associated with each 10-percentile interval for each métier using averages of SAR (left column) and landings value (euro, right column) for the period 2013-2018. The lightest blue c-squares represent the lowest 10% of total SAR / value of landings. The brown c-squares represent the highest 10% of total SAR / value of landings.**"}
+knitr::include_graphics(paste(outputs,ecoregion,"_Core_percentiles.jpg",sep=''))
 ```
 
 ### Fishing by métier {.tabset } 

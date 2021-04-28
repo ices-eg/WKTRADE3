@@ -1,6 +1,6 @@
 ---
 title: "Greater North Sea"
-author: "WKTRADE 3 - April 2021"
+author: "ICES WKTRADE 3 - April 2021"
 output: html_document
 ---
 

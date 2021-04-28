@@ -32,18 +32,20 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   
   # remove all metiers with few data
   tt <- aggregate(vmsValueLong$csquares,by=list(vmsValueLong$wktradeMet),FUN=length)
-  tt <- tt[which(tt[,2]>1),1]
+  tt <- tt[which(tt[,2]>50),1]
   vmsValueLong <- vmsValueLong[vmsValueLong$wktradeMet %in% c(tt),]
   wktradeMet <- as.data.frame(unique(vmsValueLong$wktradeMet))
   metiers <- unique(vmsValueLong$wktradeMet)
-  
-  # remove areas deeper than 200 meter for overview of Greater North Sea
-  if (Assregion == "Greater North Sea"){
-    vmsValueLong <- cbind(vmsValueLong, Region@data[match(vmsValueLong$csquares,Region@data$csquares), c("Depth")])
-    colnames(vmsValueLong)[ncol(vmsValueLong)] <- "Depth"
-    vmsValueLong <-  subset(vmsValueLong,vmsValueLong$Depth >= -200)
-  }
 
+  # and remove metiers without data in all years
+  #metiers1 <- vmsValueLong %>% group_by(year, wktradeMet) %>% count(year, wktradeMet)
+  #metiers1 <- metiers1 %>% group_by(wktradeMet) %>% count(wktradeMet) 
+  #metiers1 <- metiers1 %>%filter(n==6)
+  #metiers2 <- unique(metiers1$wktradeMet)
+  #vmsValueLong <- vmsValueLong[vmsValueLong$wktradeMet %in% c(metiers2),]
+  #metiers <- c(metiers,metiers2)
+  #metiers <- metiers[duplicated(metiers)]
+  
 #Find c-squares with 90% of landings
   #Total
   VMS_MBCG_sum <- vmsValueLong %>% 
@@ -65,15 +67,38 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     group_by( wktradeMet, csquares) %>% 
     summarise(n_years=sum(t)) 
 
+  VMS_MBCG_90pct2$t <- 1
+  VMS_MBCG_90pct2 <- VMS_MBCG_90pct2 %>% 
+    group_by( wktradeMet, n_years) %>% 
+    summarise(n_csquares=sum(t)) 
+  
+  VMS_MBCG_90pct2_tot <- VMS_MBCG_90pct2 %>% 
+    group_by( wktradeMet) %>% 
+    summarise(n_csquares_tot=sum(n_csquares)) 
+  
+  VMS_MBCG_90pct2 <- merge(VMS_MBCG_90pct2,VMS_MBCG_90pct2_tot, by=c("wktradeMet"))
+  VMS_MBCG_90pct2$pct <- (VMS_MBCG_90pct2$n_csquares/VMS_MBCG_90pct2$n_csquares_tot)*100 
+
 #Plot number of years by metier
-  core <- ggplot(data=VMS_MBCG_90pct2, aes(n_years)) + geom_bar(fill = "#0073C2FF") +
+  core <- ggplot(data=VMS_MBCG_90pct2, aes(x= n_years, y= pct)) +
+            geom_bar(fill = "#0073C2FF",stat="identity") +
             theme_bw() +  facet_wrap(~wktradeMet)+
-            labs(x="Number of years (2013-2018)", y="Count") +
+            labs(x="Number of years (2013-2018)", y="Percent c-squares") +
             theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), 
             axis.title = element_text(size=8)) 
-
+  
+  # add total number of core c-squares
+  xx <- max(VMS_MBCG_90pct2$n_years)-1
+  yy <- max(VMS_MBCG_90pct2$pct) -10
+  labtext <- ifelse(duplicated(VMS_MBCG_90pct2[,c("wktradeMet","n_csquares_tot")]) == T, "",
+                    paste("n=",VMS_MBCG_90pct2$n_csquares_tot,sep=""))
+  core <- core + geom_text(data=VMS_MBCG_90pct2,label=labtext, x=xx,y=yy,size=3) +  facet_wrap(~wktradeMet)
+  
+  plotsize <- 4.5
+  plotsize <- ifelse(length(tt) < 4, 2.5,4.5)
+  
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig1.jpg",sep="_"),sep="/"),
-      width=5.2,height=4.5, units = "in", res = 300 ) 
+      width=5.2,height=plotsize, units = "in", res = 300 ) 
     print(core)
   dev.off()
   
@@ -206,7 +231,6 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   dir.create("CSV", showWarnings = FALSE)
   
   for(m in metiers2){
-    
     #Read polygons by metier and year
     FG2013 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2013_",m,".shp",sep=""))
     FG2014 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2014_",m,".shp",sep=""))
@@ -244,20 +268,21 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     FG16 <- raster::crop(FG2016_s, MBCG_reference_metier)
     FG17 <- raster::crop(FG2017_s, MBCG_reference_metier)
     FG18 <- raster::crop(FG2018_s, MBCG_reference_metier)
+  
+      
+    FG13_sf <- if(length(FG13) > 0) {st_as_sf(FG13)} 
+    FG14_sf <- if(length(FG14) > 0) {st_as_sf(FG14)} 
+    FG15_sf <- if(length(FG15) > 0) {st_as_sf(FG15)} 
+    FG16_sf <- if(length(FG16) > 0) {st_as_sf(FG16)} 
+    FG17_sf <- if(length(FG17) > 0) {st_as_sf(FG17)} 
+    FG18_sf <- if(length(FG18) > 0) {st_as_sf(FG18)} 
     
-    FG13_sf <- st_as_sf(FG13)
-    FG14_sf <- st_as_sf(FG14)
-    FG15_sf <- st_as_sf(FG15)
-    FG16_sf <- st_as_sf(FG16)
-    FG17_sf <- st_as_sf(FG17)
-    FG18_sf <- st_as_sf(FG18)
-    
-    st_write(FG13_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2013_",Assregion, "_", m,".shp", sep=""), delete_dsn = T)
-    st_write(FG14_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2014_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
-    st_write(FG15_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2015_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
-    st_write(FG16_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2016_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
-    st_write(FG17_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2017_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
-    st_write(FG18_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2018_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
+    try(st_write(FG13_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2013_",Assregion, "_", m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FG14_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2014_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FG15_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2015_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FG16_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2016_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FG17_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2017_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FG18_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2018_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
     
     #Corefishinggrounds
     MBCG_reference_sf <- st_as_sf(MBCG_reference_metier)
@@ -267,19 +292,19 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     corefishinggrounds <- mapview(MBCG_reference_sf, zcol="euro_sum")
     
     #Area
-    area2013_km2 <- st_area(FG2013)*0.000001
-    area2014_km2 <- st_area(FG2014)*0.000001
-    area2015_km2 <- st_area(FG2015)*0.000001
-    area2016_km2 <- st_area(FG2016)*0.000001
-    area2017_km2 <- st_area(FG2017)*0.000001
-    area2018_km2 <- st_area(FG2018)*0.000001
+    area2013_km2 <- try(st_area(FG2013)*0.000001)
+    area2014_km2 <- try(st_area(FG2014)*0.000001)
+    area2015_km2 <- try(st_area(FG2015)*0.000001)
+    area2016_km2 <- try(st_area(FG2016)*0.000001)
+    area2017_km2 <- try(st_area(FG2017)*0.000001)
+    area2018_km2 <- try(st_area(FG2018)*0.000001)
     
-    area_overlap13_km2 <- st_area(FG13_sf)*0.000001
-    area_overlap14_km2 <- st_area(FG14_sf)*0.000001
-    area_overlap15_km2 <- st_area(FG15_sf)*0.000001
-    area_overlap16_km2 <- st_area(FG16_sf)*0.000001
-    area_overlap17_km2 <- st_area(FG17_sf)*0.000001
-    area_overlap18_km2 <- st_area(FG18_sf)*0.000001
+    area_overlap13_km2 <- ifelse(length(FG13_sf$geometry) == 0, NA,st_area(FG13_sf$geometry)*0.000001)
+    area_overlap14_km2 <- ifelse(length(FG14_sf$geometry) == 0, NA,st_area(FG14_sf$geometry)*0.000001)
+    area_overlap15_km2 <- ifelse(length(FG15_sf$geometry) == 0, NA,st_area(FG15_sf$geometry)*0.000001)
+    area_overlap16_km2 <- ifelse(length(FG16_sf$geometry) == 0, NA,st_area(FG16_sf$geometry)*0.000001)
+    area_overlap17_km2 <- ifelse(length(FG17_sf$geometry) == 0, NA,st_area(FG17_sf$geometry)*0.000001)
+    area_overlap18_km2 <- ifelse(length(FG18_sf$geometry) == 0, NA,st_area(FG18_sf$geometry)*0.000001)
     
     year <- c(2013, 2014, 2015, 2016, 2017, 2018)
     area_FG <- c(area2013_km2, area2014_km2, area2015_km2, area2016_km2, area2017_km2, area2018_km2)
@@ -311,8 +336,11 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     labs(x="Year (2013-2018)", y="Percent area overlap")+
     theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), axis.title = element_text(size=8)) 
  
+  plotsize2 <- 4.5
+  plotsize2 <- ifelse(length(metiers2) < 4, 2.5,4.5)
+  
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig2.jpg",sep="_"),sep="/"),
-      width=5.2,height=4.5, units = "in", res = 300 ) 
+      width=5.2,height=plotsize2, units = "in", res = 300 ) 
   print(core2)
   dev.off()
   
@@ -364,7 +392,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), axis.title = element_text(size=8)) 
   
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig3.jpg",sep="_"),sep="/"),
-      width=5.2,height=4.5, units = "in", res = 300 ) 
+      width=5.2,height=plotsize, units = "in", res = 300 ) 
   print(core3)
   dev.off()
   
@@ -396,6 +424,6 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   
   rm(list= ls()[!(ls() %in% c('pathdir','pathdir_nogit','Assregion_index','Assunit_index','EcoReg_index',
                               'Period','AssPeriod',"EcoReg",'Fisheries','FisheriesMet','p','regions_with_impact',
-                              'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq"))])
+                              'Region','State_reg','State_reg_IL',"Assunit","Assregion","msfd_csq","regions_with_corefishing"))])
   
   

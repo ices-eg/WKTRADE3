@@ -1,7 +1,7 @@
-The impact of mobile bottom-contacting fishing from the PD method shows areas of low fishing impact in the western part of the Bothnian subregion (Figure 8, left). High impact from the L1 method covers the same area (Figure 8, right), but indicates a higher impact.
+The impact of mobile bottom-contacting fishing from the PD method shows areas of low fishing impact in the western part of the Bothnian subregion (Figure 9, left). High impact from the L1 method covers the same area (Figure 9, right), but indicates a higher impact.
 
-The impact scores are constant and low over time (Figure 9, left panel). Impact does not vary much between habitats (Figure 8 shows the four most extensive habitat types). All habitat types (100%) have a PD impact score <0.2, whereas more than 95% of each habitat type has an L1 impact score <0.2.
+The impact scores are constant and low over time (Figure 10, left panel). Impact does not vary much between habitats (Figure 9 shows the four most extensive habitat types). All habitat types (100%) have a PD impact score <0.2, whereas more than 95% of each habitat type has an L1 impact score <0.2.
 
 Table 4 shows impact per métier relative to weight and value of landings. In this analysis, the different métiers are assessed for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers. As such this estimates the maximum impact compared to the untrawled situation and the impact estimated assuming all other métiers to have impacted the habitat will be less than this.  Only otter trawls for cod and plaice and small demersal fished have been used in the Bothnian subregion (Table 3).
 
-Impact by all métiers are low for each habitat type (Figure 10). 
+Impact by all métiers are low for each habitat type (Figure 11).
