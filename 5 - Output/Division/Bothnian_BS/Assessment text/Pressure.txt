@@ -1,6 +1,6 @@
 The distribution of fishing intensity in the Bothnian subregion is very patchy (Figure 2). The few fished areas show very low levels of intensity. 
 
-The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in offshore circalittoral sand or offshore circalittoral mud (14% of grid cells fished) (Table 2). The broad-scale habitats all show very low average fishing intensities (< 0.02 yr-1). 
+The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in offshore circalittoral sand or offshore circalittoral mud (11% of grid cells fished) (Table 2). The broad-scale habitats all show very low average fishing intensities (< 0.02 yr-1). 
 
 Figure 3 shows the fishing intensity for the four largest MSDF broad-scale habitats. Total fishing intensity has been very stable over time (Figure 3). The average trawling intensity is more variable over time than the proportion of area fished (Figure 3, compare left and middle panel). This shows that changes in intensity have not affected the spatial distribution of the footprint much.
 
