@@ -120,7 +120,7 @@ Readme <- readtext(paste(outtext,"Read me2.txt",sep=''))
 
 ```{r echo=FALSE, message=FALSE}
 hab <- read.csv(paste(outtext,"Metier_table.csv",sep=''),sep=";")
-nam <-  names(hab)
+nam <- gsub("[.]", " ", colnames(hab))
 
 kable(hab, col.names = nam, caption="Table 2 Gear groupings used in the analysis. Note that OT_CRU includes OT_MIX_CRU and OT_MIX_CRU_DMF, and, OT_MIX includes OT_MIX_DMF_BEN and OT_MIX_DMF_PEL.",format = "html", table.attr = "style='width:90%;'", align='c') %>% 
   kable_styling(font_size=12)

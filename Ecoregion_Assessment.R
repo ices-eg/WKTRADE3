@@ -29,7 +29,7 @@ rm(list = ls())
   regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
   regions_with_corefishing <- c(1:3,5:9,12:15,16:21)
   
-  for (p in 10:15){
+  for (p in 1:26){
    Assregion <- Assregion_index[p]
    EcoReg    <- EcoReg_index[p]
    Assunit <- Assunit_index[p]     

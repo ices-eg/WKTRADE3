@@ -98,7 +98,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   plotsize <- ifelse(length(tt) < 4, 2.5,4.5)
   
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig1.jpg",sep="_"),sep="/"),
-      width=5.2,height=plotsize, units = "in", res = 300 ) 
+      width=5.2,height=plotsize, units = "in", res = 150 ) 
     print(core)
   dev.off()
   
@@ -340,7 +340,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   plotsize2 <- ifelse(length(metiers2) < 4, 2.5,4.5)
   
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig2.jpg",sep="_"),sep="/"),
-      width=5.2,height=plotsize2, units = "in", res = 300 ) 
+      width=5.2,height=plotsize2, units = "in", res = 150 ) 
   print(core2)
   dev.off()
   
@@ -392,7 +392,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), axis.title = element_text(size=8)) 
   
   jpeg(paste(pathdir_output,paste(Assregion,"coreF_fig3.jpg",sep="_"),sep="/"),
-      width=5.2,height=plotsize, units = "in", res = 300 ) 
+      width=5.2,height=plotsize, units = "in", res = 150 ) 
   print(core3)
   dev.off()
   

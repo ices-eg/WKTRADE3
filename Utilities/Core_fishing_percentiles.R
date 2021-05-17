@@ -123,7 +123,7 @@
   # set directory
   setwd(paste(pathdir,"5 - Output",Assunit,Assregion,sep="/"))
   
-  jpeg(paste(Assregion,"Core_percentiles.jpg",sep="_"),width=8,height=id_height, units = "in", res = 500 ) 
+  jpeg(paste(Assregion,"Core_percentiles.jpg",sep="_"),width=8,height=id_height, units = "in", res = 120 ) 
   print(grid.arrange(arrangeGrob(grobs = plist,ncol=2),mylegend,heights=c(10,.5)))
   dev.off()
   

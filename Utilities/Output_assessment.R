@@ -21,19 +21,19 @@
   value  <- (map_plot(figA1,"total_value",AssPeriod,yellowred,Assregion))
   weight  <- (map_plot(figA1,"total_weight",AssPeriod,yellowred,Assregion))
 
-  png(paste(Assregion,"figureA1.png",sep="_"),width=12,height=9, units = "in", res = 300 ) 
+  png(paste(Assregion,"figureA1.png",sep="_"),width=12,height=9, units = "in", res = 150 ) 
   print(grid.arrange(sar,longevi,value,weight, nrow = 2))
   dev.off()
 
 ##### Figure A.2
-  png(paste(Assregion,"figureA2.png",sep="_"),width=6,height=4.5, units = "in", res = 300) 
+  png(paste(Assregion,"figureA2.png",sep="_"),width=6,height=4.5, units = "in", res = 150) 
   print(sar)
   dev.off()
 
 ##### Figure A.3
   load(paste(pathdir_prodFT,"FigureA3.RData",sep="/"))
 
-  png(paste(Assregion,"figureA3.png",sep="_"),width=8,height=4, units = "in", res = 300) 
+  png(paste(Assregion,"figureA3.png",sep="_"),width=8,height=4, units = "in", res = 150) 
   par(mfrow=c(1,3))
   
   #left panel
@@ -75,7 +75,7 @@
 # Figure A.4
   load(paste(pathdir_prodFT,"FigureA4.RData",sep="/"))
   
-  png(paste(Assregion,"figureA4.png",sep="_"),width=5.5,height=4.5, units = "in", res = 300) 
+  png(paste(Assregion,"figureA4.png",sep="_"),width=5.5,height=4.5, units = "in", res = 150) 
   plot(A4dat$sweptcumu~A4dat$indixcumu, xlab="Surface area \n(grid cells sorted from high to low trawling intensity)",
        ylab="Cumulative proportion",las=1,yaxt="n", lty=1, col="white", type="l")
   lines(x=c(-1,2),y=c(0.2,0.2),type="l",lty=4,lwd=0.2,col="light grey")
@@ -103,14 +103,14 @@
   impact_PD <- (map_plot(figA5,"impact",AssPeriod,sealand,Assregion))
   impact_IL <- (map_plot(figA5,"impact_IL",AssPeriod,sealand,Assregion))
   
-  png(paste(Assregion,"figureA5.png",sep="_"),width=12,height=4.5, units = "in", res = 300) 
+  png(paste(Assregion,"figureA5.png",sep="_"),width=12,height=4.5, units = "in", res = 150) 
   print(grid.arrange(impact_PD,impact_IL, nrow = 1))
   dev.off()
   
 #Figure A.6
   load(paste(pathdir_prodFT,"FigureA6.RData",sep="/"))
   
-  png(paste(Assregion,"figureA6.png",sep="_"),width=7,height=7, units = "in", res = 300) 
+  png(paste(Assregion,"figureA6.png",sep="_"),width=7,height=7, units = "in", res = 150) 
   par(mfrow=c(2,2),mar=c(4,5,2,2)+0.1)
   
   #left panel
@@ -197,7 +197,7 @@
   Avgear <- 1-Avgear # get impact
   Avgear <- t(Avgear)
   
-  png(paste(Assregion,"figureA8.png",sep="_"),width=12,height=9, units = "in", res = 300) 
+  png(paste(Assregion,"figureA8.png",sep="_"),width=12,height=9, units = "in", res = 150) 
   par(mfrow=c(2,1),mar=c(4,5,2,2)+0.1)
   
   barplot(Avgear_PD,beside=T,yaxt="n",xaxt="n",ylab="Impact (PD method)",ylim=c(0,0.5),xlab="Metier")

@@ -106,7 +106,7 @@ for (iHabitat in 1:4){
   # now make the plot 
   if (p %in% regions_with_impact){
     png(paste(Assregion,"Hab",paste(iHabitat,"png",sep="."),sep="_"),
-        width=8,height=3.5, units = "in", res = 300) 
+        width=8,height=3.5, units = "in", res = 150) 
     par(mfrow=c(1,3),mar=c(4,4,4,1)+.1)
     
     nam_points <- c("","-5","-10","","-20","","-40","","-80","-99")
@@ -148,7 +148,7 @@ for (iHabitat in 1:4){
     
   } else {
     png(paste(Assregion,"Hab",paste(iHabitat,"png",sep="."),sep="_"),
-        width=8,height=3.5, units = "in", res = 300) 
+        width=8,height=3.5, units = "in", res = 150) 
     
     par(mfrow=c(1,3),mar=c(4,4,4,1)+.1)
     plot.new();text(0.5,0.5,"NA")
