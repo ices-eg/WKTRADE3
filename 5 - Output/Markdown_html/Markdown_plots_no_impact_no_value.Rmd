@@ -49,7 +49,7 @@ kable(table2, col.names = nam , caption="Table 2 Overview of pressure indicators
 
 
 #### Figure 3
-```{r echo=FALSE, message=FALSE,fig.align = 'center', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center',out.width='80%', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA3.png",sep=''))
 ```
 
