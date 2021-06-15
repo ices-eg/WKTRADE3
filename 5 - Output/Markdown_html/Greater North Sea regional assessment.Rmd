@@ -1,6 +1,6 @@
 ---
 title: "Greater North Sea"
-author: "ICES Advice 2021 – sr.2021.xx – https://doi.org/xx.xxxx/"
+author: "ICES Advice 2021 – https://doi.org/10.17895/ices.advice.8191"
 output: html_document
 ---
 

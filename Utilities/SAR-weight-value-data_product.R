@@ -1,57 +1,55 @@
-rm(list = ls())
 
-### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
+# get csv and shapefile data product
 
-### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
-
-### get all libraries
-source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
-
-### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
-
-### create list of marine reporting areas
-Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
-NS_div <- c("Northern_NS", "Kattegat_NS", "Channel_NS", "Southern_NS" ,"NTrench_NS")
-BS_div <- c("GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
-CS_div <- c("deep_CS" ,"south_CS", "North_CS" ,"Irishsea_CS", "Middle_CS") 
-BoBIC_div <- c("Shallow_BoB", "ShallowNorth_IC","ShallowSouth_IC", "Galicia_IC",  "Deep_IC", "Deep_BoB")
-divis <- c(NS_div,BS_div,CS_div,BoBIC_div)
-
-### run all areas in a loop 
-Assregion_index <- c(Sregions, divis)  # get the reporting region
-EcoReg_index    <- c(Sregions, rep(Sregions[1],5),rep(Sregions[2],6),
-                     rep(Sregions[3],5),rep(Sregions[4],6))  # get the (sub-)region for the reporting region
-Assunit_index   <- c(rep("(sub-)Region",4),rep("Division",22)) # is reporting region a "(sub-)Region" or "Division"?
-regions_with_impact <- c(1,2,5,6,7,8,10:15) # get all areas with longevity data
-regions_with_corefishing <- c(1:3,5:9,12:15,16:21)
-
-namregion <-c("NS","BS","CS","BoBIC")
-
-
-for (p in 1:4){
-  Assregion <- Assregion_index[p]
-  EcoReg    <- EcoReg_index[p]
-  Assunit <- Assunit_index[p]     
+# get the region data
+  setwd("C:/Users/pdvd/Online for git/WKTRADE3/1 - Input env")
   
-  ### load processed file, with longevity and state/impact 
-  load(paste(pathdir_nogit,paste(EcoReg,"Fisheries.RData",sep="_"),sep="/")) 
-  load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"),sep="/")) 
-  setwd(paste(pathdir,"1 - Input env",sep="/"))
-  load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
-  
-  # add correct column names
+  load("Bay of Biscay and the Iberian Coast_region_grid_sensitivity.RData")  
   idx <- which(names(Region@data)== "long")
   colnames(Region@data)[idx]  <- "longitude"
   idx <- which(names(Region@data)== "lat")
   colnames(Region@data)[idx]  <- "latitude"
+  BoB <- Region[,c("csquares","longitude", "latitude")]
+
+  load("Celtic Seas_region_grid_sensitivity.RData")  
+  idx <- which(names(Region@data)== "long")
+  colnames(Region@data)[idx]  <- "longitude"
+  idx <- which(names(Region@data)== "lat")
+  colnames(Region@data)[idx]  <- "latitude"
+  CS <- Region[,c("csquares","longitude", "latitude")]
+
+  load("Greater North Sea_region_grid_sensitivity.RData")  
+  idx <- which(names(Region@data)== "long")
+  colnames(Region@data)[idx]  <- "longitude"
+  idx <- which(names(Region@data)== "lat")
+  colnames(Region@data)[idx]  <- "latitude"
+  NS <- Region[,c("csquares","longitude", "latitude")]
+
+  load("Baltic Sea_region_grid_sensitivity.RData")  
+  idx <- which(names(Region@data)== "long")
+  colnames(Region@data)[idx]  <- "longitude"
+  idx <- which(names(Region@data)== "lat")
+  colnames(Region@data)[idx]  <- "latitude"
+  BS <- Region[,c("csquares","longitude", "latitude")]
+  Region <- rbind(BoB,CS,NS,BS)
   
-  Region <- Region@data[,c("csquares","longitude", "latitude")]
+# get the fisheries 
+  setwd("C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted") 
+  load("Baltic Sea_fisheries.RData")
+  BS_F <- Fisheries   
   
-# get total sar, value, weight  
+  load("Bay of Biscay and the Iberian Coast_fisheries.RData")
+  BoB_F <- Fisheries   
+  
+  load("Greater North Sea_fisheries.RData")
+  NS_F <- Fisheries   
+  
+  load("Celtic Seas_fisheries.RData")
+  CS_F <- Fisheries
+  
+  Fisheries <- rbind(BS_F,BoB_F,NS_F,CS_F)
+
+# now add Fisheries to Region
   SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
   weight_year <- paste("total_weight",AssPeriod,sep="_")
   value_year <- paste("total_value",AssPeriod,sep="_")
@@ -65,6 +63,7 @@ for (p in 1:4){
   Fisheries$cat[Fisheries$cat == "(10,100]"] <- ">10" 
   Fisheries$cat <- as.factor(Fisheries$cat)
   
+  Region <- Region@data
   Region <- cbind(Region, Fisheries[match(Region$csquares,Fisheries$csquares), c("cat")])
   colnames(Region)[ncol(Region)] <- "MBCG_surface_sar"
   Region$MBCG_surface_sar[is.na(Region$MBCG_surface_sar)] <- "NA"
@@ -95,8 +94,25 @@ for (p in 1:4){
   colnames(Region)[ncol(Region)] <- "MBCG_total_weight"
   Region$MBCG_total_weight[is.na(Region$MBCG_total_weight)] <- "NA"
   
-  gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
+# get the fisheries combined 
+  setwd("C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted") 
+  load("Baltic Sea_fisheries_per_metier_comb.RData")
+  BS_F <- FisheriesMet   
+  
+  load("Bay of Biscay and the Iberian Coast_fisheries_per_metier_comb.RData")
+  BoB_F <- FisheriesMet   
+  
+  load("Greater North Sea_fisheries_per_metier_comb.RData")
+  NS_F <- FisheriesMet   
+  
+  load("Celtic Seas_fisheries_per_metier_comb.RData")
+  CS_F <- FisheriesMet
+  
+  FisheriesMet <- rbind(BS_F,BoB_F,NS_F,CS_F)
 
+# combine the fisheries metiers with the region
+  gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
+  
   for (igear in 1:length(gears)){
     nam <- paste(rep(gears[igear],length(AssPeriod)),"surface_sar",AssPeriod,sep="_")
     FisheriesMet[,c(nam)][is.na(FisheriesMet[,c(nam)])] <- 0
@@ -130,7 +146,7 @@ for (p in 1:4){
     id_name <- paste(gears[igear],"total_value",sep = "_")
     colnames(Region)[ncol(Region)] <- id_name
     Region[,id_name][is.na(Region[,id_name])] <- "NA"
- 
+    
     # weight
     nam <- paste(rep(gears[igear],length(AssPeriod)),"total_weight",AssPeriod,sep="_")
     FisheriesMet[,c(nam)][is.na(FisheriesMet[,c(nam)])] <- 0
@@ -149,15 +165,52 @@ for (p in 1:4){
     Region[,id_name][is.na(Region[,id_name])] <- "NA"
   }
   
-  assign(namregion[p], Region)
-  
-}
-  
-  data_out <- rbind(BS,NS,CS,BoBIC)
-  data_out <- subset(data_out, !(data_out$MBCG_surface_sar == "NA" & 
-                                   data_out$MBCG_total_value== "NA" &
-                                   data_out$MBCG_total_weight == "NA"))
+  data_out <- subset(Region, !(Region$MBCG_surface_sar == "NA" & 
+                                 Region$MBCG_total_value== "NA" &
+                                 Region$MBCG_total_weight == "NA"))
   
   setwd(pathdir_nogit)
   write.csv(data_out,file="TRADE3 data product.csv",row.names=F)
+
+# get polygon shapefiles
+  setwd("C:/Users/pdvd/Online for git/WKTRADE3/1 - Input env")
+  
+  load("Bay of Biscay and the Iberian Coast_region_grid_sensitivity.RData")  
+  BoB <- Region[,c("csquares")]
+  
+  load("Celtic Seas_region_grid_sensitivity.RData")  
+  CS <- Region[,c("csquares")]
+  
+  load("Greater North Sea_region_grid_sensitivity.RData")  
+  NS <- Region[,c("csquares")]
+  
+  load("Baltic Sea_region_grid_sensitivity.RData")  
+  BS <- Region[,"csquares"]
+  
+  Tot <- rbind(BoB,CS,NS,BS)
+  
+  setwd("C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted")
+  alldat <- read.csv("TRADE3 data product.csv",sep=",",header=T)
+  
+  newobj <- merge(Tot, alldat, by.x="csquares", by.y="csquares")
+  newobj <- subset(newobj,!(is.na(newobj$longitude)))
+  
+  ICESTrade <- newobj
+  
+  names(ICESTrade) <- c("csquares","long","lat",
+                        "MBCG_SAR","MBCG_EUR","MBCG_KG",
+                        "DRBMOL_SAR","DRBMOL_EUR","DRBMOL_KG",
+                        "OTCRU_SAR","OTCRU_EUR","OTCRU_KG",
+                        "OTDMF_SAR","OTDMF_EUR","OTDMF_KG",
+                        "OTMIX_SAR","OTMIX_EUR","OTMIX_KG",
+                        "OTSPF_SAR","OTSPF_EUR","OTSPF_KG",
+                        "SDNDMF_SAR","SDNDMF_EUR","SDNDMF_KG",
+                        "SSCDMF_SAR","SSCDMF_EUR","SSCDMF_KG",
+                        "TBBCRU_SAR","TBBCRU_EUR","TBBCRU_KG",
+                        "TBBDMF_SAR","TBBDMF_EUR","TBBDMF_KG",
+                        "TBBMOL_SAR","TBBMOL_EUR","TBBMOL_KG")
+
+  pathd <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
+  writeOGR(obj=ICESTrade, dsn=pathd, layer="ICESTrade_shapefiles", driver="ESRI Shapefile",overwrite_layer=TRUE) 
+  
   
