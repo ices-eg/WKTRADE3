@@ -1,0 +1,7 @@
+The distribution of fishing intensity in the “Southern area deep” has a strong spatial variation (Figure 2). Areas of higher intensity occur in areas located in the south of Portugal. Areas with lower intensity occur in the Gulf of Cadiz, in the eastern part of the study area. 
+
+The habitat with most fishing is Upper bathyal sediment. The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in Offshore circalittoral mixed sediment (99% of grid cells fished), and high in offshore circalittoral mud (91%) (Table 2). Fishing intensity is highest in offshore circalittoral mud (average intensity = 4.71 year-1). 
+
+Total fishing intensity show two peaks across the study period, one in 2012-2014 and another in 2018 (Figure 3). The average trawling intensity is more variable over time (showing two peaks) than the proportion of area fished (Figure 3, compare left and middle panel). This shows that changes in intensity have not affected the spatial distribution of the footprint much.
+
+Fishing pressure is aggregated, both at the regional level as well as at the level of the habitat (Figure 3, right panel). The smallest proportion of habitat with 90% of effort varies between 20-25% for the two broad habitats exposed to fishing. The intensively fished areas represent the ‘core fishing grounds’. These grounds are less aggregated than in other regions and it is necessary to reach values of 60% of surface area to reach values of 70% of landings (Figure 4). 

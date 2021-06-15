@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears in the Norwegian Trench is spatially concentrated due to the bathymetrical conditions of the area according to which 50% of the grid cells are not fished because of large depths (I-5). Consequently, 50% of the grid cells (I-2), and 35% of the surface area (I-3), in the depth zone 0-200m, are fished on average per year for the period 2013-2018 (Table 1). Fishing is strongly aggregated along the trench with 90% of the pressure occurring in 21% of grid cells (I-4). The average fishing intensity is 2.51 but the large portion of unfished area should be considered. Along the trench, SAR exceeds 10. 
+
+Impact indicators could not be calculated for this subdivision because of data unavailability.
+
+Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. Landings and values are also spatially heterogeneous. Landings are highest along the northern part of the trench, while value is the highest in the southern part in between Norway and Denmark.

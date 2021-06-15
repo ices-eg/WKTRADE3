@@ -1,0 +1,11 @@
+Métier;Main gear type;Target species assemblage group;Main target species;Depletion rate
+DRB_MOL;Dredge;Molluscs;Scallops;0.2
+OT_CRU;Otter trawl;Crustaceans;Nephrops, Pandalus, mixed fish;0.1
+OT_DMF;Otter trawl;Demersal fish;Cod or plaice;0.026
+OT_MIX;Otter trawl;Mixed fish;Mixed fish;0.074
+OT_SPF;Otter trawl;Small pelagic fish;Sprat or sandeel;0.009
+SDN_DMF;Danish seine;Demersal fish;Plaice, cod;0.009
+SSC_DMF;Flyshooter (seine);Demersal fish;Cod, haddock, flatfish;0.016
+TBB_CRU;Beam trawl;Crustaceans;Brown shrimp;0.06
+TBB_DMF;Beam trawl;Demersal fish;Flatfish;0.14
+TBB_MOL;Beam trawl;Molluscs;Whelk, snails and scallops;0.06

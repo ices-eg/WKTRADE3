@@ -1,0 +1,147 @@
+---
+title: "Baltic Sea"
+author: "ICES Advice 2021 – https://doi.org/10.17895/ices.advice.8191"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+  font-family: times, serif;
+  text-align: justify;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+**Physical disturbance pressures from bottom-contacting fishing gears and their impacts on seabed habitats for the Baltic Sea region and six subdivisions**
+
+#  {.tabset .tabset-fade .tabset-pills}
+
+```{r ReadData, echo=FALSE, message=FALSE}
+library(dplyr)
+library(kableExtra)
+library(knitr)
+library(readtext)
+
+reg_dat <- c("Baltic Sea" ,"Bothnian_BS", "GulfF_BS", "GulfR_BS" ,"Proper_BS","ArkBor_BS","Western_BS" )
+name_dat <- c("Baltic Sea","Bothnian area","Gulf of Finland", "Gulf of Riga","Baltic Proper" ,"Arkona & Bornholm Basin","Western Baltic Sea"  )
+reg <- 1
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\Assessment text\\",sep='')
+
+
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 2
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 3
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 4
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 5
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 6
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+```{r echo=FALSE, message=FALSE}
+reg <- 7
+ecoregion <- reg_dat[reg]
+econame <- name_dat[reg]
+outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+```
+
+```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```
+
+## Read me {.tabset}
+
+```{r echo=FALSE, message=FALSE}
+outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\Baltic Sea\\Assessment text\\"
+Readme <- readtext(paste(outtext,"Read me1.txt",sep=''))
+```
+`r Readme$text`
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outtext,"Indicator_table.csv",sep=''),sep=";")
+nam <- colnames(hab)
+
+kable(hab, col.names = nam, caption="Table 1. Pressure and impact indicators that are applied by (sub-)regional, subdivision sea, or broadscale habitat type within that sea at a 0.05° × 0.05° grid, hereafter termed c-square.",format = "html", table.attr = "style='width:90%;'", align='l') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+Readme <- readtext(paste(outtext,"Read me2.txt",sep=''))
+```
+`r Readme$text`
+
+```{r echo=FALSE, message=FALSE}
+hab <- read.csv(paste(outtext,"Metier_table.csv",sep=''),sep=";")
+nam <- gsub("[.]", " ", colnames(hab))
+
+kable(hab, col.names = nam, caption="Table 2 Gear groupings used in the analysis. Note that OT_CRU includes OT_MIX_CRU and OT_MIX_CRU_DMF, and, OT_MIX includes OT_MIX_DMF_BEN and OT_MIX_DMF_PEL.",format = "html", table.attr = "style='width:90%;'", align='c') %>% 
+  kable_styling(font_size=12)
+
+```
+
+```{r echo=FALSE, message=FALSE}
+Readme <- readtext(paste(outtext,"Read me3.txt",sep=''))
+```
+`r Readme$text`
+
+
+# {-}
+

@@ -1,0 +1,5 @@
+The figures and tables below show one implementation of multi-purpose habitat management through reductions in effort and spatial closures for the four most extensive MSFD habitat types. They show the changes in average impact (PD, L1), unfished area and fisheries values of landings based on a static assessment of effort removal.
+
+The analysis is based on the progressive removal of 5 to 99% of all MBCG fishing effort, starting from the c-squares with the lowest effort (corrected for the areal extent of the MSFD habitat within each c-square). Blue dots show the current situation and are used as reference. The % of unfished area in the reference is only based on grid cells that are unfished. Average PD and L1 impacts are a weighted average and consider the areal extent of each MSFD habitat type within a grid cell.
+
+Note that the fraction of grid cells above/below a certain impact threshold initially remains the same (not shown) as the removal of effort starts from the c-squares with the lowest effort that typically have low impact.

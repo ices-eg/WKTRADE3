@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings and value per area fished is the dredge fishery for clams (DRB_MOL) but note that only a very small area has been fished by this métier. The seines (SDN_DMF) have the lowest landings and value per area fished. This is followed by otter trawls that target crustaceans (OT_CRU).

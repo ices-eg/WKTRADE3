@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings and value per area fished is the otter trawling for small pelagic species (OT_SPF). The seines (SDN_DMF and SSC_DMF) have the lowest landings and value per area fished. Landings per area swept are high in this subdivision compared to most other areas.

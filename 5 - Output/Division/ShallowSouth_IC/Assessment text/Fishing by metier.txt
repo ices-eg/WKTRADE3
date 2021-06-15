@@ -1,0 +1,1 @@
+Area swept is estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 

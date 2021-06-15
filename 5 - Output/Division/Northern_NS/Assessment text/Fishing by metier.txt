@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the lowest landings and value per area fished are the seines (SDN_DMF and SSC_DMF). Otter trawl targeting crustaceans and demersal fish have intermediate landing and value per area swept (OT_CRU, OT_DMF). The highest value per area is given by dredges for mussels and scallops (DRB_MOL) although a limited area was swept compared to other active métiers.

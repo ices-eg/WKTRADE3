@@ -1,0 +1,31 @@
+**How is benthic impact evaluated?**
+
+Two indicators of benthic impact were used. 
+
+The first indicator of impact estimates the amount of benthic biomass, relative to carrying capacity, which will not exist in the ecosystem if the current trawling intensity continues for a long time. This indicator is estimated using a population dynamic (PD) method (Pitcher et al., 2017, ICES 2018, Hiddink et al., 2019). The PD method uses explicit estimates of the removal of benthos by a single trawl event, and explicitly relates longevity to recovery rates. These parameters were estimated from all globally available trawl impact studies for infauna and epifauna (Hiddink et al. 2017, 2019). The PD method combines information on total benthic biomass (which is linked to the overall functioning of the ecosystem, see WGFBIT report 2018 section 3.2.1 on page 57) with the relative abundance of different longevity classes that in turn relates to the structure and biodiversity. For the calculation of PD-impact, the depletion of benthos by a single trawl event will differ between the different métiers based on the 
+penetration depth of the métiers (Table 2, see further Hiddink et al. 2017, Rijnsdorp et al. 2020).
+
+The PD method does not account for declines of rare and vulnerable species that managers may want to protect (e.g. within Descriptor 1: diversity). Rare and sensitive species are potentially heavily affected by trawling even though the structure and function of a community is largely unaffected. To account for rare and sensitive species, we included a second benthic impact indicator which is more precautionary (L1). This indicator assumes that a population is affected by trawling if animals are disturbed by trawls during their life span. Only species in the community with a longevity less than the average interval between two successive trawling events, based on the swept area ratio, will not be affected (Rijnsdorp et al. 2020). 
+
+For both indicators, sensitivity of the benthic community is estimated from the longevity of benthic fauna in the community, i.e. the more long-living organisms the higher the vulnerability. Predictions of longevity, and hence impact, are available for the North and Baltic Sea, based on the present unfished reference condition of infauna and small epifauna, as collected by boxcore and grab samples (Rijnsdorp et al. 2018, van Denderen et al. 2020). The unfished reference condition does not take into account what could have been present in the past. It thus prioritizes areas that are at present sensitive to bottom trawl disturbance and directly benefit from protection.  
+
+**References**
+
+Eigaard O.R., Bastardie F., Breen M.l., Dinesen G.E., Lafargue P., Nielsen J.R., et al. 2016. Estimating seafloor pressure from trawls and dredges based on gear design and dimensions. ICES J. Mar. Sci. 73(1): 27-43 https://doi.org/10.1093/icesjms/fsv099
+
+ICES 2017. EU request on indicators of the pressure and impact of bottom-contacting fishing gear on the seabed, and of trade-offs in the catch and the value of landings. ICES Special Request Advice, eu.2017.13. 27 pp. https://doi.org/10.17895/ices.advice.5657.
+
+ICES. 2018. Interim Report of the Working Group on Fisheries Benthic Impact and Trade-offs (WGFBIT), 12–16 November 2018, ICES Headquarters, Copenhagen, Denmark. ICES CM 2018/HAPISG:21. 74 pp.
+
+Hiddink, J. G., Jennings, S., Sciberras, M., Szostek, C. L., Hughes, K. M., Ellis, N., Rijnsdorp, A. D. et al. 2017. Global analysis of depletion and recovery of seabed biota after bottom trawling disturbance. Proceedings of the National Academy of Sciences of the United States of America, 114: 8301–8306. https://doi.org/10.1073/pnas.1618858114
+
+Hiddink, J. G., Jennings, S., Sciberras, M., Bolam, S. G., Cambiè, G., McConnaughey, R. A., Mazor, T., et al. 2019 Assessing bottom-trawling impacts based on the longevity of benthic invertebrates. Journal of Applied Ecology, 56: 1075–1083. https://doi.org/10.1111/1365-2664.13278.
+
+Pitcher, C. R., Ellis, N., Jennings, S., Hiddink, J. G., Mazor, T., Kaiser, M. J., Kangas, M. I., et al. 2017. Estimating the sustainability of towed fishing-gear impacts on seabed habitats: a simple quantitative risk assessment method applicable to data-limited fisheries. Methods in Ecology and Evolution. 8: 472–480. https://doi.org/10.1111/2041-210X.12705.
+
+Rijnsdorp, A. D., Bolam, S. G., Garcia, C., Hiddink, J. G., Hintzen, N. T., van Denderen, D. P., and Van Kooten, T. 2018. Estimating sensitivity of seabed habitats to disturbance by bottom trawling based on the longevity of benthic fauna. Ecological Applications, 28: 1302–1312. https://doi.org/10.1002/eap.1731
+
+Rijnsdorp AD, Hiddink JG, van Denderen PD, Hintzen NT, Eigaard OR, Valanko S, Bastardie F, Bolam SG, Boulcott P, Egekvist J, Garcia C. 2020. Different bottom trawl fisheries have a differential impact on the status of the North Sea seafloor habitats. ICES Journal of Marine Science. 77(5): 1772-86. https://doi.org/10.1093/icesjms/fsaa050
+
+van Denderen, P.D., Bolam, S.G., Friedland, R., Hiddink, J.G., Noren, K., Rijnsdorp, A.D., Sköld, M., Törnroos, A., Virtanen, E.A. and Valanko, S., 2020. Evaluating impacts of bottom trawling and hypoxia on benthic communities at the local, habitat, and regional scale using a modelling approach. ICES Journal of Marine Science. 77(1): 278-289 https://doi.org/10.1093/icesjms/fsz219
+

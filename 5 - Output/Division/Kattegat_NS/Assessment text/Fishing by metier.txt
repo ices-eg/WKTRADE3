@@ -1,0 +1,3 @@
+Intensity, weight and value of landings are estimated for the grid cells that were fished by one MBCG métier, ignoring cells fished by other métiers (Table 3). 
+
+The métier with the highest landings and value per area fished is the otter trawl for small pelagic fish (OT_SPF). Otter trawl targeting crustaceans (OT_CRU) has the highest area swept but the least landing per area value. 

@@ -1,0 +1,7 @@
+The distribution of fishing intensity in the Gulf of Cadiz has a strong spatial variation (Figure 2). Areas of higher intensity occur in the continental shelf and slope of the eastern part of the Gulf of Cadiz, mainly in areas of south Portugal. Areas with lower intensity occur in the western area, in Spanish South Atlantic area.
+
+The proportion of area subject to fishing pressure differs between broad-scale habitats and is highest in  offshore circalittoral  mixed sediment (100% of grid cells fished) and offshore circalittoral mud (95% of grid cells fished) (Table 2). Fishing intensity is highest in Offshore circalittoral mixed sediment (average intensity = 2.22 year-1) and offshore circalittoral mud (average intensity = 1.96 year-1). 
+
+There is a strong decrease in intensity in all habitats, being higher in offshore circalittoral mud in the period 2011-2012. The average trawling intensity is more variable over time than the proportion of area fished (Figure 3, compare left and middle panel). This shows that changes in intensity have not affected the spatial distribution of the footprint much.
+
+Fishing pressure is aggregated, at the level of the habitat (Figure 3, right panel). The smallest proportion of habitat with 90% of effort varies between 0-35%. The intensively fished areas represent the ‘core fishing grounds’. These grounds contribute most of the landings (Figure 4). More than 90% of the fishing effort (swept area) and more than 90% of the landings, occur in only 45% of the surface area of the Gulf of Cadiz (Figure 4).

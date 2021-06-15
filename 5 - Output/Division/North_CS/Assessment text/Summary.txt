@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the nortern Celtic Seas subdivision, with 83% of the grid cells (I-2), and 53% of the surface area (I-3) being fished on average per year for the period 2013-2018 (Table 1) at depths <200m. Fishing is aggregated with 90% of the pressure occurring in 36% of grid cells (I-4). The area deeper than 200m is more intensely fished.  
+
+No longevity layer was available for the Northern area subdivision – declines in community biomass relating to impact cannot, therefore, be calculated for either the L1 or PD method.
+
+Maps of spatial distribution of surface abrasion, economic value and weight of fisheries landings are shown in Figure 1.  It is evident from the value map that there is a mistake in the weights for the region, and values are not presented in further analyses.

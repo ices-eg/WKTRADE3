@@ -1,0 +1,5 @@
+The physical disturbance pressures from mobile bottom-contacting fishing gears varies spatially in the “Northern area deep” subdivision with 85% of the grid cells (I-2), and 64% of the surface area (I-3), in areas 200-800 m depth , being fished on average per year for the period 2013-2018 (Table 1). Fishing seems to be very much aggregated with 90% of the pressure occurring in only 46% of grid cells (I-4). Very little fishing areas occurs deeper than 800m.
+
+The ICES methods for computing impact are not available at the moment in the region and therefore this part of the analysis has not been completed. 
+
+Maps of spatial distribution of intensity, seafloor sensitivity and economic value and weight of fisheries landings are shown in Figure 1. It is evident from the weight map that there is a mistake in the weights for the region, and weights are not presented in further analyses. The value layer also appears incomplete.

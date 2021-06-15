@@ -1,0 +1,24 @@
+"MSFD.broad.habitat.type","Extent.of.habitat.1000.km2","X0.05","X0.1","X0.2","X0.3","X0.4","X0.5","X0.6","X0.7","X0.8","X0.9"
+"Offshore circalittoral coarse sediment","142.4",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Offshore circalittoral sand","127.07",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Offshore circalittoral mud","64.6",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Upper bathyal sediment","156.59",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Upper bathyal sediment or Upper bathyal rock and biogenic reef","43.13",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Unknown","42.64",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Offshore circalittoral mixed sediment","9.41",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Offshore circalittoral rock and biogenic reef","6.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Circalittoral coarse sediment","20.6",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Circalittoral sand","11.16",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Circalittoral mud","4.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Circalittoral rock and biogenic reef","9.27",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Infralittoral sand","1.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Infralittoral coarse sediment","1.27",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Circalittoral mixed sediment","0.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Infralittoral rock and biogenic reef","1.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lower bathyal sediment","117.09",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Upper bathyal rock and biogenic reef","0.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Abyssal","139.78",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lower bathyal sediment or Lower bathyal rock and biogenic reef","33.97",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Infralittoral mud","0.4",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Infralittoral mixed sediment","0.19",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Lower bathyal rock and biogenic reef","0.48",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

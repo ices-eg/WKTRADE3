@@ -1,0 +1,10 @@
+**How is benthic impact evaluated?**
+
+No prediction of benthic community longevity is available and no benthic impact is estimated.
+
+**References**
+
+Eigaard O.R., Bastardie F., Breen M.l., Dinesen G.E., Lafargue P., Nielsen J.R., Nilson H., O’Neil F., Polet H., Reid D., Sala A., Sköld M., Smith C., Sørensen T.K., Tully O., Zengin M., Hintzen N.T., Rijnsdorp A.D. (2016). Estimating seafloor pressure from trawls and dredges based on gear design and dimensions. ICES J. Mar. Sci. 73(1): 27-43 https://doi.org/10.1093/icesjms/fsv099
+
+ICES 2017. EU request on indicators of the pressure and impact of bottom-contacting fishing gear on the seabed, and of trade-offs in the catch and the value of landings. ICES Special Request Advice, eu.2017.13. 27 pp. https://doi.org/10.17895/ices.advice.5657.
+
