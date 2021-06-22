@@ -125,15 +125,15 @@ for (p in 2:4) {
                 stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5,fillColor = "grey") %>%
     
     # region boundaries
-    addPolygons(data = EcReg, group="(sub-)regions",
+    addPolygons(data = EcReg, group="(Sub-)regions",
                 stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "white") %>%
     # subdivision boundaries
-    addPolygons(data = subdiv, group="subdivisions",
+    addPolygons(data = subdiv, group="Subdivisions",
                 stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "yellow") %>%
     
 
     # core scenarios
-    addPolygons(data = regfished, group="Fished c-squares",
+    addPolygons(data = regfished, group="Trawled c-squares",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#ffffcc") %>%
     addPolygons(data = Regionnew2, group="Highest 90% of SAR (2013-2018) per subdiv.",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "red") %>%
@@ -146,13 +146,23 @@ for (p in 2:4) {
 
     # Layers control
     addLayersControl(
-      overlayGroups = c("Areal extent","(sub-)regions","subdivisions","Fished c-squares","Highest 90% of SAR (2013-2018) per subdiv.",
+      overlayGroups = c("Areal extent","(Sub-)regions","Subdivisions","Trawled c-squares","Highest 90% of SAR (2013-2018) per subdiv.",
                         "Highest 90% of SAR (2013-2018) per metier and subdiv.",
                         "90% of SAR (2013-2018) per metier and subdiv. with fragmentation penalty",
                         "Highest 90% of SAR per metier and subdiv. in multiple years during the period 2013-2018"),
       options = layersControlOptions(collapsed = FALSE)
-    )
-  
+    )%>%
+    
+    addLegend(title = "" ,colors = c(NA,NA,NA) ,position = "bottomright",
+              labels= c("The map shows four different ways to estimate the core fishing", 
+                        "ground covering the Greater North Sea, Baltic Sea, Celtic Seas",
+                        "and Bay of Biscay and the Iberian Coast.")) %>%
+    
+    htmlwidgets::onRender("
+        function() {
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"> <b>Core fishing ground</label>');
+        }
+    ")
   setwd(paste(pathdir,"5 - Output/Interactive maps/Core fishing area",sep="/"))
   
   # save output

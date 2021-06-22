@@ -151,24 +151,24 @@ for (p in 2:4) {
                 stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5,fillColor = "grey") %>%
     
     # region boundaries
-    addPolygons(data = EcReg, group="(sub-)regions",
+    addPolygons(data = EcReg, group="(Sub-)regions",
                 stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "white") %>%
     # subdivision boundaries
-    addPolygons(data = subdiv, group="subdivisions",
+    addPolygons(data = subdiv, group="Subdivisions",
                 stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "yellow") %>%
     
    # pressure
-    addPolygons(data = reg001, group="avg. SAR >0 - 0.1",
+    addPolygons(data = reg001, group="SAR >0 - 0.1",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#f2f0f7") %>%
-    addPolygons(data = reg0105, group="avg. SAR 0.1-0.5",
+    addPolygons(data = reg0105, group="SAR 0.1-0.5",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#dadaeb") %>%
-    addPolygons(data = reg051, group="avg. SAR 0.5-1",
+    addPolygons(data = reg051, group="SAR 0.5-1",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#bcbddc") %>%
-    addPolygons(data = reg15, group="avg. SAR 1-5",
+    addPolygons(data = reg15, group="SAR 1-5",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#9e9ac8") %>%
-    addPolygons(data = reg510, group="avg. SAR 5-10",
+    addPolygons(data = reg510, group="SAR 5-10",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#756bb1") %>%
-    addPolygons(data = reg1099, group="avg. SAR >10",
+    addPolygons(data = reg1099, group="SAR >10",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#54278f") %>%
     
     # IL impact
@@ -202,14 +202,25 @@ for (p in 2:4) {
     
     # Layers control
     addLayersControl(
-      overlayGroups = c("Areal extent","(sub-)regions","subdivisions","avg. SAR >0 - 0.1","avg. SAR 0.1-0.5","avg. SAR 0.5-1",
-                        "avg. SAR 1-5","avg. SAR 5-10","avg. SAR >10",
+      overlayGroups = c("Areal extent","(Sub-)regions","Subdivisions","SAR >0 - 0.1","SAR 0.1-0.5","SAR 0.5-1",
+                        "SAR 1-5","SAR 5-10","SAR >10",
                         "L1 impact >0 - 0.1","L1 impact 0.1-0.2","L1 impact 0.2-0.3",
                         "L1 impact 0.3-0.5","L1 impact 0.5-0.8","L1 impact 0.8-1",
                         "PD impact >0 - 0.1","PD impact 0.1-0.2","PD impact 0.2-0.3",
                         "PD impact 0.3-0.5","PD impact 0.5-0.8","PD impact 0.8-1"),
       options = layersControlOptions(collapsed = FALSE)
-    )
+    )%>%
+    
+    addLegend(title = "" ,colors = c(NA,NA,NA) ,position = "bottomright",
+              labels= c("The map shows  fishing pressure SAR (swept-area-ratio)", 
+                        "and, where available, the PD and L1 benthic impact indicators",
+                        "(all averaged for the period 2013-2018)")) %>%
+    
+    htmlwidgets::onRender("
+        function() {
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"> <b>Pressure and impact</label>');
+        }
+    ")
   
   setwd(paste(pathdir,"5 - Output/Interactive maps/Pressure and impact",sep="/"))
   

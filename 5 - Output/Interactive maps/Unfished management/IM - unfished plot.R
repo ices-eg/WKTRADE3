@@ -34,7 +34,7 @@ library(htmlwidgets)
 
 steps <- c(5, seq(10,90,10),95)
 steps <- steps[1:8]
-namings <- paste(steps,"% unfished area, ",round(protect[,2]*100,digits = 1)[1:8],"% effort loss",sep="")
+namings <- paste(steps,"% untrawled area, ",round(protect[,2]*100,digits = 1)[1:8],"% effort loss",sep="")
 
 mfs <- leaflet() %>%
   #addTiles() %>%  # Add default OpenStreetMap map tiles
@@ -45,14 +45,14 @@ mfs <- leaflet() %>%
   #            stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5,fillColor = "grey") %>%
   
   # region boundaries
-  addPolygons(data = EcReg, group="(sub-)regions",
+  addPolygons(data = EcReg, group="(Sub-)regions",
               stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "white") %>%
   # subdivision boundaries
-  addPolygons(data = subdiv, group="subdivisions",
+  addPolygons(data = subdiv, group="Subdivisions",
               stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "yellow") %>%
   
   # unfished area
-  addPolygons(data = regunfished, group="Unfished",
+  addPolygons(data = regunfished, group="Untrawled in the period 2013-2018",
               stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "grey") %>%
   
   # core scenarios
@@ -81,23 +81,23 @@ mfs <- leaflet() %>%
 
   # Layers control
   addLayersControl(
-    overlayGroups = c("(sub-)regions","subdivisions","Unfished",namings),
+    overlayGroups = c("(Sub-)regions","Subdivisions","Untrawled in the period 2013-2018",namings),
     options = layersControlOptions(collapsed = FALSE)
   )%>%
   
   addLegend(title = "" ,colors = c(NA,NA,NA) ,position = "bottomright",
             labels= c("Layers show the area where closures are needed (sorted from low to high", 
-                      "fished grid cells) to reach x % of unfished area for each MSFD habitat",
+                      "fished grid cells) to reach x % of untrawled area for each MSFD habitat",
                       "in each subdivision and the resulting loss in total fishing effort")) %>%
   
   htmlwidgets::onRender("
         function() {
-            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"> <b> Area unfished</label>');
+            $('.leaflet-control-layers-overlays').prepend('<label style=\"text-align:center\"> <b> Area untrawled</label>');
         }
     ")
 
 setwd(paste(pathdir,"5 - Output/Interactive maps/Unfished management",sep="/"))
 
 # save output
-saveWidget(mfs, file="Illustration of MSFD protection - unfished.html")  
+saveWidget(mfs, file="Illustration of MSFD protection - untrawled.html")  
 
