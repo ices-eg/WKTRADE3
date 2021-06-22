@@ -8,7 +8,7 @@ source(paste(pathdir,"5 - Output/Interactive maps/Shapefiles_subregions_subdivis
 
 # calculate PD impact for the two quality impact thresholds
 source(paste(pathdir,"5 - Output/Interactive maps/PD impact management/IM - PDimpact005 calculations.R",sep = "/")) 
-source(paste(pathdir,"5 - Output/Interactive maps/PD impact management/IM - PDimpact020 calculations.R",sep = "/")) 
+source(paste(pathdir,"5 - Output/Interactive maps/PD impact management/IM - PDimpact020 calculations.R",sep = "/")) # polygon slot error okay
 
 library(leaflet)
 library(htmlwidgets)
@@ -23,10 +23,10 @@ mfs <- leaflet() %>%
   addProviderTiles(providers$Esri.WorldImagery) %>%
 
   # region boundaries
-   addPolygons(data = EcReg, group="(sub-)regions",
+   addPolygons(data = EcReg, group="(Sub-)regions",
                stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "white") %>%
   # subdivision boundaries
-   addPolygons(data = subdiv, group="subdivisions",
+   addPolygons(data = subdiv, group="Subdivisions",
                stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "yellow") %>%
   
   # no information
@@ -34,11 +34,11 @@ mfs <- leaflet() %>%
               stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "grey") %>%
   
   # area unfished
-  addPolygons(data = Region_unfished, group="Unfished",
+  addPolygons(data = Region_unfished, group="Untrawled",
             stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#fff7bc") %>%
 
   # below threshold area
-  addPolygons(data = Region_below_T1, group="Fished area with PD impact below 0.05",
+  addPolygons(data = Region_below_T1, group="Trawled area with PD impact below 0.05",
                stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#fdbb84") %>%
 
   # core scenarios
@@ -52,7 +52,7 @@ mfs <- leaflet() %>%
               stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#f03b20") %>%
  
   # below threshold
-  addPolygons(data = Region_below_T2, group="Fished area with PD impact below 0.20",
+  addPolygons(data = Region_below_T2, group="Trawled area with PD impact below 0.20",
               stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#bcbddc") %>%
 
   addPolygons(data = Region010_T2, group=namings2[1],
@@ -66,9 +66,9 @@ mfs <- leaflet() %>%
   
   # Layers control
   addLayersControl(
-    overlayGroups = c("(sub-)regions","subdivisions","No PD impact information","Unfished",
-                      "Fished area with PD impact below 0.05",namings1,
-                      "Fished area with PD impact below 0.20",namings2),
+    overlayGroups = c("(Sub-)regions","Subdivisions","No PD impact information","Untrawled",
+                      "Trawled area with PD impact below 0.05",namings1,
+                      "Trawled area with PD impact below 0.20",namings2),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
 
