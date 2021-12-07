@@ -1,6 +1,6 @@
 # get shapefiles with subregions and subdivisions
 
-setwd("C:/Users/pdvd/Online for git/WKTRADE3/1 - Input env")
+setwd("C:/Users/danie/Documents/Online for git/WKTRADE3/1 - Input env")
 
 load("Bay of Biscay and the Iberian Coast_region_grid_sensitivity.RData")  
 BoB <- Region[,c("Ecoregion")]
@@ -35,3 +35,7 @@ BS <- Region[,c("division")]
 new <- rbind(CS,BS,NS,BoB)
 
 subdiv <-  maptools::unionSpatialPolygons(new,new$division)
+
+#subdiv <- sf::st_as_sf(subdiv)
+#sf::write_sf(subdiv, "Subdivisions_ICES_TRADE3.shp")
+
