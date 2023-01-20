@@ -1,8 +1,4 @@
 
-library(sf)
-library(tidyr)
-library(mapview)
-
 pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
 
 # select division from the region
@@ -26,7 +22,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   vmsValueLong <- gather(vmsValue, column, euro, 2:ncol(vmsValue), factor_key=TRUE)
   vmsValueLong <- vmsValueLong[!is.na(vmsValueLong$euro),]
   vmsValueLong$year <- sapply(strsplit(as.character(vmsValueLong$column), "_"), tail, 1)
-  vmsValueLong <- vmsValueLong[vmsValueLong$year %in% c(2013:2018),]
+  vmsValueLong <- vmsValueLong[vmsValueLong$year %in% c(AssPeriod),]
   vmsValueLong$metier <- substr(vmsValueLong$column, 1, nchar(as.character(vmsValueLong$column))-17)
   vmsValueLong$wktradeMet <- vmsValueLong$metier
   
@@ -83,7 +79,9 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   core <- ggplot(data=VMS_MBCG_90pct2, aes(x= n_years, y= pct)) +
             geom_bar(fill = "#0073C2FF",stat="identity") +
             theme_bw() +  facet_wrap(~wktradeMet)+
-            labs(x="Number of years (2013-2018)", y="Percent c-squares") +
+            labs(x=paste("Number of years (",AssPeriod[1],"-",
+                         AssPeriod[length(AssPeriod)],")",sep=""),
+                 y="Percent c-squares") +
             theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), 
             axis.title = element_text(size=8)) 
   
@@ -173,14 +171,14 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     ) %>%
     st_as_sf(crs = 4326, wkt = "wkt")
   
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2013,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2013",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2014,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2014",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2015,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2015",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2016,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2016",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2017,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2017",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
-  st_write(MBCG_total_poly2[MBCG_total_poly2$year==2018,], paste(pathdir_output,"/shapefiles/MBCG_total_poly_2018",Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[1],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[1],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[2],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[2],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[3],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[3],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[4],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[4],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[5],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[5],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
+  st_write(MBCG_total_poly2[MBCG_total_poly2$year==AssPeriod[6],], paste(pathdir_output,paste("/shapefiles/MBCG_total_poly_",AssPeriod[6],sep="_"),Assregion,".shp", sep=""), driver="ESRI Shapefile", delete_dsn = T)
 
-#Reference fishing grounds: within 90% value at at least 2 years out of the 6 years (2013-2018)
+#Reference fishing grounds: within 90% value at at least 2 years out of the 6 years (assess period)
   MBCG_reference <- MBCG_90pct_poly[MBCG_90pct_poly$n_years>=2,]
   MBCG_reference_s <- as_Spatial(MBCG_reference)
   
@@ -214,7 +212,7 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
     }
   }
   
-  for(i in 2013:2018){
+  for(i in AssPeriod[1]:AssPeriod[length(AssPeriod)]){
     for(m in metiers){
       poly(x=i, m=m)
     }
@@ -225,91 +223,85 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   metiers1 <- metiers1 %>% group_by(wktradeMet) %>% count(wktradeMet) 
   metiers1 <- metiers1 %>%filter(n==6)
   metiers2 <- unique(metiers1$wktradeMet)
-  metiers2 <- metiers2[metiers2  %in% unique(MBCG_reference_s$wktradeMet)]
+  metiers2 <- metiers2[metiers2  %in% unique(MBCG_reference$wktradeMet)]
   
   setwd(pathdir_output)  
   dir.create("CSV", showWarnings = FALSE)
   
   for(m in metiers2){
     #Read polygons by metier and year
-    FG2013 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2013_",m,".shp",sep=""))
-    FG2014 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2014_",m,".shp",sep=""))
-    FG2015 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2015_",m,".shp",sep=""))
-    FG2016 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2016_",m,".shp",sep=""))
-    FG2017 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2017_",m,".shp",sep=""))
-    FG2018 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,"_2018_",m,".shp",sep=""))
+    FGyear1 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[1],"_",sep=""),m,".shp",sep=""))
+    FGyear2 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[2],"_",sep=""),m,".shp",sep=""))
+    FGyear3 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[3],"_",sep=""),m,".shp",sep=""))
+    FGyear4 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[4],"_",sep=""),m,".shp",sep=""))
+    FGyear5 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[5],"_",sep=""),m,".shp",sep=""))
+    FGyear6 <- st_read(paste(pathdir_output,"/shapefiles/MBCG_FG_",Assregion,paste("_",AssPeriod[6],"_",sep=""),m,".shp",sep=""))
     
-    FG2013$year <- 2013
-    FG2014$year <- 2014
-    FG2015$year <- 2015
-    FG2016$year <- 2016
-    FG2017$year <- 2017
-    FG2018$year <- 2018
+    FGyear1$year <- AssPeriod[1]
+    FGyear2$year <- AssPeriod[2]
+    FGyear3$year <- AssPeriod[3]
+    FGyear4$year <- AssPeriod[4]
+    FGyear5$year <- AssPeriod[5]
+    FGyear6$year <- AssPeriod[6]
     
-    FG2013_v <- st_buffer(FG2013, 0.0) 
-    FG2014_v <- st_buffer(FG2014, 0.0) 
-    FG2015_v <- st_buffer(FG2015, 0.0) 
-    FG2016_v <- st_buffer(FG2016, 0.0) 
-    FG2017_v <- st_buffer(FG2017, 0.0) 
-    FG2018_v <- st_buffer(FG2018, 0.0) 
+    #FGyear1_v <- st_buffer(FGyear1, 0.0) 
+    #FGyear2_v <- st_buffer(FGyear2, 0.0) 
+    #FGyear3_v <- st_buffer(FGyear3, 0.0) 
+    #FGyear4_v <- st_buffer(FGyear4, 0.0) 
+    #FGyear5_v <- st_buffer(FGyear5, 0.0) 
+    #FGyear6_v <- st_buffer(FGyear6, 0.0) 
     
-    FG2013_s <- as_Spatial(FG2013_v)
-    FG2014_s <- as_Spatial(FG2014_v)
-    FG2015_s <- as_Spatial(FG2015_v)
-    FG2016_s <- as_Spatial(FG2016_v)
-    FG2017_s <- as_Spatial(FG2017_v)
-    FG2018_s <- as_Spatial(FG2018_v)
+    MBCG_reference_metier <- MBCG_reference[MBCG_reference$wktradeMet==m,]
+    MBCG_reference_metier_union <- st_union(MBCG_reference_metier)
     
-    MBCG_reference_metier <- MBCG_reference_s[MBCG_reference_s$wktradeMet==m,] 
-    
-    FG13 <- raster::crop(FG2013_s, MBCG_reference_metier)
-    FG14 <- raster::crop(FG2014_s, MBCG_reference_metier)
-    FG15 <- raster::crop(FG2015_s, MBCG_reference_metier)
-    FG16 <- raster::crop(FG2016_s, MBCG_reference_metier)
-    FG17 <- raster::crop(FG2017_s, MBCG_reference_metier)
-    FG18 <- raster::crop(FG2018_s, MBCG_reference_metier)
+    FGy1 <- st_intersection(FGyear1,MBCG_reference_metier_union)
+    FGy2 <- st_intersection(FGyear2,MBCG_reference_metier_union)
+    FGy3 <- st_intersection(FGyear3,MBCG_reference_metier_union)
+    FGy4 <- st_intersection(FGyear4,MBCG_reference_metier_union)
+    FGy5 <- st_intersection(FGyear5,MBCG_reference_metier_union)
+    FGy6 <- st_intersection(FGyear6,MBCG_reference_metier_union)
   
-      
-    FG13_sf <- if(length(FG13) > 0) {st_as_sf(FG13)} 
-    FG14_sf <- if(length(FG14) > 0) {st_as_sf(FG14)} 
-    FG15_sf <- if(length(FG15) > 0) {st_as_sf(FG15)} 
-    FG16_sf <- if(length(FG16) > 0) {st_as_sf(FG16)} 
-    FG17_sf <- if(length(FG17) > 0) {st_as_sf(FG17)} 
-    FG18_sf <- if(length(FG18) > 0) {st_as_sf(FG18)} 
+    FGy1_sf <- if(length(FGy1) > 0) {(FGy1)} 
+    FGy2_sf <- if(length(FGy2) > 0) {(FGy2)} 
+    FGy3_sf <- if(length(FGy3) > 0) {(FGy3)} 
+    FGy4_sf <- if(length(FGy4) > 0) {(FGy4)} 
+    FGy5_sf <- if(length(FGy5) > 0) {(FGy5)} 
+    FGy6_sf <- if(length(FGy6) > 0) {(FGy6)} 
     
-    try(st_write(FG13_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2013_",Assregion, "_", m,".shp", sep=""), delete_dsn = T))
-    try(st_write(FG14_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2014_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
-    try(st_write(FG15_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2015_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
-    try(st_write(FG16_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2016_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
-    try(st_write(FG17_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2017_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
-    try(st_write(FG18_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_2018_",Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy1_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[1],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy2_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[2],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy3_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[3],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy4_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[4],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy5_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[5],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
+    try(st_write(FGy6_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_overlap_",paste(AssPeriod[6],"_",sep=""),Assregion, "_",m,".shp", sep=""), delete_dsn = T))
     
     #Corefishinggrounds
-    MBCG_reference_sf <- st_as_sf(MBCG_reference_metier)
-    MBCG_reference_sf$division <- Assregion
-    st_write(MBCG_reference_sf, paste(pathdir_output,"/shapefiles/MBCG_FG_reference_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
+    MBCG_reference_metier$division <- Assregion
+    st_write(MBCG_reference_metier, paste(pathdir_output,"/shapefiles/MBCG_FG_reference_",Assregion, "_",m,".shp", sep=""), delete_dsn = T)
     
-    corefishinggrounds <- mapview(MBCG_reference_sf, zcol="euro_sum")
+    corefishinggrounds <- mapview(MBCG_reference_metier, zcol="euro_sum")
     
     #Area
-    area2013_km2 <- try(st_area(FG2013)*0.000001)
-    area2014_km2 <- try(st_area(FG2014)*0.000001)
-    area2015_km2 <- try(st_area(FG2015)*0.000001)
-    area2016_km2 <- try(st_area(FG2016)*0.000001)
-    area2017_km2 <- try(st_area(FG2017)*0.000001)
-    area2018_km2 <- try(st_area(FG2018)*0.000001)
+    areay1_km2 <- try(st_area(FGyear1)*0.000001)
+    areay2_km2 <- try(st_area(FGyear2)*0.000001)
+    areay3_km2 <- try(st_area(FGyear3)*0.000001)
+    areay4_km2 <- try(st_area(FGyear4)*0.000001)
+    areay5_km2 <- try(st_area(FGyear5)*0.000001)
+    areay6_km2 <- try(st_area(FGyear6)*0.000001)
     
-    area_overlap13_km2 <- ifelse(length(FG13_sf$geometry) == 0, NA,st_area(FG13_sf$geometry)*0.000001)
-    area_overlap14_km2 <- ifelse(length(FG14_sf$geometry) == 0, NA,st_area(FG14_sf$geometry)*0.000001)
-    area_overlap15_km2 <- ifelse(length(FG15_sf$geometry) == 0, NA,st_area(FG15_sf$geometry)*0.000001)
-    area_overlap16_km2 <- ifelse(length(FG16_sf$geometry) == 0, NA,st_area(FG16_sf$geometry)*0.000001)
-    area_overlap17_km2 <- ifelse(length(FG17_sf$geometry) == 0, NA,st_area(FG17_sf$geometry)*0.000001)
-    area_overlap18_km2 <- ifelse(length(FG18_sf$geometry) == 0, NA,st_area(FG18_sf$geometry)*0.000001)
+    area_overlapy1_km2 <- ifelse(length(FGy1_sf$geometry) == 0, NA,st_area(FGy1_sf$geometry)*0.000001)
+    area_overlapy2_km2 <- ifelse(length(FGy2_sf$geometry) == 0, NA,st_area(FGy2_sf$geometry)*0.000001)
+    area_overlapy3_km2 <- ifelse(length(FGy3_sf$geometry) == 0, NA,st_area(FGy3_sf$geometry)*0.000001)
+    area_overlapy4_km2 <- ifelse(length(FGy4_sf$geometry) == 0, NA,st_area(FGy4_sf$geometry)*0.000001)
+    area_overlapy5_km2 <- ifelse(length(FGy5_sf$geometry) == 0, NA,st_area(FGy5_sf$geometry)*0.000001)
+    area_overlapy6_km2 <- ifelse(length(FGy6_sf$geometry) == 0, NA,st_area(FGy6_sf$geometry)*0.000001)
     
-    year <- c(2013, 2014, 2015, 2016, 2017, 2018)
-    area_FG <- c(area2013_km2, area2014_km2, area2015_km2, area2016_km2, area2017_km2, area2018_km2)
-    area_overlap <- c(area_overlap13_km2, area_overlap14_km2, 
-                      area_overlap15_km2, area_overlap16_km2, area_overlap17_km2, area_overlap18_km2)
+    year <- AssPeriod
+    area_FG <- c(areay1_km2, areay2_km2, areay3_km2, 
+                 areay4_km2, areay5_km2, areay6_km2)
+    area_overlap <- c(area_overlapy1_km2, area_overlapy2_km2, 
+                      area_overlapy3_km2, area_overlapy4_km2, 
+                      area_overlapy5_km2, area_overlapy6_km2)
     
     FG_area_overlap <- data.frame(year, area_FG, area_overlap)
     FG_area_overlap$pct <- (area_overlap/area_FG)*100
@@ -333,7 +325,9 @@ pathdir_output <- paste(pathdir,"5 - Output",Assunit,Assregion,sep="/")
   #Plot overlap by metier
   core2 <- ggplot(data=combined_overlap, aes(year, pct)) + geom_bar(stat = "identity") +
     theme_bw() + facet_wrap(~metier)+
-    labs(x="Year (2013-2018)", y="Percent area overlap")+
+    labs(x=paste("Year (",AssPeriod[1],"-",
+                         AssPeriod[length(AssPeriod)],")",sep=""),
+         y="Percent area overlap")+
     theme(axis.text.x = element_text(size=8), plot.title=element_text(size=8), axis.title = element_text(size=8)) 
  
   plotsize2 <- 4.5

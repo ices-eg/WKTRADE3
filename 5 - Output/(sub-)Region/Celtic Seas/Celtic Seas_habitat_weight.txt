@@ -1,24 +1,24 @@
-"MSFD.broad.habitat.type","Extent.of.habitat.1000.km2","X0.05","X0.1","X0.2","X0.3","X0.4","X0.5","X0.6","X0.7","X0.8","X0.9"
-"Offshore circalittoral coarse sediment","142.4",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Offshore circalittoral sand","127.07",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Offshore circalittoral mud","64.6",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Upper bathyal sediment","156.59",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Upper bathyal sediment or Upper bathyal rock and biogenic reef","43.13",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Unknown","42.64",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Offshore circalittoral mixed sediment","9.41",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Offshore circalittoral rock and biogenic reef","6.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Circalittoral coarse sediment","20.6",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Circalittoral sand","11.16",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Circalittoral mud","4.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Circalittoral rock and biogenic reef","9.27",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Infralittoral sand","1.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Infralittoral coarse sediment","1.27",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Circalittoral mixed sediment","0.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Infralittoral rock and biogenic reef","1.96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Lower bathyal sediment","117.09",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Upper bathyal rock and biogenic reef","0.82",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Abyssal","139.78",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Lower bathyal sediment or Lower bathyal rock and biogenic reef","33.97",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Infralittoral mud","0.4",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Infralittoral mixed sediment","0.19",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
-"Lower bathyal rock and biogenic reef","0.48",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"MSFD broad habitat type","Extent of habitat 1000 km2","X0.05","X0.1","X0.2","X0.3","X0.4","X0.5","X0.6","X0.7","X0.8","X0.9"
+"Offshore circalittoral coarse sediment",144.85,"   0.0","0.0","0.2","   2.1","   6.0","  11.6","  20.9","31.8","47.1","67.4"
+"Offshore circalittoral sand",129.3,"<0.1","0.3","3.0","   8.4","  14.9","  23.3","  31.9","42.1","54.7","70.1"
+"Upper bathyal sediment",156.06,"   0.0","0.0","0.0","   0.0","   0.0","   3.1","   6.8","14.9","28.2","53.1"
+"Offshore circalittoral mud",60.36,"   0.1","0.7","3.3","   6.8","  10.9","  16.5","  24.0","33.2","45.4","64.2"
+"Upper bathyal sediment or Upper bathyal rock and biogenic reef",43.15,"   0.0","0.0","0.0","   0.0","   0.0","<0.1","   0.8"," 3.4"," 9.7","33.7"
+"Unknown",45.28,"   0.0","0.0","0.0","   0.0","<0.1","   1.2","   6.8","16.6","35.2","59.3"
+"Offshore circalittoral mixed sediment",9.39,"   0.0","0.0","0.0","   0.2","   0.8","   2.0","   5.0","12.3","26.9","61.2"
+"Circalittoral coarse sediment",21.46,"   0.0","0.0","0.0","<0.1","   0.8","   1.7","   3.5"," 7.5","16.8","37.3"
+"Offshore circalittoral rock and biogenic reef",6.67,"   0.0","0.0","0.0","   0.4","   2.0","   4.3","   9.1","16.8","25.3","38.8"
+"Circalittoral sand",11.3,"   0.0","0.0","0.0","   0.0","   0.4","   1.8","   6.8","13.0","23.6","44.0"
+"Circalittoral mud",4.95,"   0.0","0.0","0.0","   0.7","   1.9","   4.8","   9.5","15.0","30.1","56.5"
+"Circalittoral rock and biogenic reef",10.05,"   0.0","0.0","0.0","   0.0","   0.0","   1.2","   4.3","11.1","24.5","43.5"
+"Infralittoral sand",2.12,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   1.0"," 4.0","15.8","37.3"
+"Infralittoral coarse sediment",1.4,"   0.0","0.0","0.0","   0.0","   0.1","   0.4","   1.0"," 4.0"," 8.9","30.8"
+"Circalittoral mixed sediment",0.94,"   0.0","0.0","0.0","<0.1","   0.8","   2.8","  12.6","23.9","40.5","63.5"
+"Infralittoral rock and biogenic reef",2.61,"   0.0","0.0","0.0","   0.0","   0.0","   0.6","   1.7"," 6.0","15.5","35.1"
+"Upper bathyal rock and biogenic reef",0.82,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.0"," 1.0"," 6.5"
+"Lower bathyal sediment",113.89,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.0"," 0.0"," 0.0"
+"Abyssal",138.22,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.0"," 0.0"," 0.0"
+"Lower bathyal sediment or Lower bathyal rock and biogenic reef",33.97,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.0"," 0.0"," 0.0"
+"Infralittoral mud",0.52,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","<0.1"," 1.2"," 6.1","26.7"
+"Infralittoral mixed sediment",0.28,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.9"," 5.6","29.3"
+"Lower bathyal rock and biogenic reef",0.5,"   0.0","0.0","0.0","   0.0","   0.0","   0.0","   0.0"," 0.0"," 0.0"," 0.0"

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #  {.tabset .tabset-fade .tabset-pills}
 
-```{r ReadData, echo=FALSE, message=FALSE}
+```{r ReadData, echo=FALSE, message=FALSE, include=FALSE}
 library(dplyr)
 library(kableExtra)
 library(knitr)
@@ -31,73 +31,77 @@ name_dat <- c("Greater North Sea","Northern North Sea","Kattegat","Southern Nort
 reg <- 1
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\",ecoregion,"\\Assessment text\\",sep='')
+
+# set pathdir
+pathdir_mark <- "C:\\Users\\danie\\Documents\\Online for git\\WKTRADE3\\5 - Output"
+
+outputs <- paste(pathdir_mark,"\\(sub-)region\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\(sub-)region\\",ecoregion,"\\Assessment text\\",sep='')
 
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_allplots.Rmd',sep="")}
 ```
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 2
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+outputs <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_allplots.Rmd',sep="")}
 ```
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 3
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+outputs <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_allplots.Rmd',sep="")}
 ```
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 4
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+outputs <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_allplots.Rmd',sep="")}
 ```
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 5
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+outputs <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_allplots.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_allplots.Rmd',sep="")}
 ```
 
 ```{r echo=FALSE, message=FALSE}
 reg <- 6
 ecoregion <- reg_dat[reg]
 econame <- name_dat[reg]
-outputs <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\",sep='')
-outtext <- paste("C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\Division\\",ecoregion,"\\Assessment text\\",sep='')
+outputs <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\",sep='')
+outtext <- paste(pathdir_mark,"\\Division\\",ecoregion,"\\Assessment text\\",sep='')
 ```
 
-```{r add-to-main, child = 'C:/Users/pdvd/Online for git/WKTRADE3/5 - Output/Markdown_html/Markdown_plots_no_impact.Rmd'}
+```{r add-to-main, child = paste(pathdir_mark,'/Markdown_html/Markdown_plots_no_impact.Rmd',sep="")}
 ```
 
 ## Read me {.tabset}
 
 ```{r echo=FALSE, message=FALSE}
-outtext <- "C:\\Users\\pdvd\\Online for git\\WKTRADE3\\5 - Output\\(sub-)region\\Greater North Sea\\Assessment text\\"
+outtext <- paste(pathdir_mark,"\\(sub-)Region\\Greater North Sea\\Assessment text\\",sep="")
 Readme <- readtext(paste(outtext,"Read me1.txt",sep=''))
 ```
 `r Readme$text`

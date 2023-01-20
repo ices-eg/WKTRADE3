@@ -75,6 +75,9 @@
 # Figure A.4
   load(paste(pathdir_prodFT,"FigureA4.RData",sep="/"))
   
+  if(is.na(sum(A4dat$sweptcumu))) {A4dat$sweptcumu <- 1}
+  if(is.na(sum(A4dat$landcumu))) {A4dat$landcumu <- 1}
+  if(is.na(sum(A4dat$valuecumu))) {A4dat$valuecumu <- 1}
   png(paste(Assregion,"figureA4.png",sep="_"),width=5.5,height=4.5, units = "in", res = 150) 
   plot(A4dat$sweptcumu~A4dat$indixcumu, xlab="Surface area \n(grid cells sorted from high to low trawling intensity)",
        ylab="Cumulative proportion",las=1,yaxt="n", lty=1, col="white", type="l")

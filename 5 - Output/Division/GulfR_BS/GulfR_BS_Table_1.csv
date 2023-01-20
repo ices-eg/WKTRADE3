@@ -2,7 +2,7 @@
 "Average intensity (I-1)",0,NA,NA
 "Proportion of area in fished cells (I-2)",0,NA,NA
 "Proportion of area fished per year (I-3)",0,NA,NA
-"Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)",0,NA,NA
+"Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)",NA,NA,NA
 "Proportion of area in unfished cells (I-5)",1,NA,NA
 "Average PD impact (I-6)",0,NA,NA
 "Average L1 impact (I-6)",0,NA,NA

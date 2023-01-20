@@ -1,17 +1,17 @@
 rm(list = ls())
 
 ### github folder
-  pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
-  
+  pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
+
 ### folder for restricted VMS data
-  pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
+  pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
 ### get all libraries
   source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
   
 ### select time period
-  Period    <- 2009:2018    # period with fishing data to calculate impact
-  AssPeriod <- 2013:2018    # assessment period
+  Period    <- 2009:2021    # period with fishing data to calculate impact
+  AssPeriod <- 2016:2021    # assessment period
   
 ### create list of marine reporting areas
   Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
