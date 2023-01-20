@@ -51,7 +51,9 @@ RegionJcore <- subset(Region, Region@data$csquares %in% csq)
 RegionJcore$incl <- 1
 RegionJcore <- RegionJcore[,"incl"]
 
-for (p in 6:10) {
+# some regions do not have data - now manually adjusted
+
+for (p in 6:9) {
   Assregion <- Assregion_index[p]
   EcoReg    <- EcoReg_index[p]
   Assunit <- Assunit_index[p]     

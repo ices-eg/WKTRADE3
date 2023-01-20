@@ -1,7 +1,12 @@
 rm(list = ls())
 
 ### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
+pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
+
+### select time period
+Period    <- 2009:2021    # period with fishing data to calculate impact
+AssPeriod <- 2016:2021    # assessment period
 
 # get shapefiles subregions, subdivisions    
 source(paste(pathdir,"5 - Output/Interactive maps/Shapefiles_subregions_subdivisions-impact-only.R",sep="/"))

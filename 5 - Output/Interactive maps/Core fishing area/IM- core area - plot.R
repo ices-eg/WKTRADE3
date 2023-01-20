@@ -1,17 +1,17 @@
 rm(list = ls())
 
 ### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
+pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
 
 ### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
 ### get all libraries
 source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
 
 ### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
+Period    <- 2009:2021    # period with fishing data to calculate impact
+AssPeriod <- 2016:2021    # assessment period
 
 ### create list of marine reporting areas
 Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
@@ -39,7 +39,7 @@ p <-1
   setwd(paste(pathdir,"1 - Input env",sep="/"))
   load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
   
-## get SAR map average 2013-2018
+## get SAR map average ass period
   SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
 
   idx <- which(names(Region@data)== "long")
@@ -70,7 +70,7 @@ for (p in 2:4) {
   setwd(paste(pathdir,"1 - Input env",sep="/"))
   load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
   
-  ## get SAR map average 2013-2018
+  ## get SAR map average 
   SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
   
   idx <- which(names(Region@data)== "long")
@@ -105,13 +105,20 @@ for (p in 2:4) {
   # get shapefiles subregions, subdivisions    
   source(paste(pathdir,"5 - Output/Interactive maps/Shapefiles_subregions_subdivisions.R",sep="/"))
   
-  regfished <- subset(Regionall, !(Regionall@data$cat == "<NA>"))
-  regfished <- raster::aggregate(regfished)
-  regall <- raster::aggregate(Regionall)
-  Regionnew <- raster::aggregate(Regionnew)
-  Regionnew2 <- raster::aggregate(Regionnew2)
-  sf2test <- raster::aggregate(newdat) 
-  RegionJcore <- raster::aggregate(RegionJcore) 
+  regfished   <- subset(Regionall, !(Regionall@data$cat == "<NA>"))
+  regfished   <- st_make_valid(st_union(st_as_sf(regfished)))
+  regfished   <- regfished[2]
+  regall      <- st_make_valid(st_union(st_as_sf(Regionall)))
+  regall      <- regall[3]
+  Regionnew   <-  st_make_valid(st_union(st_as_sf(Regionnew)))
+  Regionnew   <- Regionnew[2]
+  Regionnew2  <- st_make_valid(st_union(st_as_sf(Regionnew2)))
+  Regionnew2  <- Regionnew2[2]
+  sf2test     <- st_make_valid(st_union(st_as_sf(newdat)))
+  sf2test     <- sf2test[2]
+  RegionJcore <- st_make_valid(st_union(st_as_sf(RegionJcore))) 
+  RegionJcore <- RegionJcore[2]
+  
   
   library(leaflet)
   library(htmlwidgets)
@@ -135,21 +142,21 @@ for (p in 2:4) {
     # core scenarios
     addPolygons(data = regfished, group="Trawled c-squares",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "#ffffcc") %>%
-    addPolygons(data = Regionnew2, group="Highest 90% of SAR (2013-2018) per subdiv.",
+    addPolygons(data = Regionnew2, group="Highest 90% of SAR (2016-2021) per subdiv.",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "red") %>%
-    addPolygons(data = Regionnew, group="Highest 90% of SAR (2013-2018) per metier and subdiv.",
+    addPolygons(data = Regionnew, group="Highest 90% of SAR (2016-2021) per metier and subdiv.",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "black") %>%
-    addPolygons(data = sf2test, group="90% of SAR (2013-2018) per metier and subdiv. with fragmentation penalty",
+    addPolygons(data = sf2test, group="90% of SAR (2016-2021) per metier and subdiv. with fragmentation penalty",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "orange") %>%
-    addPolygons(data = RegionJcore, group="Highest 90% of SAR per metier and subdiv. in multiple years during the period 2013-2018",
+    addPolygons(data = RegionJcore, group="Highest 90% of SAR per metier and subdiv. in multiple years during the period 2016-2021",
                 stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "blue") %>%
 
     # Layers control
     addLayersControl(
-      overlayGroups = c("Areal extent","(Sub-)regions","Subdivisions","Trawled c-squares","Highest 90% of SAR (2013-2018) per subdiv.",
-                        "Highest 90% of SAR (2013-2018) per metier and subdiv.",
-                        "90% of SAR (2013-2018) per metier and subdiv. with fragmentation penalty",
-                        "Highest 90% of SAR per metier and subdiv. in multiple years during the period 2013-2018"),
+      overlayGroups = c("Areal extent","(Sub-)regions","Subdivisions","Trawled c-squares","Highest 90% of SAR (2016-2021) per subdiv.",
+                        "Highest 90% of SAR (2016-2021) per metier and subdiv.",
+                        "90% of SAR (2016-2021) per metier and subdiv. with fragmentation penalty",
+                        "Highest 90% of SAR per metier and subdiv. in multiple years during the period 2016-2021"),
       options = layersControlOptions(collapsed = FALSE)
     )%>%
     

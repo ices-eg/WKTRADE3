@@ -5,7 +5,7 @@
 ## In a first instance, this is run for the Greater North Sea ecoregion
 ## This will be added to the GitHub, where hopefully Daniel van Denderen can 
 ## make some final modifications to integrate it into the overall TRADE3
-## workflow
+## workflow 
 ## can download data from
 #https://github.com/ices-eg/WKTRADE3/tree/master/1%20-%20Input%20env
 
@@ -15,6 +15,8 @@ library(scales)
 library(prioritizr)
 library(ggplot2)
 library(raster)
+library(Rsymphony)
+
 
 ### Input data
 
@@ -23,6 +25,8 @@ p <-5
 Assregion <- Assregion_index[p]
 EcoReg    <- EcoReg_index[p]
 Assunit <- Assunit_index[p]     
+
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
 ### load processed file, with longevity and state/impact 
 load(paste(pathdir_nogit,paste(EcoReg,"Fisheries.RData",sep="_"),sep="/")) 
@@ -53,7 +57,7 @@ years<-as.numeric(
   str_sub(colnames(FisheriesMet),-4,-1)
     )
 
-idx <- which(years>2012)
+idx <- which(years>2015)
 
 # subset the FisheriesMet table according to year (select columns)
 FisheriesMetSS <-cbind(FisheriesMet$csquares,FisheriesMet[,idx])
@@ -107,11 +111,13 @@ pf2 <- pf1 %>%
   add_boundary_penalties(penalty = 300, edge_factor = 0.5)
 
 # solve the problem
-sf2 <- solve(pf2)
+sf2 <- solve(pf2,run_checks=F)
 newdat <- subset(sf2,sf2@data$solution_1 == 1)
   
 save(newdat,file="solution90pc.RData")
 
+# not all areas in the baltic sea work, continue for-loop with the next region
+# solve run_check is FALSE, ignores a warming in the solver - need to revisit
 for (p in 6:26) {
   Assregion <- Assregion_index[p]
   EcoReg    <- EcoReg_index[p]
@@ -146,7 +152,7 @@ for (p in 6:26) {
     str_sub(colnames(FisheriesMet),-4,-1)
   )
   
-  idx <- which(years>2012)
+  idx <- which(years>2015)
   
   # subset the FisheriesMet table according to year (select columns)
   FisheriesMetSS <-cbind(FisheriesMet$csquares,FisheriesMet[,idx])
@@ -199,7 +205,7 @@ for (p in 6:26) {
     add_boundary_penalties(penalty = 300, edge_factor = 0.5)
   
   # solve the problem
-  sf2 <- solve(pf2)
+  sf2 <- solve(pf2,run_checks=F)
   sf2 <- subset(sf2,sf2@data$solution_1 == 1)
   newdat <- rbind(newdat,sf2)
   save(newdat,file="solution90pc.RData")

@@ -1,6 +1,6 @@
 # get shapefiles with subregions and subdivisions
 
-setwd("C:/Users/pdvd/Online for git/WKTRADE3/1 - Input env")
+setwd(paste(pathdir,"1 - Input env",sep="/"))
 
 load("Greater North Sea_region_grid_sensitivity.RData")  
 NS <- Region[,c("Ecoregion")]

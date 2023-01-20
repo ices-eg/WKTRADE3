@@ -16,7 +16,7 @@ if (Assregion != EcoReg){
   Region <-  subset(Region,Region@data$division == Assregion)
 }
 
-## get SAR map average 2013-2018 per metier
+## get SAR map average per metier
 gears <- c("DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
 csq <- c()
 
@@ -76,8 +76,9 @@ for (p in 6:26) {
     }}
   csq <- unique(csq)
   
+  if (length(csq >0)){
   Region <- subset(Region, Region@data$csquares %in% csq)    
   Region$incl <- 1
   Region <- Region[,"incl"]
   Regionnew <- rbind(Regionnew,Region)
-}
+}}

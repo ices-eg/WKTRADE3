@@ -74,8 +74,9 @@ for (p in 6:26) {
   }
   csq <- unique(csq)
   
+  if (length(csq >0)){
   Region <- subset(Region, Region@data$csquares %in% csq)    
   Region$incl <- 1
   Region <- Region[,"incl"]
   Regionnew2 <- rbind(Regionnew2,Region)
-}
+}}
