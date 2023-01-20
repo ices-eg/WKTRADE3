@@ -29,3 +29,6 @@
   setwd(pathdir_nogit)
   save(State_reg,file=paste(EcoReg,"state_IL.RData",sep="_"))
   
+  rm(list=ls()[! ls() %in% c("Fisheries_Atlantic","FisheriesMet_Atlantic",
+                             "Period","EcoReg","pathdir","pathdir_nogit")])
+  

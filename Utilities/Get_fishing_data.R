@@ -2,56 +2,46 @@
 # load the grid for the region
   load(paste(pathdir,"1 - Input env",paste(EcoReg,"region_grid_sensitivity.RData",sep="_"),sep="/")) 
 
-# get total surface and subsurface abrasion, weight and value of landings per year
-  loopdata <- data.frame(Region@data$csquares)
-  colnames(loopdata) <- "csquares"
-
-  for (i in 1: length(Period)){
-    Total   <- icesVMS::get_wgfbit_data1(EcoReg, Period[i])
-    Total  <- aggregate(Total[, 1:5], by= list(Total$c_square), FUN=function(x){sum(x, na.rm=T)})
-    colnames(Total)[2:6] <- paste(colnames(Total)[2:6], Period[i], sep = "_")
-    loopdata <- cbind(loopdata, Total[match(loopdata$csquares,Total$Group.1), c(2:6)])
+# ------------------------------------------------------------------------------
+# get sum of all gears fishing data
+# ------------------------------------------------------------------------------
+  Fisheries <- data.frame(csquares = Region@data$csquares)
+  for (i in 1:length(Period)){
+    suby <- subset(Fisheries_Atlantic,Fisheries_Atlantic$year == Period[i])
+    colnames(suby)[3:7] <- paste(colnames(suby)[3:7],Period[i],sep="_")
+    Fisheries <- cbind(Fisheries, suby[match(Fisheries$csquares,suby$c_square), c(3:7)])
   }
-
-  Fisheries <- loopdata
+  
   setwd(pathdir_nogit)
   save(Fisheries,file=paste(EcoReg,"fisheries.RData",sep="_"))
-
-# get fishing data specified per metier
-  loopdata <- data.frame(Region@data$csquares)
-  colnames(loopdata) <- "csquares"
   
+# ------------------------------------------------------------------------------
+# get fishing data specified per metier
+# ------------------------------------------------------------------------------
+  FisheriesMet <- data.frame(csquares = Region@data$csquares)
   metier <- c("DRB_MOL","OT_CRU","OT_MIX_CRU","OT_MIX_CRU_DMF","OT_DMF","OT_MIX","OT_MIX_DMF_BEN",
               "OT_MIX_DMF_PEL","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL")
   metier_name <- metier
   
   for (i in 1: length(Period)){
     for (p in 1:length(metier)){
-      Gear   <- icesVMS::get_wgfbit_data1(EcoReg, Period[i], benthis_metier = metier[p])
-      
-      if(length(Gear)>0){
-        Gear  <- aggregate(Gear[, 1:5], by= list(Gear$c_square), FUN=function(x){sum(x, na.rm=T)})  
-        colnames(Gear)[2:6] <- paste(metier_name[p],colnames(Gear)[2:6],Period[i],sep="_")
-        loopdata<-cbind(loopdata, Gear[match(loopdata$csquares,Gear$Group.1), c(2:6)])
-      } else {
-        unavail <-  matrix(data = NA, ncol=5,nrow =nrow(loopdata))
-        colnames(unavail) <- paste(metier_name[p],c("surface_sar", "subsurface_sar", "total_weight", "total_value", "mw_fishinghours"),Period[i],sep="_")
-        loopdata <- cbind(loopdata,unavail)
-      }
-    }
-  }
-
-  FisheriesMet <- loopdata
+      suby <- subset(FisheriesMet_Atlantic,
+                     FisheriesMet_Atlantic$year == Period[i] &
+                     FisheriesMet_Atlantic$gear_category == metier[p])
+      colnames(suby)[4:8] <- paste(metier[p],colnames(suby)[4:8],Period[i],sep="_")
+      FisheriesMet <- cbind(FisheriesMet, suby[match(FisheriesMet$csquares,suby$c_square), c(4:8)])
+    }}
+  
   setwd(pathdir_nogit)
   save(FisheriesMet,file=paste(EcoReg,"fisheries_per_metier.RData",sep="_"))
   
-##################################
-#### now combine different metiers following working document
-####  
+# ------------------------------------------------------------------------------
+# now combine different metiers following WKTRADE3
+# ------------------------------------------------------------------------------ 
   
-  ### combine OT_MIX
+  # combine OT_MIX
   groups <- c("surface_sar","subsurface_sar","total_weight","total_value","mw_fishinghours")
-  year   <- c(2009:2018)
+  year   <- Period
   combine <- c("OT_MIX","OT_MIX_DMF_BEN","OT_MIX_DMF_PEL")
   
   sar    <- paste(combine[1],"surface_sar",year,sep="_")
@@ -62,7 +52,7 @@
   
   for (i in 1:length(year)){
     nam <- paste(combine,groups[1],year[i], sep="_")
-    FisheriesMet[,sar[i]] <- tt <- rowSums(FisheriesMet[,nam],na.rm=T)
+    FisheriesMet[,sar[i]]  <- rowSums(FisheriesMet[,nam],na.rm=T)
     nam <- paste(combine,groups[2],year[i], sep="_")
     FisheriesMet[,ssar[i]] <- rowSums(FisheriesMet[,nam],na.rm=T)
     nam <- paste(combine,groups[3],year[i], sep="_")
@@ -118,4 +108,6 @@
   setwd(pathdir_nogit)
   save(FisheriesMet,file=paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_"))
   
+  rm(list=ls()[! ls() %in% c("Fisheries_Atlantic","FisheriesMet_Atlantic",
+                             "Period","EcoReg","pathdir","pathdir_nogit")])
   
