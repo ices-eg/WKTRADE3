@@ -14,13 +14,13 @@ table1 <- read.csv(paste(outputs,ecoregion,"_Table_1.csv",sep=''))
 nam <- gsub("[.]", " ", names(table1))
 nam <- gsub("[X]", " ", nam)
 
-kable(table1, col.names = nam, caption="Table 1. Pressure and impact indicators for 2013-2018",format = "html", table.attr = "style='width:80%;'", align=c('l','c','c','c')) %>% 
+kable(table1, col.names = nam, caption="Table 1. Pressure and impact indicators for 2016-2021",format = "html", table.attr = "style='width:80%;'", align=c('l','c','c','c')) %>% 
   kable_styling(font_size=12)
 ```
 
 #### Figure 1
 
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 1 Geographic distribution of surface abrasion, seabed sensitivity (community longevity) and total value and weight from mobile bottom-contacting gear. The maps of surface abrasion, value and weight show the average per year for 2013-2018**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 1 Geographic distribution of surface abrasion, seabed sensitivity (community longevity) and total value and weight from mobile bottom-contacting gear. The maps of surface abrasion, value and weight show the average per year for 2016-2021**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA1.png",sep=''))
 ```
 
@@ -32,7 +32,7 @@ pressure <- readtext(paste(outtext,"Pressure.txt",sep=''))
 `r pressure$text`
 
 #### Figure 2
-```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Surface abrasion, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2013-2018 six-year cycle**"}
+```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Surface abrasion, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2016-2021 six-year cycle**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 ```
 
@@ -44,17 +44,17 @@ nam <- c("MSFD broad habitat type","Extent of habitat (1000 km^2^)", "Number of 
                          "Landings 1000 tonnes","Value 10^6^ euro","Swept area 1000 km^2^","Average intensity (I-1)","Prop. of area in fished grid cells (I-2)", "Prop. of area fished per year (I-3)",
                           "Smallest  prop. of area with 90% of fishing effort (I-4)")
 
-kable(table2, col.names = nam, caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
+kable(table2, col.names = nam, caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2016-2021. I refers to the indicators in Table 1.") %>%
   kable_styling(font_size=12)
 ```
 
 #### Figure 3
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2021).**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA3.png",sep=''))
 ```
 
 #### Figure 4
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears based on averaged fishing data per c-square from 2013-2018.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears based on averaged fishing data per c-square from 2016-2021.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA4.png",sep=''))
 ```
 
@@ -65,7 +65,7 @@ coregrounds <- readtext(paste(outtext,"Core fishing grounds.txt",sep=''))
 `r coregrounds$text`
 
 #### Figure 5
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% highest value by métier, presented as a % relative to the total number of c-squares (n) that are within the 90% highest value by métier across all years. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 5. Number of years c-squares are within the 90% highest value by métier, presented as a % relative to the total number of c-squares (n) that are within the 90% highest value by métier across all years. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2016-2021.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig1.jpg",sep=''))
 ```
 
@@ -75,12 +75,12 @@ knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig2.jpg",sep=''))
 ```
 
 #### Figure 7
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2013-2018.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 7. Percent area fished vs. landings value (euro) by métier, coloured by year. The outcome is only shown for métiers that have >50 uniquely fished c-squares in the period 2016-2021.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_coreF_fig3.jpg",sep=''))
 ```
 
 #### Figure 8
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 8. The area associated with each 10-percentile interval for each métier using averages of SAR (left column) and landings value (euro, right column) for the period 2013-2018. The lightest blue c-squares represent the lowest 10% of total SAR / value of landings. The brown c-squares represent the highest 10% of total SAR / value of landings.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='60%', fig.cap="**Figure 8. The area associated with each 10-percentile interval for each métier using averages of SAR (left column) and landings value (euro, right column) for the period 2016-2021. The lightest blue c-squares represent the lowest 10% of total SAR / value of landings. The brown c-squares represent the highest 10% of total SAR / value of landings.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_Core_percentiles.jpg",sep=''))
 ```
 
@@ -107,12 +107,12 @@ impact <- readtext(paste(outtext,"Impact.txt",sep=''))
 `r impact$text`
 
 #### Figure 9
-```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 9. Impact of mobile bottom-contacting gears averaged for the 2013-2018 six-year cycle for the PD and L1 method.**"}
+```{r echo=FALSE, message=FALSE, fig.align = 'center',fig.cap="**Figure 9. Impact of mobile bottom-contacting gears averaged for the 2016-2021 six-year cycle for the PD and L1 method.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA5.png",sep=''))
 ```
 
 #### Figure 10
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 10. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2018 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='70%', fig.cap="**Figure 10. The mean impact of mobile bottom-contacting gears in all combined MSFD habitats and the four most extensive habitat types between 2009 and 2021 (left). The proportion of the fished area with an impact of less than 0.2 (right)**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA6.png",sep=''))
 ```
 

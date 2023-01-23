@@ -13,13 +13,13 @@ table1 <- read.csv(paste(outputs,ecoregion,"_Table_1.csv",sep=''))
 nam <- gsub("[.]", " ", names(table1))
 nam <- gsub("[X]", " ", nam)
 
-kable(table1, col.names = nam, caption="Table 1. Pressure and impact indicators for 2013-2018",format = "html", table.attr = "style='width:80%;'", align=c('l','c','c','c')) %>% 
+kable(table1, col.names = nam, caption="Table 1. Pressure and impact indicators for 2016-2021",format = "html", table.attr = "style='width:80%;'", align=c('l','c','c','c')) %>% 
   kable_styling(font_size=12)
 ```
 
 #### Figure 1
 
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 1 Geographic distribution of surface abrasion, seabed sensitivity (not shown) and total value and weight from mobile bottom-contacting gear. The maps of surface abrasion, value and weight show the average per year for 2013-2018**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='80%', fig.cap="**Figure 1 Geographic distribution of surface abrasion, seabed sensitivity (not shown) and total value and weight from mobile bottom-contacting gear. The maps of surface abrasion, value and weight show the average per year for 2016-2021**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA1.png",sep=''))
 ```
 
@@ -31,7 +31,7 @@ pressure <- readtext(paste(outtext,"Pressure.txt",sep=''))
 `r pressure$text`
 
 #### Figure 2
-```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Surface abrasion, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2013-2018 six-year cycle**"}
+```{r echo=FALSE, message=FALSE, out.width='50%',fig.align = 'center', fig.cap="**Figure 2 Surface abrasion, Swept Area Ratio, by mobile bottom-contacting gears (year-1), averaged for the 2016-2021 six-year cycle**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA2.png",sep=''))
 ```
 
@@ -43,18 +43,18 @@ nam <- c("MSFD broad habitat type","Extent of habitat (1000 km^2^)", "Number of 
                          "Landings 1000 tonnes","Value 10^6^ euro","Swept area 1000 km^2^","Average intensity (I-1)","Prop. of area in fished grid cells (I-2)", "Prop. of area fished per year (I-3)",
                           "Smallest  prop. of area with 90% of fishing effort (I-4)")
 
-kable(table2, col.names = nam , caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2013-2018. I refers to the indicators in Table 1.") %>%
+kable(table2, col.names = nam , caption="Table 2 Overview of pressure indicators of all mobile bottom-contacting gears per broad-scale habitat averaged for 2016-2021. I refers to the indicators in Table 1.") %>%
   kable_styling(font_size=12)
 ```
 
 
 #### Figure 3
-```{r echo=FALSE, message=FALSE,fig.align = 'center',out.width='80%', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2018).**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center',out.width='80%', fig.cap="**Figure 3. Time series of (a) mean fishing intensity (surface abrasion), (b) proportion of the surface area of the seafloor fished, (c) aggregation of fishing (proportion of the surface area with 90% of the fishing effort) by habitat. Results represent vessels over 15m (2009-2011) and vessels over 12m (2012-2021).**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA3.png",sep=''))
 ```
 
 #### Figure 4
-```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears based on averaged fishing data per c-square from 2013-2018.**"}
+```{r echo=FALSE, message=FALSE,fig.align = 'center', out.width='50%', fig.cap="**Figure 4. Cumulative proportion of the swept area, landings and value. Grid cells were sorted from highest to lowest fishing intensity and include non-fished cells. The results are for all mobile bottom-contacting gears based on averaged fishing data per c-square from 2016-2021.**"}
 knitr::include_graphics(paste(outputs,ecoregion,"_figureA4.png",sep=''))
 ```
 

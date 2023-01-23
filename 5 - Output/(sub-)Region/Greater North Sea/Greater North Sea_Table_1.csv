@@ -4,7 +4,7 @@
 "Proportion of area fished per year (I-3)",0.62,0.31,NA
 "Smallest  prop. of area in fished cells with 90% of fishing effort (I-4)",0.42,0.21,NA
 "Proportion of area in unfished cells (I-5)",0.1,0.5,NA
-"Average PD impact (I-6)",0.12,0.07,NA
-"Average L1 impact (I-6)",0.68,0.33,NA
-"Proportion of area with PD impact < 0.2 (I-7)",0.8,0.89,NA
-"Proportion of area with L1 impact < 0.2 (I-7)",0.23,0.62,NA
+"Average PD impact (I-6)",0.12,NA,NA
+"Average L1 impact (I-6)",0.68,NA,NA
+"Proportion of area with PD impact < 0.2 (I-7)",0.8,NA,NA
+"Proportion of area with L1 impact < 0.2 (I-7)",0.23,NA,NA

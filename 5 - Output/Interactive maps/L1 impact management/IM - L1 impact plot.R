@@ -12,6 +12,7 @@ AssPeriod <- 2016:2021    # assessment period
 source(paste(pathdir,"5 - Output/Interactive maps/Shapefiles_subregions_subdivisions-impact-only.R",sep="/"))
 
 # calculate L1 impact for the two quality impact thresholds
+source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/")) # get all libraries
 source(paste(pathdir,"5 - Output/Interactive maps/L1 impact management/IM - L1impact005 calculations.R",sep = "/")) 
 source(paste(pathdir,"5 - Output/Interactive maps/L1 impact management/IM - L1impact020 calculations.R",sep = "/")) 
 

@@ -1,6 +1,6 @@
 "","DRB_MOL","OT_CRU","OT_DMF","OT_MIX","OT_SPF","SDN_DMF","SSC_DMF","TBB_CRU","TBB_DMF","TBB_MOL"
-"Area swept (1000 km2)","0.01","22.58","2.96","0.03","0","0","0","0","0","0"
-"Landings (1000 tonnes)","0.06","5.07","0.12","<0.005","0","0","0","0","0","0"
-"Value (10^6 euro)","0","0","0","0","0","0","0","0","0","0"
-"Landings (1000 tonnes)/Area swept (1000 km2)","3.7","0.22","0.04","0.12","NaN","NaN","NaN","NaN","NaN","NaN"
-"Value (10^6 euro)/Area swept (1000 km2)","0","0","0","0","NaN","NaN","NaN","NaN","NaN","NaN"
+"Area swept (1000 km2)",0.01,22.58,2.96,0.03,0,0,0,0,0,0
+"Landings (1000 tonnes)",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Value (10^6 euro)",0,0,0,0,0,0,0,0,0,0
+"Landings (1000 tonnes)/Area swept (1000 km2)",3.7,0.22,0.04,0.12,NA,NA,NA,NA,NA,NA
+"Value (10^6 euro)/Area swept (1000 km2)",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

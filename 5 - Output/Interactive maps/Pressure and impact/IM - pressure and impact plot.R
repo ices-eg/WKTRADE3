@@ -1,17 +1,15 @@
 rm(list = ls())
 
 ### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
-
-### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
-
-### get all libraries
-source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
+pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
 ### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
+Period    <- 2009:2021    # period with fishing data to calculate impact
+AssPeriod <- 2016:2021    # assessment period
+
+### get all libraries
+source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/")) 
 
 ### create list of marine reporting areas
 Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
@@ -39,7 +37,7 @@ load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_")
 setwd(paste(pathdir,"1 - Input env",sep="/"))
 load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
 
-## get SAR map average 2013-2018
+## get SAR map average
 SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
 
 idx <- which(names(Region@data)== "long")
@@ -70,7 +68,7 @@ for (p in 2:4) {
   setwd(paste(pathdir,"1 - Input env",sep="/"))
   load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
   
-  ## get SAR map average 2013-2018
+  ## get SAR map average
   SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
   
   idx <- which(names(Region@data)== "long")
@@ -92,52 +90,52 @@ for (p in 2:4) {
   
   Regionall <- rbind(Regionall,Region)
 }
-
-  # get impact
+  
+### get impact
   source(paste(pathdir,"5 - Output/Interactive maps/Pressure and impact/IM - pressure and impact source-a.R",sep="/"))
 
-  # get shapefiles subregions, subdivisions    
+### get shapefiles subregions, subdivisions    
   source(paste(pathdir,"5 - Output/Interactive maps/Shapefiles_subregions_subdivisions.R",sep="/"))
 
-  regall <- raster::aggregate(Regionall)
+  regall <- st_union(st_make_valid(st_as_sf(Regionall)))  
   reg001 <- subset(Regionall,Regionall@data$cat == "(0,0.1]")
-  reg001 <- raster::aggregate(reg001)
+  reg001 <- st_union(st_make_valid(st_as_sf(reg001))) 
   reg0105 <- subset(Regionall,Regionall@data$cat == "(0.1,0.5]")
-  reg0105 <- raster::aggregate(reg0105)
+  reg0105 <- st_union(st_make_valid(st_as_sf(reg0105))) 
   reg051 <- subset(Regionall,Regionall@data$cat == "(0.5,1]")
-  reg051 <- raster::aggregate(reg051)
+  reg051 <- st_union(st_make_valid(st_as_sf(reg051))) 
   reg15 <- subset(Regionall,Regionall@data$cat == "(1,5]")
-  reg15 <- raster::aggregate(reg15)
+  reg15 <- st_union(st_make_valid(st_as_sf(reg15))) 
   reg510 <- subset(Regionall,Regionall@data$cat == "(5,10]")
-  reg510 <- raster::aggregate(reg510)
+  reg510 <- st_union(st_make_valid(st_as_sf(reg510))) 
   reg1099 <- subset(Regionall,Regionall@data$cat == "(10,99]")
-  reg1099 <- raster::aggregate(reg1099)
+  reg1099 <- st_union(st_make_valid(st_as_sf(reg1099)))
   
   IL001 <- subset(Region_IL,Region_IL@data$cat == "(0,0.1]")
-  IL001 <- raster::aggregate(IL001)
+  IL001 <- st_union(st_make_valid(st_as_sf(IL001)))
   IL0102 <- subset(Region_IL,Region_IL@data$cat == "(0.1,0.2]")
-  IL0102 <- raster::aggregate(IL0102)
+  IL0102 <- st_union(st_make_valid(st_as_sf(IL0102)))
   IL0203 <- subset(Region_IL,Region_IL@data$cat == "(0.2,0.3]")
-  IL0203 <- raster::aggregate(IL0203)
+  IL0203 <- st_union(st_make_valid(st_as_sf(IL0203)))
   IL0305 <- subset(Region_IL,Region_IL@data$cat == "(0.3,0.5]")
-  IL0305 <- raster::aggregate(IL0305)
+  IL0305 <- st_union(st_make_valid(st_as_sf(IL0305)))
   IL0508 <- subset(Region_IL,Region_IL@data$cat == "(0.5,0.8]")
-  IL0508 <- raster::aggregate(IL0508)
+  IL0508 <- st_union(st_make_valid(st_as_sf(IL0508)))
   IL081 <- subset(Region_IL,Region_IL@data$cat == "(0.8,1]")
-  IL081 <- raster::aggregate(IL081)
+  IL081 <- st_union(st_make_valid(st_as_sf(IL081)))
   
   PD001 <- subset(Region_PD,Region_PD@data$cat == "(0,0.1]")
-  PD001 <- raster::aggregate(PD001)
+  PD001 <- st_union(st_make_valid(st_as_sf(PD001)))
   PD0102 <- subset(Region_PD,Region_PD@data$cat == "(0.1,0.2]")
-  PD0102 <- raster::aggregate(PD0102)
+  PD0102 <- st_union(st_make_valid(st_as_sf(PD0102)))  
   PD0203 <- subset(Region_PD,Region_PD@data$cat == "(0.2,0.3]")
-  PD0203 <- raster::aggregate(PD0203)
+  PD0203 <- st_union(st_make_valid(st_as_sf(PD0203)))  
   PD0305 <- subset(Region_PD,Region_PD@data$cat == "(0.3,0.5]")
-  PD0305 <- raster::aggregate(PD0305)
+  PD0305 <- st_union(st_make_valid(st_as_sf(PD0305)))  
   PD0508 <- subset(Region_PD,Region_PD@data$cat == "(0.5,0.8]")
-  PD0508 <- raster::aggregate(PD0508)
+  PD0508 <- st_union(st_make_valid(st_as_sf(PD0508)))  
   PD081 <- subset(Region_PD,Region_PD@data$cat == "(0.8,1]")
-  PD081 <- raster::aggregate(PD081)
+  PD081 <- st_union(st_make_valid(st_as_sf(PD081)))  
   
   library(leaflet)
   library(htmlwidgets)
@@ -214,7 +212,7 @@ for (p in 2:4) {
     addLegend(title = "" ,colors = c(NA,NA,NA) ,position = "bottomright",
               labels= c("The map shows  fishing pressure SAR (swept-area-ratio)", 
                         "and, where available, the PD and L1 benthic impact indicators",
-                        "(all averaged for the period 2013-2018)")) %>%
+                        "(all averaged for the period 2016-2021)")) %>%
     
     htmlwidgets::onRender("
         function() {

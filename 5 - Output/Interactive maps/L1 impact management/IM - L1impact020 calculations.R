@@ -1,18 +1,5 @@
 
-### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
-
-### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
-
-### get all libraries
-source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
-
-### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
-
-### create list of marine reporting areas
+# create list of marine reporting areas
 Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
 NS_div <- c("Northern_NS", "Kattegat_NS", "Channel_NS", "Southern_NS" ,"NTrench_NS")
 BS_div <- c("GulfF_BS", "GulfR_BS" ,"ArkBor_BS","Western_BS" ,"Proper_BS" ,"Bothnian_BS")
@@ -59,7 +46,7 @@ Trade_RE1 <- cbind(Trade_RE1, State_reg[match(Trade_RE1$csquares,State_reg$Fishe
 Trade_RE1[,c(nam)][is.na(Trade_RE1[,c(nam)])] <- 1
 Trade_RE1$avgstate <- rowMeans(Trade_RE1[,state_year])
 
-## get SAR map average 2013-2018
+## get SAR map average 
 SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
 
 # get SAR
@@ -247,18 +234,20 @@ Region_above <- subset(all,all$csquares %in% abovecsq)
 Region_unfished <- subset(all,all$csquares %in% unfishedcsq)
 RegionNA <- subset(NS, NS$Depth < -200)
 
-Region005_T2 <- raster::aggregate(Region005) #; save(Region005,file=("Region005.RData"))
-Region010_T2 <- raster::aggregate(Region010) #; save(Region010,file=("Region010.RData"))
-Region020_T2 <- raster::aggregate(Region020) #; save(Region020,file=("Region020.RData"))
-Region030_T2 <- raster::aggregate(Region030) #; save(Region030,file=("Region030.RData"))
-Region040_T2 <- raster::aggregate(Region040) #; save(Region040,file=("Region040.RData"))
-Region050_T2 <- raster::aggregate(Region050) #; save(Region050,file=("Region050.RData"))
-Region060_T2 <- raster::aggregate(Region060) #; save(Region060,file=("Region060.RData"))
-Region070_T2 <- raster::aggregate(Region070) #; save(Region070,file=("Region070.RData"))
-Region080_T2 <- raster::aggregate(Region080) #; save(Region080,file=("Region080.RData"))
-Region090_T2 <- raster::aggregate(Region090) #; save(Region090,file=("Region090.RData"))
-Region095_T2 <- raster::aggregate(Region095) #; save(Region095,file=("Region095.RData"))
-Region_unfished <- raster::aggregate(Region_unfished)
-Region_below_T2 <- raster::aggregate(Region_below)
-Region_above_T2 <- raster::aggregate(Region_above)
-RegionNA <- raster::aggregate(RegionNA)
+Region010_T2 <- st_union(st_make_valid(st_as_sf(Region010)))
+Region030_T2 <- st_union(st_make_valid(st_as_sf(Region030)))
+Region060_T2 <- st_union(st_make_valid(st_as_sf(Region060)))
+Region090_T2 <- st_union(st_make_valid(st_as_sf(Region090)))
+Region_unfished <- st_union(st_make_valid(st_as_sf(Region_unfished)))
+Region_below_T2 <- st_union(st_make_valid(st_as_sf(Region_below)))
+Region_above_T2 <- st_union(st_make_valid(st_as_sf(Region_above)))
+RegionNA <- st_union(st_make_valid(st_as_sf(RegionNA,crs = "EPSG:4326")))
+st_crs(RegionNA) <- "EPSG:4326"
+
+#Region005_T2 <- raster::aggregate(Region005) #; save(Region005,file=("Region005.RData"))
+#Region020_T2 <- raster::aggregate(Region020) #; save(Region020,file=("Region020.RData"))
+#Region040_T2 <- raster::aggregate(Region040) #; save(Region040,file=("Region040.RData"))
+#Region050_T2 <- raster::aggregate(Region050) #; save(Region050,file=("Region050.RData"))
+#Region070_T2 <- raster::aggregate(Region070) #; save(Region070,file=("Region070.RData"))
+#Region080_T2 <- raster::aggregate(Region080) #; save(Region080,file=("Region080.RData"))
+#Region095_T2 <- raster::aggregate(Region095) #; save(Region095,file=("Region095.RData"))
