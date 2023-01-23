@@ -1,8 +1,17 @@
 rm(list = ls())
 
 ### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
+pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
+### select time period
+Period    <- 2009:2021    # period with fishing data to calculate impact
+AssPeriod <- 2016:2021    # assessment period
+
+### get all libraries
+source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/")) 
+
+### set path location
 setwd(paste(pathdir,"5 - Output/Interactive maps/Unfished management",sep="/"))
 
 load("protect.RData")
@@ -52,7 +61,7 @@ mfs <- leaflet() %>%
               stroke = TRUE, fillOpacity = 0, smoothFactor = 0.5, opacity = 0.5, weight = 1, color = "yellow") %>%
   
   # unfished area
-  addPolygons(data = regunfished, group="Untrawled in the period 2013-2018",
+  addPolygons(data = regunfished, group="Untrawled in the period 2016-2021",
               stroke = FALSE, fillOpacity = 1, smoothFactor = 0.5,fillColor = "grey") %>%
   
   # core scenarios
@@ -81,7 +90,7 @@ mfs <- leaflet() %>%
 
   # Layers control
   addLayersControl(
-    overlayGroups = c("(Sub-)regions","Subdivisions","Untrawled in the period 2013-2018",namings),
+    overlayGroups = c("(Sub-)regions","Subdivisions","Untrawled in the period 2016-2021",namings),
     options = layersControlOptions(collapsed = FALSE)
   )%>%
   

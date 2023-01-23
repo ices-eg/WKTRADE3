@@ -1,17 +1,4 @@
 
-### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
-
-### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
-
-### get all libraries
-source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
-
-### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
-
 ### create list of marine reporting areas
 Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
 NS_div <- c("Northern_NS", "Kattegat_NS", "Channel_NS", "Southern_NS" ,"NTrench_NS")
@@ -38,7 +25,7 @@ load(paste(pathdir_nogit,paste(EcoReg,"fisheries_per_metier_comb.RData",sep="_")
 setwd(paste(pathdir,"1 - Input env",sep="/"))
 load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
 
-## get SAR map average 2013-2018
+## get SAR map average
 SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
 
 idx <- which(names(Region@data)== "long")
@@ -69,7 +56,7 @@ for (p in 2:4) {
   setwd(paste(pathdir,"1 - Input env",sep="/"))
   load(paste(EcoReg,"region_grid_sensitivity.RData",sep="_")) 
   
-  ## get SAR map average 2013-2018
+  ## get SAR map average
   SSAR_year <- paste("surface_sar",AssPeriod,sep="_")
   
   idx <- which(names(Region@data)== "long")
@@ -93,4 +80,4 @@ for (p in 2:4) {
 }
 
 regunfished <- subset(Regionall, is.na(Regionall@data$cat ))
-regunfished <- raster::aggregate(regunfished)
+regunfished <- st_union(st_make_valid(st_as_sf(regunfished)))

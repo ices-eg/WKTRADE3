@@ -2,17 +2,15 @@
 rm(list = ls())
 
 ### github folder
-pathdir <- "C:/Users/pdvd/Online for git/WKTRADE3"
-
-### folder for restricted VMS data
-pathdir_nogit <- "C:/Users/pdvd/Online for git/WKTRADE3 - Fisheries restricted"
-
-### get all libraries
-source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/"))
+pathdir <- "C:/Users/danie/Documents/Online for git/WKTRADE3"
+pathdir_nogit <- "C:/Users/danie/Documents/Online for git/WKTRADE4 - Fisheries restricted"
 
 ### select time period
-Period    <- 2009:2018    # period with fishing data to calculate impact
-AssPeriod <- 2013:2018    # assessment period
+Period    <- 2009:2021    # period with fishing data to calculate impact
+AssPeriod <- 2016:2021    # assessment period
+
+### get all libraries
+source(paste(pathdir,"Utilities/Libraries_WKTRADE3.R",sep="/")) 
 
 ### create list of marine reporting areas
 Sregions <- c("Greater North Sea", "Baltic Sea","Celtic Seas","Bay of Biscay and the Iberian Coast")
@@ -276,17 +274,17 @@ for(p in 6:26){
   }
 
 setwd(paste(pathdir,"5 - Output/Interactive maps/Unfished management",sep="/"))
-Region005 <- raster::aggregate(Region005); save(Region005,file=("Region005.RData"))
-Region010 <- raster::aggregate(Region010); save(Region010,file=("Region010.RData"))
-Region020 <- raster::aggregate(Region020); save(Region020,file=("Region020.RData"))
-Region030 <- raster::aggregate(Region030); save(Region030,file=("Region030.RData"))
-Region040 <- raster::aggregate(Region040); save(Region040,file=("Region040.RData"))
-Region050 <- raster::aggregate(Region050); save(Region050,file=("Region050.RData"))
-Region060 <- raster::aggregate(Region060); save(Region060,file=("Region060.RData"))
-Region070 <- raster::aggregate(Region070); save(Region070,file=("Region070.RData"))
-Region080 <- raster::aggregate(Region080); save(Region080,file=("Region080.RData"))
-Region090 <- raster::aggregate(Region090); save(Region090,file=("Region090.RData"))
-Region095 <- raster::aggregate(Region095); save(Region095,file=("Region095.RData"))
+Region005 <- st_union(st_make_valid(st_as_sf(Region005))); save(Region005,file=("Region005.RData"))
+Region010 <- st_union(st_make_valid(st_as_sf(Region010))); save(Region010,file=("Region010.RData"))
+Region020 <- st_union(st_make_valid(st_as_sf(Region020))); save(Region020,file=("Region020.RData"))
+Region030 <- st_union(st_make_valid(st_as_sf(Region030))); save(Region030,file=("Region030.RData"))
+Region040 <- st_union(st_make_valid(st_as_sf(Region040))); save(Region040,file=("Region040.RData"))
+Region050 <- st_union(st_make_valid(st_as_sf(Region050))); save(Region050,file=("Region050.RData"))
+Region060 <- st_union(st_make_valid(st_as_sf(Region060))); save(Region060,file=("Region060.RData"))
+Region070 <- st_union(st_make_valid(st_as_sf(Region070))); save(Region070,file=("Region070.RData"))
+Region080 <- st_union(st_make_valid(st_as_sf(Region080))); save(Region080,file=("Region080.RData"))
+Region090 <- st_union(st_make_valid(st_as_sf(Region090))); save(Region090,file=("Region090.RData"))
+Region095 <- st_union(st_make_valid(st_as_sf(Region095))); save(Region095,file=("Region095.RData"))
 
 sweptloss <- c(sum(swept005),sum(swept010),sum(swept020),sum(swept030),sum(swept040),
   sum(swept050),sum(swept060),sum(swept070),sum(swept080),sum(swept090),sum(swept095))
